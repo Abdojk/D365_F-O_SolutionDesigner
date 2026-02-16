@@ -1,0 +1,451 @@
+================================================================================
+D365 F&O KNOWLEDGE BASE — FILE 5 OF 5
+CONSOLIDATED FOR: Claude.Code Migration
+CONTENTS: Operational Frameworks, Report Catalogs, Templates
+          — S01 Support Case Email Thread Analysis (Master Prompt)
+          — Sign-Off Sheet Template
+          — WMS & Inventory Report Catalog (from Excel)
+          — Financial Reports Catalog (from Excel)
+ORIGINAL SOURCES: S01-Instruction.txt, Signoff_Sheet_Format_docx.docx,
+                  D365_FO_WMS_Inventory_Report_Catalog.xlsx,
+                  D365_FO_Financial_Reports_Catalog.xlsx
+DATE CONSOLIDATED: 2026-02-16
+================================================================================
+
+========================================================================================================================
+SOURCE: S01-Instruction.txt
+TOPIC: Master Prompt — S01 Support Case Email Thread Analysis
+========================================================================================================================
+
+```
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║ COPY — MASTER PROMPT : S01 — SUPPORT CASE EMAIL THREAD ANALYSIS                   ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+```
+
+```
+ROLE
+You are an enterprise-grade Dynamics 365 Finance & Operations (D365 F&O)
+Support Analyst operating within a managed ERP support organisation.
+
+Your task is to analyse a SUPPORT EMAIL THREAD and extract a structured,
+evidence-based S01 support analysis.
+
+────────────────────────────────────────────────────────
+INPUT
+────────────────────────────────────────────────────────
+• One complete email thread (plain text)
+• No screenshots unless explicitly pasted as text
+• No external assumptions
+
+────────────────────────────────────────────────────────
+NON-NEGOTIABLE GOVERNANCE
+────────────────────────────────────────────────────────
+• ZERO hallucination
+• Use ONLY evidence explicitly present in the email thread
+• Do NOT infer intent, root cause, or solution unless stated
+• If data is missing or unclear, write exactly:
+  “Insufficient data to verify.”
+• No pleasantries
+• No filler
+• No apologies
+• British English
+• Clinical, professional tone
+• Ask clarifying questions ONLY if resolution is impossible without them
+
+────────────────────────────────────────────────────────
+OUTPUT RULES
+────────────────────────────────────────────────────────
+• Output ONE table only
+• No text before or after the table
+• Use EXACT row order as defined below
+• Highlight the row “Pending with / Owner” using <mark>...</mark>
+• Keep language factual, concise, and evidence-based
+
+────────────────────────────────────────────────────────
+TABLE STRUCTURE (EXACT ORDER — DO NOT CHANGE)
+────────────────────────────────────────────────────────
+
+0. Three-word issue description
+
+1. Issue / Request Description  
+   (What the customer is asking + problem statement as written)
+
+2.1 With whom is this pending?  
+2.2 What is the pending decision / action?
+
+3. Email Source & Customer  
+   (Who sent the email + customer / legal entity)
+
+4. Scope Separation Check  
+   (Is the same thread covering multiple cases?  
+   If yes, list each case title line-by-line)
+
+5. Steps to Reproduce  
+   (ONLY steps explicitly mentioned)
+
+6. Info-Sys / Infosys Engagement  
+   (Names involved, one per line)
+
+7. Recurrence  
+   (Recurring issue? Evidence-based)
+
+8. Prior Closure Confirmation  
+   (Previously closed and confirmed by customer?)
+
+9. Case Type  
+   (Support / CR — based on evidence)
+
+10. Business Impact  
+    (High / Medium / Low — evidence-based only)
+
+11. Sequence of Events  
+    (Chronological summary: customer side + Info-Sys side)
+
+12. <mark>Pending with / Owner</mark>  
+    (Current owner and blocking party)
+
+13. Effort Estimate (hours)  
+    (If not explicitly stated: Insufficient data to verify.)
+
+14. Root Cause Provided to Customer?  
+    (Yes / No + evidence)
+
+15. Risks  
+    (SLA, scope creep, customer dissatisfaction, compliance, etc.)
+
+16. Case Age  
+    (Calculated from first email date)
+
+17. Clarifying Questions  
+    (MINIMUM set — ONLY if required)
+
+18. Verifiable Solution Options  
+    (ONLY if supported by thread evidence)
+
+19. Microsoft Escalation  
+    (Recommend ONLY if behavior appears non-standard;  
+     otherwise: “Not required based on provided evidence.”)
+
+20. Can this be resolved using Power Automate?
+
+========================================================================================================================
+SOURCE: Signoff_Sheet_Format_docx.docx (text format)
+TOPIC: Project Sign-Off Sheet Template
+========================================================================================================================
+
+> ![](media/image1.jpeg){width="1.1146576990376202in"
+> height="0.7785411198600175in"}SIGN-OFF SHEET
+
++----------------------------------+-----------------------------------+
+| **Project Name:                  | > **Project Phase: \<Phase\>**    |
+| \<Project_Name\>**               |                                   |
++==================================+===================================+
+| **Info-Sys CR Owner: \<Owner\>** |                                   |
++----------------------------------+-----------------------------------+
+| **Project Deliverables:**        |                                   |
+|                                  |                                   |
+| -   \<project Deliverable1\>     |                                   |
+|                                  |                                   |
+| -   \<project Deliverable2\>     |                                   |
+|                                  |                                   |
+| -   \<project Deliverable3\>     |                                   |
+|                                  |                                   |
+| -                                |                                   |
++----------------------------------+-----------------------------------+
+| By signing this document, I      | > By signing this document, I     |
+| acknowledge that I have          | > acknowledge that I have         |
+| delivered all the stated         | > reviewed the features and       |
+| deliverables at the agreed to    | > functions of the above and      |
+| quality levels.                  | > agree that they are appropriate |
+|                                  | > to my business area and attest  |
+|                                  | > that I was able to perform all  |
+|                                  | > my expected job function tasks  |
+|                                  | > and activities normally.        |
++----------------------------------+-----------------------------------+
+| **Info-Sys Project Manager Name  | > **Innocent Minds Project        |
+| and Signature:**                 | > Manager Name and Signature:**   |
++----------------------------------+-----------------------------------+
+| **Date: \<today's_date\>**       | > **Date: \<today's_date\>**      |
++----------------------------------+-----------------------------------+
+
+
+========================================================================================================================
+SOURCE: D365_FO_WMS_Inventory_Report_Catalog.xlsx
+TOPIC: WMS & Inventory Management Report/Inquiry Catalog
+========================================================================================================================
+
+
+--- Sheet: Summary ---
+D365 F&O Report Catalog |  |  |
+Warehouse Management & Inventory Management Modules |  |  |
+Generated: February 2026 |  |  |
+|  |  |
+|  |  |
+Module | Total Reports/Inquiries | Output Reports | Inquiries/List Pages
+Warehouse Management | 42 | 15 | 27
+Inventory Management | 38 | 18 | 20
+Cost Management (Inventory) | 12 | 8 | 4
+Total | 92 | 41 | 51
+
+--- Sheet: Warehouse Management ---
+Report Category | Report/Inquiry Name | Navigation Path | Type | Description
+Work Management | All work | Warehouse management > Work > All work | Inquiry | Displays all warehouse work with status, type, priority; filter by warehouse, worker, status
+Work Management | Work details | Warehouse management > Work > Work details | Inquiry | Detailed view of individual work headers and lines with pick/put sequences
+Work Management | Work audit history | Warehouse management > Work > Audit > Work audit history | Inquiry | Audit trail of work changes, status updates, and user actions
+Work Management | Canceled work | Warehouse management > Work > Canceled work | Inquiry | Lists all cancelled work with cancellation reasons and timestamps
+Work Management | Cycle count work pending review | Warehouse management > Cycle counting > Cycle count work pending review | Inquiry | Cycle count work requiring supervisor approval for variances
+Wave Management | All waves | Warehouse management > Outbound waves > All waves | Inquiry | Lists all waves with status, shipment count, line count
+Wave Management | Shipment waves | Warehouse management > Outbound waves > Shipment waves | Inquiry | Waves specifically for outbound shipments with processing status
+Wave Management | Production waves | Warehouse management > Outbound waves > Production waves | Inquiry | Waves for production order material picking
+Loads & Shipments | All loads | Warehouse management > Loads > All loads | Inquiry | All inbound and outbound loads with status, weight, volume
+Loads & Shipments | Load planning workbench | Warehouse management > Loads > Load planning workbench | Inquiry | Interactive workbench for planning and building loads
+Loads & Shipments | Shipment summary | Warehouse management > Inquiries and reports > Shipment summary | Inquiry | Summary of shipments by date, carrier, destination
+Loads & Shipments | Packing slip posting | Warehouse management > Inquiries and reports > Packing slip posting | Report | Posted packing slips with details
+Inventory Inquiries | Physical on-hand inventory | Warehouse management > Inquiries and reports > Physical on-hand inventory | Inquiry | On-hand inventory by warehouse location and license plate
+Inventory Inquiries | On-hand by location | Warehouse management > Inquiries and reports > On-hand by location | Inquiry | Inventory quantities grouped by warehouse location
+Inventory Inquiries | Location inventory lookup | Warehouse management > Inquiries and reports > Location inventory lookup | Inquiry | Quick lookup of inventory at specific locations
+Inventory Inquiries | License plate | Warehouse management > Inquiries and reports > License plate | Inquiry | License plate details including contents and location
+Inventory Inquiries | Container contents | Warehouse management > Inquiries and reports > Container contents | Inquiry | Contents of packed containers for shipments
+Status Reports | Work status | Warehouse management > Inquiries and reports > Work status | Report | Work status summary by warehouse, type, and date
+Status Reports | Wave processing status | Warehouse management > Inquiries and reports > Wave processing status | Inquiry | Status of wave processing including errors
+Status Reports | Warehouse performance statistics | Warehouse management > Inquiries and reports > Warehouse performance statistics | Inquiry | Warehouse KPIs including throughput, efficiency metrics
+Label Reports | License plate labels | Warehouse management > Inquiries and reports > License plate labels | Report | Print license plate labels for receiving/inventory
+Label Reports | Wave labels | Warehouse management > Inquiries and reports > Wave labels | Report | Wave-generated picking labels
+Label Reports | Container labels | Warehouse management > Inquiries and reports > Container labels | Report | Shipping container labels
+Cycle Counting | Cycle counting plans | Warehouse management > Setup > Cycle counting > Cycle count plans | Inquiry | Configured cycle counting plans and schedules
+Cycle Counting | Cycle count history | Warehouse management > Cycle counting > Cycle count history | Inquiry | Historical cycle count results and variances
+Cycle Counting | Cycle count thresholds | Warehouse management > Setup > Cycle counting > Cycle count thresholds | Inquiry | Threshold triggers for automatic cycle counting
+Replenishment | Replenishment work | Warehouse management > Work > Replenishment work | Inquiry | Active replenishment work by location and item
+Replenishment | Replenishment templates | Warehouse management > Setup > Replenishment > Replenishment templates | Inquiry | Configured replenishment rules and templates
+Mobile Device | Mobile device logs | Warehouse management > Inquiries and reports > Mobile device logs > Mobile devices | Inquiry | Registered mobile devices and their status
+Mobile Device | Mobile device activity log | Warehouse management > Inquiries and reports > Mobile device logs > Mobile device activity | Inquiry | Activity logs from warehouse mobile app
+Mobile Device | Mobile device menu items | Warehouse management > Setup > Mobile device > Mobile device menu items | Inquiry | Configured mobile device menu items and processes
+Warehouse Only Mode | Inbound shipment orders | Warehouse management > Inquiries and reports > Inbound shipment orders | Inquiry | Inbound shipment orders for WMS-only mode integrations
+Warehouse Only Mode | Outbound shipment orders | Warehouse management > Inquiries and reports > Outbound shipment orders | Inquiry | Outbound shipment orders for WMS-only mode
+Warehouse Only Mode | Inbound shipment order messages | Warehouse management > Inquiries and reports > Inbound shipment order messages | Inquiry | Integration messages for inbound shipments
+Warehouse Only Mode | Outbound shipment order messages | Warehouse management > Inquiries and reports > Outbound shipment order messages | Inquiry | Integration messages for outbound shipments
+Warehouse Only Mode | Warehouse inventory update log | Warehouse management > Inquiries and reports > Physical inventory reconciliation > Warehouse inventory update log | Inquiry | Log of inventory updates for external system sync
+Warehouse Only Mode | Source system on-hand inventory report | Warehouse management > Inquiries and reports > Physical inventory reconciliation > Create source system on-hand inventory report | Report | On-hand reconciliation report for external ERP systems
+Efficiency Reports | Labor by user | Warehouse management > Inquiries and reports > Labor by user | Report | Worker productivity based on actual vs expected times
+Efficiency Reports | Labor by work transaction type | Warehouse management > Inquiries and reports > Labor by work transaction type | Report | Work efficiency analysis by transaction type
+Efficiency Reports | Picker productivity | Warehouse management > Inquiries and reports > Picker productivity | Report | Picking efficiency metrics per worker
+Hazardous Materials | Hazardous materials inquiries | Warehouse management > Inquiries and reports > Hazardous materials | Report | Hazmat shipping documentation and compliance reports
+
+--- Sheet: Inventory Management ---
+Report Category | Report/Inquiry Name | Navigation Path | Type | Description
+On-Hand Reports | On-hand list | Inventory management > Inquiries and reports > On-hand list | Inquiry | Comprehensive on-hand inventory by item, warehouse, location, dimensions
+On-Hand Reports | Physical inventory | Inventory management > Inquiries and reports > Physical inventory | Report | Physical inventory summary report
+On-Hand Reports | Inventory on-hand | Inventory management > Inquiries and reports > Inventory on-hand | Inquiry | On-hand inventory with available, reserved, ordered quantities
+On-Hand Reports | On-hand consignment inventory | Inventory management > Inquiries and reports > On-hand consignment inventory | Inquiry | Vendor-owned consignment inventory on-hand
+Transaction Reports | Inventory transactions | Inventory management > Inquiries and reports > Transactions | Inquiry | All inventory transactions with reference documents
+Transaction Reports | Transaction details | Inventory management > Inquiries and reports > Transactions > Transaction details | Inquiry | Detailed view of individual inventory transactions
+Transaction Reports | Warehouse transactions | Inventory management > Inquiries and reports > Warehouse transactions | Inquiry | WMS-related inventory transactions
+Transaction Reports | Posted inventory transactions | Inventory management > Inquiries and reports > Posted inventory transactions | Report | Posted/finalized inventory transactions
+Counting & Adjustments | Counting history | Inventory management > Inquiries and reports > Counting history | Inquiry | Historical inventory counting results with reason codes
+Counting & Adjustments | Counting journals | Inventory management > Journal entries > Item counting > Counting | Inquiry | Active and posted counting journals
+Counting & Adjustments | Adjustment journals | Inventory management > Journal entries > Item adjustment > Adjustment | Inquiry | Inventory adjustment journal history
+Counting & Adjustments | Movement journals | Inventory management > Journal entries > Items > Movement | Inquiry | Inventory movement journal records
+Dimension Reports | Inventory dimensions | Inventory management > Inquiries and reports > Dimensions display | Inquiry | Inventory breakdown by tracking dimensions
+Dimension Reports | Batch disposition | Inventory management > Inquiries and reports > Batch disposition | Inquiry | Batch tracking status and disposition codes
+Dimension Reports | Serial number status | Inventory management > Inquiries and reports > Serial number status | Inquiry | Serial number tracking and status
+Aging Reports | Inventory aging | Inventory management > Inquiries and reports > Inventory aging | Report | Inventory aging by date buckets
+Aging Reports | Inventory aging report configuration | Inventory management > Inquiries and reports > Inventory aging report configuration | Inquiry | Aging report parameter setup
+Expiration Reports | Batch expiration dates | Inventory management > Inquiries and reports > Batch expiration dates | Inquiry | Items approaching expiration by batch
+Expiration Reports | Shelf life report | Inventory management > Inquiries and reports > Shelf life report | Report | Shelf life analysis for perishable items
+ABC Classification | ABC classification | Inventory management > Inquiries and reports > ABC classification | Inquiry | ABC inventory classification results
+ABC Classification | ABC classification report | Inventory management > Inquiries and reports > ABC classification report | Report | ABC analysis report by value/quantity
+Blocking Reports | Inventory blocking | Inventory management > Periodic tasks > Inventory blocking | Inquiry | Blocked inventory with blocking reasons
+Blocking Reports | Quarantine orders | Inventory management > Inquiries and reports > Quarantine orders | Inquiry | Items in quarantine status
+Quality Management | Quality orders | Inventory management > Inquiries and reports > Quality management > Quality orders | Inquiry | Quality inspection orders and results
+Quality Management | Nonconformance | Inventory management > Inquiries and reports > Quality management > Nonconformance | Inquiry | Non-conformance records and dispositions
+Quality Management | Test results | Inventory management > Inquiries and reports > Quality management > Test results | Report | Quality test results by item/batch
+Turnover & Analysis | Inventory turnover | Inventory management > Inquiries and reports > Inventory turnover | Report | Inventory turnover ratio analysis
+Turnover & Analysis | Slow-moving inventory | Inventory management > Inquiries and reports > Slow-moving inventory | Report | Items with low turnover/movement
+Forecast Reports | Supply forecast | Inventory management > Inquiries and reports > Forecasts > Supply forecast | Inquiry | Forecasted supply by item and date
+Forecast Reports | Demand forecast | Inventory management > Inquiries and reports > Forecasts > Demand forecast | Inquiry | Forecasted demand by item and date
+Transfer Reports | Transfer orders | Inventory management > Inquiries and reports > Transfer orders | Inquiry | Inter-warehouse transfer orders and status
+Transfer Reports | Transfer order history | Inventory management > Inquiries and reports > Transfer order history | Inquiry | Historical transfer order records
+Bills of Materials | BOM calculation | Inventory management > Inquiries and reports > BOM calculations | Inquiry | BOM cost calculations and roll-ups
+Bills of Materials | Where-used | Inventory management > Inquiries and reports > Where-used | Inquiry | Items where components are used
+Settlement | Inventory settlement | Inventory management > Inquiries and reports > Settlement | Report | Inventory settlement transactions
+
+--- Sheet: Cost Management ---
+Report Category | Report/Inquiry Name | Navigation Path | Type | Description
+Inventory Value | Inventory value | Cost management > Inquiries and reports > Inventory accounting - status reports > Inventory value | Report | Inventory valuation by item, dimension, date
+Inventory Value | Inventory value report storage | Cost management > Inquiries and reports > Inventory value report storage | Report | Pre-generated inventory value reports for performance
+Inventory Value | Inventory value report configuration | Cost management > Inquiries and reports > Inventory value report configurations | Inquiry | Report configurations for inventory value
+Cost Analysis | Inventory value comparison | Cost management > Inquiries and reports > Inventory accounting - analysis reports | Report | Variance analysis between inventory and GL
+Cost Analysis | Potential conflicts - inventory and general ledger | Cost management > Inquiries and reports > Potential conflicts - inventory and general ledger | Report | Identifies discrepancies between inventory subledger and GL
+Cost Analysis | Variance analysis statement | Cost management > Inquiries and reports > Variance analysis statement | Report | Standard cost variance analysis
+Item Pricing | Item price list | Cost management > Inquiries and reports > Item price list | Report | Item prices by costing version
+Item Pricing | Active item prices | Cost management > Inquiries and reports > Active item prices | Inquiry | Currently active item cost prices
+Costing Versions | Costing versions | Cost management > Inquiries and reports > Costing versions | Inquiry | Costing version details and prices
+Costing Versions | Cost rollup | Cost management > Inquiries and reports > Cost rollup | Report | BOM cost rollup calculations
+Manufacturing | Production variance analysis | Cost management > Inquiries and reports > Manufacturing accounting - analysis reports | Report | Production cost variances by order
+Manufacturing | Cost comparison | Cost management > Inquiries and reports > Cost comparison | Report | Standard vs actual cost comparison
+
+--- Sheet: Reference ---
+Report Type Definitions |  |
+|  |
+Type | Definition | Characteristics
+Inquiry | Interactive list page or form | Real-time data; filterable; exportable to Excel; drill-down capability
+Report | SSRS output report (PDF/Excel) | Point-in-time snapshot; printable; parameter-driven; batch capable
+|  |
+Common Navigation Patterns |  |
+|  |
+Pattern | Description |
+Inquiries and reports | Standard section in each module containing operational reports |
+Setup | Configuration forms that can serve as reference inquiries |
+Periodic tasks | Batch processes with associated status inquiries |
+Journal entries | Transaction journals with posting history |
+|  |
+Sources |  |
+Microsoft Learn: https://learn.microsoft.com/en-us/dynamics365/supply-chain/ |  |
+D365 F&O Standard Menu Structure (Version 10.0.x - 2025 Wave 2) |  |
+
+
+========================================================================================================================
+SOURCE: D365_FO_Financial_Reports_Catalog.xlsx
+TOPIC: Financial Reports Catalog (GL, AP, AR, Cash & Bank)
+========================================================================================================================
+
+
+--- Sheet: Summary ---
+D365 Finance & Operations - Financial Reports Catalog |  |  |  |  |
+Standard Reports, Inquiries & Menu Items by Module |  |  |  |  |
+|  |  |  |  |
+Module | Inquiries | SSRS Reports | Financial Reports | Total | Primary Navigation
+General Ledger | 7 | 11 | 5 | =SUM(B5:D5) | General ledger > Inquiries and reports
+Accounts Payable | 8 | 14 | 0 | =SUM(B6:D6) | Accounts payable > Inquiries and reports
+Accounts Receivable | 6 | 15 | 0 | =SUM(B7:D7) | Accounts receivable > Inquiries and reports
+Cash & Bank Management | 6 | 13 | 0 | =SUM(B8:D8) | Cash and bank management > Inquiries and reports
+TOTAL | =SUM(B5:B8) | =SUM(C5:C8) | =SUM(D5:D8) | =SUM(E5:E8) |
+|  |  |  |  |
+Report Type Legend: |  |  |  |  |
+Inquiry | Interactive list page or workspace with real-time data |  |  |  |
+SSRS Report | SQL Server Reporting Services formatted report |  |  |  |
+Financial Report | Financial Reporter (Management Reporter) based report |  |  |  |
+|  |  |  |  |
+Notes: |  |  |  |  |
+• Menu items shown are the AOT object names used in D365 F&O |  |  |  |  |
+• Navigation paths follow standard module structure |  |  |  |  |
+• Additional reports may be available through Electronic Reporting (ER) |  |  |  |  |
+• Custom reports can be added via SSRS or Power BI integration |  |  |  |  |
+• Financial Reports require Report Designer for modifications |  |  |  |  |
+
+--- Sheet: General Ledger ---
+Category | Report Name | Menu Item | Navigation Path | Description | Report Type
+INQUIRIES | Voucher transactions | LedgerTransVoucher | General ledger > Inquiries and reports > Voucher transactions | View all GL transactions with filter criteria for account, date, posting layer | Inquiry
+INQUIRIES | Audit trail | LedgerTransAuditTrail | General ledger > Inquiries and reports > Audit trail | Shows transaction types, descriptions, creator, and creation timestamps | Inquiry
+INQUIRIES | Trial balance | LedgerTrialBalance | General ledger > Inquiries and reports > Trial balance | List page showing account balances by dimension set for a period | Inquiry
+INQUIRIES | Trial balance snapshots | LedgerTrialBalanceSnapshot | General ledger > Inquiries and reports > Trial balance > Trial balance snapshots | View scheduled trial balance snapshot data | Inquiry
+INQUIRIES | Accounting source explorer | AccountingSourceExplorer | General ledger > Inquiries and reports > Accounting source explorer | Drill into source documents from accounting distributions | Inquiry
+INQUIRIES | Ledger settlements | LedgerSettlements | General ledger > Inquiries and reports > Ledger settlements | View and manage settled GL transactions | Inquiry
+INQUIRIES | Currency revaluation accounts | LedgerExchAdjAccounts | General ledger > Inquiries and reports > Currency revaluation accounts | View accounts affected by currency revaluation | Inquiry
+LEDGER REPORTS | Dimension statement | LedgerDimensionStatement | General ledger > Inquiries and reports > Ledger reports > Dimension statement | Transactions by day/account with dimension and period options | SSRS Report
+LEDGER REPORTS | Ledger transaction list | LedgerTransactionList | General ledger > Inquiries and reports > Ledger reports > Ledger transaction list | Transactions in transaction, accounting, and reporting currencies | SSRS Report
+LEDGER REPORTS | Print journal | LedgerJournalReport | General ledger > Inquiries and reports > Ledger reports > Print journal | Shows posted journal results by batch number or journal type | SSRS Report
+LEDGER REPORTS | Posted transactions by journal | LedgerTransPostedByJournal | General ledger > Inquiries and reports > Ledger reports > Posted transactions by journal | Transactions posted to journal, grouped by voucher | SSRS Report
+LEDGER REPORTS | Transaction list by date | LedgerTransListDate | General ledger > Inquiries and reports > Ledger reports > Transaction list by date | All transactions by date with journal number, voucher, account | SSRS Report
+LEDGER REPORTS | Transaction origin | LedgerTransOrigin | General ledger > Inquiries and reports > Ledger reports > Transaction origin | Account by journal with offset line details | SSRS Report
+LEDGER REPORTS | Opening transactions | LedgerOpeningTransactions | General ledger > Inquiries and reports > Ledger reports > Opening transactions | View opening balance transactions | SSRS Report
+LEDGER REPORTS | Closing transactions | LedgerClosingTransactions | General ledger > Inquiries and reports > Ledger reports > Closing transactions | View closing balance transactions | SSRS Report
+FINANCIAL REPORTS | Balance sheet | FinancialReports | General ledger > Financial reports | Standard balance sheet using Financial Reporter | Financial Report
+FINANCIAL REPORTS | Income statement | FinancialReports | General ledger > Financial reports | Standard P&L using Financial Reporter | Financial Report
+FINANCIAL REPORTS | Cash flow statement | FinancialReports | General ledger > Financial reports | Cash flow analysis using Financial Reporter | Financial Report
+FINANCIAL REPORTS | Trial balance summary | FinancialReports | General ledger > Financial reports | Trial balance summary using Financial Reporter | Financial Report
+FINANCIAL REPORTS | Trial balance detail | FinancialReports | General ledger > Financial reports | Detailed trial balance using Financial Reporter | Financial Report
+CONSOLIDATION | Consolidation report | LedgerConsolidateReport | General ledger > Inquiries and reports > Consolidation > Consolidation report | Consolidation results across legal entities | SSRS Report
+CONSOLIDATION | Elimination rules | LedgerEliminationRule | General ledger > Inquiries and reports > Consolidation > Elimination rules | View elimination rule transactions | Inquiry
+BUDGET | Budget funds available | BudgetFundsAvailable | General ledger > Inquiries and reports > Budget control > Budget funds available | Check available budget by dimension | Inquiry
+BUDGET | Actual vs budget | BudgetActualVsBudget | General ledger > Inquiries and reports > Budget control > Actual vs budget | Compare actual spending to budget | SSRS Report
+BUDGET | Budget control statistics | BudgetControlStatistics | General ledger > Inquiries and reports > Budget control > Budget control statistics | Budget utilization statistics | Inquiry
+
+--- Sheet: Accounts Payable ---
+Category | Report Name | Menu Item | Navigation Path | Description | Report Type
+INQUIRIES | Vendor transactions | VendTrans | Accounts payable > Vendors > All vendors > [Select vendor] > Transactions | View all transactions for a specific vendor | Inquiry
+INQUIRIES | Global transactions | VendTransGlobal | Accounts payable > Vendors > All vendors > [Select vendor] > Global transactions | Cross-company vendor transactions | Inquiry
+INQUIRIES | Settle open transactions | VendOpenTrans | Accounts payable > Vendors > All vendors > [Select vendor] > Settle open transactions | View and settle open vendor transactions | Inquiry
+INQUIRIES | Invoice journal | VendInvoiceJournal | Accounts payable > Invoices > Invoice journal | View posted vendor invoice journals | Inquiry
+INQUIRIES | Pending vendor invoices | VendInvoiceInfoTable | Accounts payable > Invoices > Pending vendor invoices | View invoices pending approval/posting | Inquiry
+INQUIRIES | Invoice register | VendInvoiceRegister | Accounts payable > Invoices > Invoice register | View invoice register entries | Inquiry
+INQUIRIES | Posted invoice journal | VendInvoiceJournalPosted | Accounts payable > Invoices > Posted invoices > Open vendor invoices | View posted invoice details | Inquiry
+INQUIRIES | Vendor payment journal | LedgerJournalTable_VendPaym | Accounts payable > Payments > Vendor payment journal | View vendor payment journals | Inquiry
+VENDOR REPORTS | Vendor aging report | VendAgingReport | Accounts payable > Inquiries and reports > Vendor reports > Vendor aging | Aging analysis of vendor balances by period buckets | SSRS Report
+VENDOR REPORTS | Vendor balance list | VendBalanceList | Accounts payable > Inquiries and reports > Vendor reports > Vendor balance list | List of vendor account balances | SSRS Report
+VENDOR REPORTS | Vendor to ledger reconciliation | VendLedgerReconciliation | Accounts payable > Inquiries and reports > Vendor reports > Vendor to ledger reconciliation | Compare AP subledger to GL control account | SSRS Report
+VENDOR REPORTS | Vendor invoice totals | VendInvoiceTotals | Accounts payable > Inquiries and reports > Vendor reports > Vendor invoice totals | Summary of invoice amounts by vendor | SSRS Report
+VENDOR REPORTS | Vendor transaction list | VendTransList | Accounts payable > Inquiries and reports > Vendor reports > Vendor transaction list | Detailed list of vendor transactions | SSRS Report
+VENDOR REPORTS | Vendor account statement | VendAccountStatement | Accounts payable > Inquiries and reports > Vendor reports > Vendor account statement | Statement of account for vendor | SSRS Report
+VENDOR REPORTS | Vendor payment history | VendPaymentHistory | Accounts payable > Inquiries and reports > Vendor reports > Vendor payment history | History of payments made to vendors | SSRS Report
+INVOICE REPORTS | Invoice matching details | VendInvoiceMatchingDetails | Accounts payable > Inquiries and reports > Invoice matching > Invoice matching details | Details of invoice matching variances | SSRS Report
+INVOICE REPORTS | Invoice matching totals | VendInvoiceMatchingTotals | Accounts payable > Inquiries and reports > Invoice matching > Invoice matching totals | Summary of matched vs unmatched invoices | SSRS Report
+INVOICE REPORTS | Pending invoices | VendPendingInvoices | Accounts payable > Inquiries and reports > Invoice reports > Pending invoices | List of pending invoice documents | SSRS Report
+PAYMENT REPORTS | Payment journal | LedgerJournalReport_Vend | Accounts payable > Inquiries and reports > Payment reports > Payment journal | Print payment journal entries | SSRS Report
+PAYMENT REPORTS | Check register | BankCheckRegister | Accounts payable > Inquiries and reports > Payment reports > Check register | Register of checks issued | SSRS Report
+PAYMENT REPORTS | Vendor payment by date | VendPaymByDate | Accounts payable > Inquiries and reports > Payment reports > Vendor payment by date | Payments organized by payment date | SSRS Report
+STATISTICS | Vendor statistics | VendStatistics | Accounts payable > Inquiries and reports > Statistics > Vendor statistics | Statistical analysis of vendor activity | Inquiry
+STATISTICS | Vendor - Due date analysis | VendDueDateAnalysis | Accounts payable > Inquiries and reports > Statistics > Vendor - Due date analysis | Analysis of payment due dates | SSRS Report
+TAX REPORTS | Vendor 1099 report | Vend1099Report | Accounts payable > Inquiries and reports > Tax 1099 > Vendor 1099 report | 1099 reporting for US vendors | SSRS Report
+TAX REPORTS | 1099 summary | Vend1099Summary | Accounts payable > Inquiries and reports > Tax 1099 > 1099 summary | Summary of 1099 amounts by vendor | SSRS Report
+
+--- Sheet: Accounts Receivable ---
+Category | Report Name | Menu Item | Navigation Path | Description | Report Type
+INQUIRIES | Customer transactions | CustTrans | Accounts receivable > Customers > All customers > [Select customer] > Transactions | View all transactions for a specific customer | Inquiry
+INQUIRIES | Global transactions | CustTransGlobal | Accounts receivable > Customers > All customers > [Select customer] > Global transactions | Cross-company customer transactions | Inquiry
+INQUIRIES | Settle open transactions | CustOpenTrans | Accounts receivable > Customers > All customers > [Select customer] > Settle open transactions | View and settle open customer transactions | Inquiry
+INQUIRIES | Posted free text invoices | CustFreeInvoiceListPage | Accounts receivable > Invoices > All free text invoices | View posted free text invoices | Inquiry
+INQUIRIES | Customer payment journal | LedgerJournalTable_CustPaym | Accounts receivable > Payments > Customer payment journal | View customer payment journals | Inquiry
+INQUIRIES | Collections | CustCollections | Credit and collections > Collections > Collections | Collections workspace and activities | Inquiry
+CUSTOMER REPORTS | Customer aging report | CustAgingReport | Accounts receivable > Inquiries and reports > Customer reports > Customer aging | Aging analysis of customer balances by period buckets | SSRS Report
+CUSTOMER REPORTS | Customer balance list | CustBalanceList | Accounts receivable > Inquiries and reports > Customer reports > Customer balance list | List of customer account balances | SSRS Report
+CUSTOMER REPORTS | Customer to ledger reconciliation | CustLedgerReconciliation | Accounts receivable > Inquiries and reports > Customer reports > Customer to ledger reconciliation | Compare AR subledger to GL control account | SSRS Report
+CUSTOMER REPORTS | Customer invoice totals | CustInvoiceTotals | Accounts receivable > Inquiries and reports > Customer reports > Customer invoice totals | Summary of invoice amounts by customer | SSRS Report
+CUSTOMER REPORTS | Customer transaction list | CustTransList | Accounts receivable > Inquiries and reports > Customer reports > Customer transaction list | Detailed list of customer transactions | SSRS Report
+CUSTOMER REPORTS | Customer account statement | CustAccountStatement | Accounts receivable > Inquiries and reports > Customer reports > Customer account statement | Statement of account for customer | SSRS Report
+CUSTOMER REPORTS | Customer payment history | CustPaymentHistory | Accounts receivable > Inquiries and reports > Customer reports > Customer payment history | History of payments received from customers | SSRS Report
+INVOICE REPORTS | Sales invoice journal | CustInvoiceJournal | Accounts receivable > Inquiries and reports > Invoice reports > Invoice journal | List of posted sales invoices | SSRS Report
+INVOICE REPORTS | Free text invoice | FreeTextInvoiceReport | Accounts receivable > Inquiries and reports > Invoice reports > Free text invoice | Print free text invoice documents | SSRS Report
+INVOICE REPORTS | Invoice summary | CustInvoiceSummary | Accounts receivable > Inquiries and reports > Invoice reports > Invoice summary | Summary of invoices by period | SSRS Report
+PAYMENT REPORTS | Customer payment journal report | LedgerJournalReport_Cust | Accounts receivable > Inquiries and reports > Payment reports > Customer payment journal | Print customer payment journal entries | SSRS Report
+PAYMENT REPORTS | Deposit slip | BankDepositSlip | Accounts receivable > Inquiries and reports > Payment reports > Deposit slip | Print bank deposit slip | SSRS Report
+PAYMENT REPORTS | Customer payment by date | CustPaymByDate | Accounts receivable > Inquiries and reports > Payment reports > Customer payment by date | Payments organized by receipt date | SSRS Report
+COLLECTIONS REPORTS | Collection letter | CustCollectionLetter | Credit and collections > Inquiries and reports > Collection letter | Print collection letters for overdue accounts | SSRS Report
+COLLECTIONS REPORTS | Interest note | CustInterestNote | Credit and collections > Inquiries and reports > Interest note | Print interest calculation notes | SSRS Report
+COLLECTIONS REPORTS | Collection activities | CustCollectionActivities | Credit and collections > Inquiries and reports > Collection activities | Report on collection activities and results | SSRS Report
+STATISTICS | Customer statistics | CustStatistics | Accounts receivable > Inquiries and reports > Statistics > Customer statistics | Statistical analysis of customer activity | Inquiry
+STATISTICS | Customer - Due date analysis | CustDueDateAnalysis | Accounts receivable > Inquiries and reports > Statistics > Customer - Due date analysis | Analysis of payment due dates | SSRS Report
+CREDIT REPORTS | Credit limit check | CustCreditLimitCheck | Credit and collections > Inquiries and reports > Credit limit check | Check customer credit limits and utilization | SSRS Report
+CREDIT REPORTS | Credit hold | CustCreditHold | Credit and collections > Inquiries and reports > Credit hold | List of customers on credit hold | Inquiry
+
+--- Sheet: Cash & Bank ---
+Category | Report Name | Menu Item | Navigation Path | Description | Report Type
+INQUIRIES | Bank transactions | BankAccountTrans | Cash and bank management > Bank accounts > Bank accounts > [Select account] > Transactions | View all transactions for a bank account | Inquiry
+INQUIRIES | Bank account balance | BankAccountBalance | Cash and bank management > Bank accounts > Bank accounts > [Select account] > Balance | Current balance inquiry for bank account | Inquiry
+INQUIRIES | Check status | BankChequeStatus | Cash and bank management > Inquiries and reports > Checks > Check status | View status of issued checks | Inquiry
+INQUIRIES | Checks with status | BankChequeWithStatus | Cash and bank management > Inquiries and reports > Checks > Checks | List of all checks with current status | Inquiry
+INQUIRIES | Deposit slip | BankDepositSlipInquiry | Cash and bank management > Inquiries and reports > Deposits > Deposit slip | View deposit slip details | Inquiry
+INQUIRIES | Bank reconciliation | BankReconciliation | Cash and bank management > Bank accounts > Bank accounts > [Select account] > Reconcile | Bank statement reconciliation workspace | Inquiry
+BANK REPORTS | Bank reconciliation summary | BankReconciliationSummary | Cash and bank management > Inquiries and reports > Bank reports > Bank reconciliation summary | Summary of reconciliation status by account | SSRS Report
+BANK REPORTS | Bank reconciliation details | BankReconciliationDetails | Cash and bank management > Inquiries and reports > Bank reports > Bank reconciliation details | Detailed reconciliation including unmatched items | SSRS Report
+BANK REPORTS | Bank account statement | BankAccountStatement | Cash and bank management > Inquiries and reports > Bank reports > Bank account statement | Print bank account statement | SSRS Report
+BANK REPORTS | Bank transactions report | BankTransReport | Cash and bank management > Inquiries and reports > Bank reports > Bank transactions | Transactions by bank account and date range | SSRS Report
+BANK REPORTS | Bank balance by date | BankBalanceByDate | Cash and bank management > Inquiries and reports > Bank reports > Bank balance by date | Historical bank balance analysis | SSRS Report
+CHECK REPORTS | Check register | BankCheckRegister | Cash and bank management > Inquiries and reports > Checks > Check register | Register of all checks issued | SSRS Report
+CHECK REPORTS | Check summary | BankCheckSummary | Cash and bank management > Inquiries and reports > Checks > Check summary | Summary of check activity by status | SSRS Report
+CHECK REPORTS | Voided checks | BankVoidedChecks | Cash and bank management > Inquiries and reports > Checks > Voided checks | List of voided check transactions | SSRS Report
+CHECK REPORTS | Positive pay file | BankPositivePayFile | Cash and bank management > Inquiries and reports > Checks > Positive pay file | Positive pay export file for fraud prevention | SSRS Report
+CASH FLOW | Cash flow forecast | CashFlowForecast | Cash and bank management > Inquiries and reports > Cash flow forecasting > Cash flow forecast | Projected cash inflows and outflows | SSRS Report
+CASH FLOW | Cash position | CashPosition | Cash and bank management > Inquiries and reports > Cash flow forecasting > Cash position | Current cash position across accounts | Inquiry
+CASH FLOW | Liquidity analysis | LiquidityAnalysis | Cash and bank management > Inquiries and reports > Cash flow forecasting > Liquidity analysis | Analysis of liquidity by period | SSRS Report
+PAYMENT INSTRUMENTS | Bills of exchange list | BankBillOfExchangeList | Cash and bank management > Inquiries and reports > Bills of exchange > Bills of exchange list | List of bills of exchange | SSRS Report
+PAYMENT INSTRUMENTS | Promissory notes list | BankPromissoryNoteList | Cash and bank management > Inquiries and reports > Promissory notes > Promissory notes list | List of promissory notes | SSRS Report
+PAYMENT INSTRUMENTS | Letters of credit | BankLetterOfCredit | Cash and bank management > Inquiries and reports > Letters of credit > Letters of credit | List of letters of credit | Inquiry
+PAYMENT INSTRUMENTS | Letters of guarantee | BankLetterOfGuarantee | Cash and bank management > Inquiries and reports > Letters of guarantee > Letters of guarantee | List of bank guarantee letters | Inquiry
+ELECTRONIC BANKING | Payment status | BankPaymentStatus | Cash and bank management > Inquiries and reports > Electronic banking > Payment status | Status of electronic payments | Inquiry
+ELECTRONIC BANKING | Bank statement import history | BankStatementImportHistory | Cash and bank management > Inquiries and reports > Electronic banking > Bank statement import history | History of imported bank statements | Inquiry
+
+================================================================================
+END OF FILE 5 OF 5
+================================================================================
