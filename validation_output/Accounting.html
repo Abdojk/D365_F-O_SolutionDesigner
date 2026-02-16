@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting — RFP Compliance Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #0078d4; padding-bottom: 15px; }
+        h2 { color: #0078d4; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th { background: #0078d4; color: white; padding: 10px 8px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ddd; vertical-align: top; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .summary { background: #e8f4fd; border-left: 4px solid #0078d4; padding: 20px; margin: 20px 0; }
+        .high-risk { background: #fdecea; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; }
+        .medium-risk { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; }
+        .safe { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; }
+        .risk-note { background: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin: 10px 0; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+        .stat { display: inline-block; background: #0078d4; color: white; padding: 5px 15px; border-radius: 20px; margin: 3px; font-size: 13px; }
+        .stat.high { background: #dc3545; }
+        .stat.medium { background: #ffc107; color: #333; }
+        .stat.safe { background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Accounting</h1>
+        
+        <h2>1. Validation Summary</h2>
+        <div class="summary">
+            <p><strong>Tab Status:</strong> Responses provided — Validation performed.</p>
+            <p><strong>Total Requirements Reviewed:</strong> ~190 (excluding headers and blank rows)</p>
+            <p>
+                <span class="stat high">High Risk: 7</span>
+                <span class="stat medium">Medium Risk: 13</span>
+                <span class="stat safe">Safe / Validated: 158</span>
+            </p>
+            <p>The Accounting tab covers General Ledger, Accounts Receivable, Accounts Payable, Reporting, Banks, Assets, and Budget. The majority of responses are marked as 'S' (Standard), which is broadly consistent with D365 F&O capabilities. However, several items are left unanswered or marked 'Not Clear', and a few items are misclassified between Standard and Modification.</p>
+        </div>
+
+        <h2>2. High-Risk Items</h2>
+        <div class="high-risk">
+            <p>The following items pose significant compliance, contractual, or accuracy risk:</p>
+            <table>
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Requirement</th>
+                <th>Availability</th>
+                <th>Vendor Comment</th>
+                <th>Validation Finding</th>
+                <th>Recommended Correction</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>62</td>
+            <td>Ability to reprint or directly e-mail sales invoices and view invoice detail and shipping documents</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. This is inaccurate. D365 F&amp;O provides standard capability to reprint invoices, email them directly (via Print Management and email destinations), and view invoice details. The &#x27;M&#x27; classification overstates the effort significantly.</td>
+            <td>Reclassify to &#x27;S&#x27;. D365 F&amp;O supports invoice reprinting and email delivery through standard Print Management configuration. Viewing invoice details and shipping documents is available in standard forms.</td>
+        </tr><tr>
+            <td>63</td>
+            <td>Invoice via email automatically</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. This is inaccurate. D365 F&amp;O has standard Print Management settings that support automatic email delivery of invoices upon posting. No modification is required.</td>
+            <td>Reclassify to &#x27;S&#x27;. D365 F&amp;O Print Management supports automatic email delivery of invoices as a standard feature.</td>
+        </tr><tr>
+            <td>68</td>
+            <td>Exception reporting on items that can not be invoiced</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>No availability code provided, only &#x27;Not Clear&#x27; comment. This requirement needs clarification from the client. D365 F&amp;O does provide visibility into delivery remainders and items pending invoicing. Leaving this unanswered creates contractual risk.</td>
+            <td>Seek clarification from the client on what &#x27;exception reporting on items that cannot be invoiced&#x27; means. Once clarified, D365 F&amp;O likely supports this through delivery remainder reports or custom inquiry.</td>
+        </tr><tr>
+            <td>74</td>
+            <td>Ability to capture credit conversations/history in notes section</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>No availability code provided, only &#x27;Not Clear&#x27; comment. D365 F&amp;O does support notes/attachments on customer records and collection activities. This should be marked as &#x27;S&#x27;. Leaving unanswered creates unnecessary gap.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O Collections module supports activity logging, notes, and communication history on customer accounts.</td>
+        </tr><tr>
+            <td>101</td>
+            <td>Invoicing Coordinator sends the price table in the offer and the RCO’s to the mechanical and electrical Project Managers, and the Spare Parts department, to define the percentage of each assembly to b</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Price Matrix Available</td>
+            <td>No availability code provided, only &#x27;Price Matrix Available&#x27; comment. This is a process-level requirement about information flow after contract signature. The response is incomplete and creates ambiguity about system capability.</td>
+            <td>Clarify how D365 F&amp;O handles the price matrix in project context. If price breakdown structures exist in the project module, mark accordingly with explanation.</td>
+        </tr><tr>
+            <td>109</td>
+            <td>Provide cash requirements planning information</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>No availability code provided. D365 F&amp;O has Cash Flow Forecasting capabilities as standard. This requirement should be answered.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O provides Cash Flow Forecasting with integration across AP, AR, Budgets, and Projects.</td>
+        </tr><tr>
+            <td>113</td>
+            <td>Integrated with Purchasing on-line, real-time</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>No availability code provided. D365 F&amp;O AP is fully integrated with Purchasing module in real-time. All purchase invoices are matched against POs. This should clearly be &#x27;S&#x27;.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O AP and Purchasing modules are fully integrated with real-time data sharing, invoice matching, and three-way matching.</td>
+        </tr></tbody>
+    </table>
+        </div>
+
+        <h2>3. Medium-Risk Items</h2>
+        <div class="medium-risk">
+            <p>The following items have potential misclassification or missing information:</p>
+            <table>
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Requirement</th>
+                <th>Availability</th>
+                <th>Vendor Comment</th>
+                <th>Validation Finding</th>
+                <th>Recommended Correction</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>17</td>
+            <td>User-controlled posting on-demand</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided. D365 F&amp;O does support user-controlled posting (manual posting of journals). This should be marked as &#x27;S&#x27;.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O allows manual posting of individual or batch journals on-demand.</td>
+        </tr><tr>
+            <td>22</td>
+            <td>Third party EDI (Electronic Data Interchange) integration</td>
+            <td><strong>3</strong></td>
+            <td></td>
+            <td>Marked as &#x27;3&#x27; (3rd Party). While D365 F&amp;O does not have native full EDI, it supports EDI through ISV solutions. The response is accurate but should include a comment naming potential ISV partners (e.g., Microsoft EDI solutions, or certified ISV partners).</td>
+            <td>Add comment specifying recommended ISV EDI partner and integration approach.</td>
+        </tr><tr>
+            <td>23</td>
+            <td>Automated account reconciliation (banks, vendors,…)</td>
+            <td><strong>S</strong></td>
+            <td>Banks Only</td>
+            <td>Marked &#x27;S&#x27; with comment &#x27;Banks Only&#x27;. D365 F&amp;O provides automated bank reconciliation as standard. However, the requirement also asks about vendor reconciliation. Vendor statement reconciliation is not a standard automated feature in D365 F&amp;O — it requires manual comparison or customization. The &#x27;Banks Only&#x27; comment is accurate but the &#x27;S&#x27; code is misleading since the full requirement is not met.</td>
+            <td>Consider marking as &#x27;W&#x27; with comment: &#x27;Bank reconciliation is standard. Vendor reconciliation requires manual process or third-party tools.&#x27;</td>
+        </tr><tr>
+            <td>39</td>
+            <td>Customized automatic numbering per type of Customer</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification). D365 F&amp;O supports number sequences that can be configured per customer group. This could potentially be achieved through standard configuration with number sequence scoping rules. The &#x27;M&#x27; classification may overstate the effort required.</td>
+            <td>Evaluate if number sequence scope rules in D365 F&amp;O can satisfy this without modification. If so, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</td>
+        </tr><tr>
+            <td>40</td>
+            <td>Customized automatic numbering per type of Vendor </td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification). Similar to customer numbering, D365 F&amp;O number sequences support scope-based configuration that may cover vendor numbering by type. May be achievable through standard configuration.</td>
+            <td>Evaluate if number sequence scope rules can satisfy this. If so, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</td>
+        </tr><tr>
+            <td>67</td>
+            <td>the sales invoice form should be flexible and customizable in a way to:
+     Add information required by the customer
+     Split items (example freight and services)
+     Show conversion rate to local</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. Partially accurate. D365 F&amp;O sales invoice reports can be customized via SSRS report design, which does require development effort. However, basic field additions and layout changes are part of the standard implementation approach using report configurations. Full customization of the invoice layout (adding customer-specific fields, splitting items, showing conversion rates) would require report modifications.</td>
+            <td>Reclassify to &#x27;W&#x27; for basic customization needs. Note that significant layout changes would require SSRS report modification (M).</td>
+        </tr><tr>
+            <td>79</td>
+            <td>Hold orders at time of entry, or at any milestone (shipping, installation,…), based on instruction from Fin. Manager</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. Partially accurate. D365 F&amp;O supports sales order holds as a standard feature (credit holds, manual holds). However, holds at arbitrary milestones like &#x27;installation&#x27; would require customization. The &#x27;M&#x27; is reasonable for the full scope but a comment should differentiate standard vs. custom capabilities.</td>
+            <td>Add comment: &#x27;Sales order holds at entry and before shipping are standard. Holds at custom milestones (installation) require modification.&#x27;</td>
+        </tr><tr>
+            <td>90</td>
+            <td>High credit information – notification to accounting</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. D365 F&amp;O has standard credit limit checks that can block or warn during sales order processing. However, proactive notifications to accounting when credit thresholds are reached would require workflow or alert rule configuration, which is standard functionality. This may be achievable as &#x27;S&#x27; or &#x27;W&#x27;.</td>
+            <td>Evaluate if D365 F&amp;O Alert Rules or Workflow notifications can satisfy this requirement. If so, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</td>
+        </tr><tr>
+            <td>102</td>
+            <td>Invoicing need should be triggered by Project Manager upon completion of each milestone (except advance payments)</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. D365 F&amp;O Project module supports milestone billing and invoice proposals. The project manager can create invoice proposals upon milestone completion as a standard feature. However, automatic triggering (notification-based) upon milestone status change would require workflow customization.</td>
+            <td>Reclassify to &#x27;S&#x27; with comment: &#x27;D365 F&amp;O supports milestone-based invoice proposals in the Project module. Automatic triggering upon milestone completion can be configured via workflow.&#x27;</td>
+        </tr><tr>
+            <td>135</td>
+            <td>Generate warning while making payment to vendors who is also a customer if any outstanding amount is due from him</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27;. D365 F&amp;O does not have this as a built-in automatic warning during payment processing. The Vendor-Customer bridging (one-way/mutual settlement) feature exists, but automatic warnings during payment require customization. The &#x27;M&#x27; classification is reasonable.</td>
+            <td>No correction needed.</td>
+        </tr><tr>
+            <td>142</td>
+            <td>Accounts Receivable aging reports by vendor</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Requirement text says &#x27;Accounts Receivable aging reports by vendor&#x27; which is contradictory — AR reports are by customer, not vendor. This appears to be a typo in the RFP and should be &#x27;Accounts Payable aging reports by vendor&#x27;. The &#x27;S&#x27; response is correct for AP aging by vendor. Clarification should be noted.</td>
+            <td>Add comment noting this appears to be a typo. If the intent is AP aging by vendor, &#x27;S&#x27; is correct. If truly AR aging by vendor, this does not apply in standard accounting.</td>
+        </tr><tr>
+            <td>160</td>
+            <td>Bank correspondance reference list</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>No availability code provided. The requirement is vague. D365 F&amp;O tracks bank transaction references but a &#x27;correspondence reference list&#x27; is not a standard term. This needs client clarification.</td>
+            <td>Seek clarification from client. If referring to bank letter/guarantee tracking, D365 F&amp;O supports Bank Guarantees and Letter of Credit as standard features.</td>
+        </tr><tr>
+            <td>176</td>
+            <td>Automatically create journal entries for asset Transfers</td>
+            <td><strong>W</strong></td>
+            <td></td>
+            <td>Marked as &#x27;W&#x27;. In D365 F&amp;O, Fixed Asset transfers between financial dimensions automatically create journal entries. This is a standard feature, not a workaround.</td>
+            <td>Reclassify to &#x27;S&#x27;. D365 F&amp;O Fixed Asset transfer proposals automatically generate journal entries for dimension/location transfers.</td>
+        </tr></tbody>
+    </table>
+        </div>
+
+        <h2>4. Safe Items</h2>
+        <div class="safe">
+            <p>158 items validated as correctly classified. D365 F&O capabilities confirmed for the stated availability codes. Key validated areas include:</p>
+            <ul>
+                <li>General Ledger: Multi-currency, multi-company, journal management, dimension-based P&amp;L — all standard D365 F&O features.</li>
+                <li>Accounts Receivable: Customer payments, aging, credit management, proforma invoices — standard capabilities.</li>
+                <li>Accounts Payable: Three-way matching, recurring vouchers, vendor management — standard capabilities.</li>
+                <li>Banks: Bank reconciliation, cheque management, bank transfers — standard features.</li>
+                <li>Fixed Assets: Depreciation methods, acquisitions, disposals, barcode tracking — standard features.</li>
+                <li>Budget: Budget planning, control, workflows, consolidation — standard features in D365 F&O Budget module.</li>
+            </ul>
+        </div>
+
+        <h2>5. Recommended Corrections</h2>
+        <div class="risk-note">
+            <ul>
+<li><strong>Row 62:</strong> Reclassify to &#x27;S&#x27;. D365 F&amp;O supports invoice reprinting and email delivery through standard Print Management configuration. Viewing invoice details and shipping documents is available in standard forms.</li>
+<li><strong>Row 63:</strong> Reclassify to &#x27;S&#x27;. D365 F&amp;O Print Management supports automatic email delivery of invoices as a standard feature.</li>
+<li><strong>Row 68:</strong> Seek clarification from the client on what &#x27;exception reporting on items that cannot be invoiced&#x27; means. Once clarified, D365 F&amp;O likely supports this through delivery remainder reports or custom inquiry.</li>
+<li><strong>Row 74:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O Collections module supports activity logging, notes, and communication history on customer accounts.</li>
+<li><strong>Row 101:</strong> Clarify how D365 F&amp;O handles the price matrix in project context. If price breakdown structures exist in the project module, mark accordingly with explanation.</li>
+<li><strong>Row 109:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O provides Cash Flow Forecasting with integration across AP, AR, Budgets, and Projects.</li>
+<li><strong>Row 113:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O AP and Purchasing modules are fully integrated with real-time data sharing, invoice matching, and three-way matching.</li>
+<li><strong>Row 17:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O allows manual posting of individual or batch journals on-demand.</li>
+<li><strong>Row 22:</strong> Add comment specifying recommended ISV EDI partner and integration approach.</li>
+<li><strong>Row 23:</strong> Consider marking as &#x27;W&#x27; with comment: &#x27;Bank reconciliation is standard. Vendor reconciliation requires manual process or third-party tools.&#x27;</li>
+<li><strong>Row 39:</strong> Evaluate if number sequence scope rules in D365 F&amp;O can satisfy this without modification. If so, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</li>
+<li><strong>Row 40:</strong> Evaluate if number sequence scope rules can satisfy this. If so, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</li>
+<li><strong>Row 67:</strong> Reclassify to &#x27;W&#x27; for basic customization needs. Note that significant layout changes would require SSRS report modification (M).</li>
+<li><strong>Row 79:</strong> Add comment: &#x27;Sales order holds at entry and before shipping are standard. Holds at custom milestones (installation) require modification.&#x27;</li>
+<li><strong>Row 90:</strong> Evaluate if D365 F&amp;O Alert Rules or Workflow notifications can satisfy this requirement. If so, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</li>
+<li><strong>Row 102:</strong> Reclassify to &#x27;S&#x27; with comment: &#x27;D365 F&amp;O supports milestone-based invoice proposals in the Project module. Automatic triggering upon milestone completion can be configured via workflow.&#x27;</li>
+<li><strong>Row 142:</strong> Add comment noting this appears to be a typo. If the intent is AP aging by vendor, &#x27;S&#x27; is correct. If truly AR aging by vendor, this does not apply in standard accounting.</li>
+<li><strong>Row 160:</strong> Seek clarification from client. If referring to bank letter/guarantee tracking, D365 F&amp;O supports Bank Guarantees and Letter of Credit as standard features.</li>
+<li><strong>Row 176:</strong> Reclassify to &#x27;S&#x27;. D365 F&amp;O Fixed Asset transfer proposals automatically generate journal entries for dimension/location transfers.</li>
+            </ul>
+        </div>
+
+        <h2>6. Suggested Improved Responses</h2>
+        <div class="risk-note">
+            <table>
+                <thead>
+                    <tr><th>Row</th><th>Current Response</th><th>Suggested Improvement</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>R62</td><td>M (Modification)</td><td>S — Invoice reprinting and email delivery are standard via Print Management in D365 F&O.</td></tr>
+                    <tr><td>R63</td><td>M (Modification)</td><td>S — Automatic invoice emailing is standard via Print Management email destinations.</td></tr>
+                    <tr><td>R74</td><td>Not Provided (Not Clear)</td><td>S — D365 F&O Collections module supports notes, activities, and communication logging per customer.</td></tr>
+                    <tr><td>R102</td><td>M (Modification)</td><td>S — Milestone billing and invoice proposals are standard in D365 F&O Project module.</td></tr>
+                    <tr><td>R109</td><td>Not Provided (Not Clear)</td><td>S — D365 F&O Cash Flow Forecasting is a standard feature integrated with AP, AR, and Budgets.</td></tr>
+                    <tr><td>R113</td><td>Not Provided (Not Clear)</td><td>S — AP and Purchasing are fully integrated in D365 F&O with real-time data sharing.</td></tr>
+                    <tr><td>R176</td><td>W (Workaround)</td><td>S — Fixed Asset transfers automatically generate journal entries in D365 F&O.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>7. Explicit Risk Notes</h2>
+        <div class="high-risk">
+            <ul>
+<li>Multiple requirements are left unanswered (no availability code). Per the RFP Instructions tab, 'Items that are not addressed by the Vendor\'s response will be assumed as not available or not supported.' This creates significant contractual risk.</li><li>Several items marked as 'M' (Modification) may be achievable through standard D365 F&O configuration, potentially understating the platform\'s capabilities.</li><li>The 'Not Clear' responses on critical items (cash requirements planning, AP-Purchasing integration) leave gaps that competitors may exploit.</li><li>Invoice email capabilities are incorrectly marked as 'M' when they are standard D365 F&O features via Print Management — this may convey an incorrect impression of complexity.</li>
+            </ul>
+        </div>
+
+        <h2>8. Verification Gaps</h2>
+        <div class="risk-note">
+            <ul>
+<li>R68 (Exception reporting on items that cannot be invoiced): Requirement is ambiguous. Cannot verify without client clarification.</li><li>R101 (Price matrix / invoicing coordinator process): Business process requirement that depends on implementation design. Cannot verify against standard D365 F&amp;O without further context.</li><li>R160 (Bank correspondence reference list): Non-standard terminology. Cannot map to specific D365 F&amp;O feature without clarification.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
