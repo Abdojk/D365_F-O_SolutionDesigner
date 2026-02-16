@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Warehouse &mdash; RFP Compliance Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #0078d4; padding-bottom: 15px; }
+        h2 { color: #0078d4; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th { background: #0078d4; color: white; padding: 10px 8px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ddd; vertical-align: top; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .summary { background: #e8f4fd; border-left: 4px solid #0078d4; padding: 20px; margin: 20px 0; }
+        .high-risk { background: #fdecea; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; }
+        .medium-risk { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; }
+        .safe { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; }
+        .risk-note { background: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin: 10px 0; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+        .stat { display: inline-block; background: #0078d4; color: white; padding: 5px 15px; border-radius: 20px; margin: 3px; font-size: 13px; }
+        .stat.high { background: #dc3545; }
+        .stat.medium { background: #ffc107; color: #333; }
+        .stat.safe { background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inventory - Warehouse</h1>
+
+        <h2>1. Validation Summary</h2>
+        <div class="summary">
+            <p><strong>Tab Status:</strong> Responses provided &mdash; Validation performed.</p>
+            <p><strong>Total Requirements Reviewed:</strong> 99 (excluding headers and blank rows)</p>
+            <p>
+                <span class="stat high">High Risk: 8</span>
+                <span class="stat medium">Medium Risk: 6</span>
+                <span class="stat safe">Safe / Validated: 85</span>
+            </p>
+            <p>The Inventory - Warehouse tab covers Inventory Control, Warehouse/Distribution,
+            Receiving/Shipping, and Reporting. The majority of responses are marked as 'S' (Standard),
+            which is broadly consistent with D365 F&amp;O Supply Chain Management and Warehouse Management
+            capabilities. However, several critical items in the Electronic Data Collection section
+            (R59-R62) are left completely unanswered, and a few items marked 'M' (Modification) may
+            be achievable through standard D365 F&amp;O configuration. One item (R85 Leasing Equipments)
+            marked 'S' may be inaccurately classified depending on the requirement's intent.</p>
+        </div>
+
+        <h2>2. High-Risk Items</h2>
+        <div class="high-risk">
+            <p>The following items pose significant compliance, contractual, or accuracy risk:</p>
+            <table>
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Requirement</th>
+                <th>Availability</th>
+                <th>Vendor Comment</th>
+                <th>Validation Finding</th>
+                <th>Recommended Correction</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>59</td>
+            <td>Electronic Data Collection</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>Section header &#x27;Electronic Data Collection&#x27; has no availability code. D365 F&amp;O WMS mobile app and Warehouse Management support electronic data collection as a core capability. This section header and its sub-items (R60-R62) are all left unanswered, creating significant contractual risk per the Instructions tab: &#x27;Items not addressed will be assumed as not available or not supported.&#x27;</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O Warehouse Management mobile app provides full electronic data collection capability including barcode scanning, RF device support, and real-time data capture.</td>
+        </tr><tr>
+            <td>60</td>
+            <td>        Barcoding of finished goods</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided for &#x27;Barcoding of finished goods&#x27;. D365 F&amp;O supports barcode generation and scanning for finished goods through Warehouse Management, including GS1 barcode support. Leaving this unanswered implies the capability is not available, which is inaccurate.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O supports barcode generation, printing, and scanning for finished goods as standard WMS functionality.</td>
+        </tr><tr>
+            <td>61</td>
+            <td>        Barcode, pick list, receiving</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided for &#x27;Barcode, pick list, receiving&#x27;. D365 F&amp;O WMS provides barcode-driven pick lists and receiving processes as core warehouse functionality. This is a standard feature that should not be left unanswered.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O WMS supports barcode-driven pick lists and receiving workflows as standard features.</td>
+        </tr><tr>
+            <td>62</td>
+            <td>        Supports RF automatic data collection</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided for &#x27;Supports RF automatic data collection&#x27;. D365 F&amp;O Warehouse Management mobile app is specifically designed for RF/mobile devices and supports automatic data collection. This capability is already confirmed in R46 (marked &#x27;S&#x27;), making the omission here inconsistent.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O Warehouse Management mobile app supports RF devices for automatic data collection. This is consistent with R46 which is already marked &#x27;S&#x27;.</td>
+        </tr><tr>
+            <td>63</td>
+            <td>Product Groups assigned to Profit Center</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided for &#x27;Product Groups assigned to Profit Center&#x27;. D365 F&amp;O supports product groups (Item groups) and financial dimensions including Business Unit / Profit Center assignments. Product posting profiles map item groups to GL accounts by financial dimension. However, direct assignment of product groups to profit centers as a dedicated feature may require configuration via financial dimension defaults. This requirement is unanswered, creating contractual risk.</td>
+            <td>Mark as &#x27;S&#x27; or &#x27;W&#x27;. D365 F&amp;O supports mapping item groups to financial dimensions (including profit centers) through product posting profiles and default financial dimension assignments on item groups.</td>
+        </tr><tr>
+            <td>75</td>
+            <td>Ability to dismantle shipment list</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided for &#x27;Ability to dismantle shipment list&#x27;. D365 F&amp;O WMS supports splitting shipments, removing lines from load/shipment, and reorganizing shipment contents. This capability exists in standard Warehouse Management. Leaving unanswered creates risk.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O Warehouse Management supports splitting and reorganizing shipments, including removing lines from shipment lists.</td>
+        </tr><tr>
+            <td>85</td>
+            <td>Leasing Equipments</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27; (Standard) for &#x27;Leasing Equipments&#x27;. D365 F&amp;O has an Asset Leasing module for financial lease accounting (IFRS 16 / ASC 842), but this appears to refer to inventory equipment leasing (tracking equipment loaned/leased to customers or from vendors). Inventory-based equipment leasing is NOT a standard D365 F&amp;O feature and would typically require customization or a third-party solution. The &#x27;S&#x27; classification may be inaccurate and could set incorrect expectations.</td>
+            <td>Clarify the requirement scope with the client. If referring to financial lease accounting, &#x27;S&#x27; is correct (Asset Leasing module). If referring to tracking inventory equipment leased to/from parties, reclassify to &#x27;M&#x27; or &#x27;3&#x27; and add explanatory comment.</td>
+        </tr><tr>
+            <td>97</td>
+            <td>Job costing reports to include all sub contractors, expenses, etc. that are assigned to a job/customer</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided for &#x27;Job costing reports to include all sub contractors, expenses, etc. that are assigned to a job/customer&#x27;. D365 F&amp;O Project Accounting module provides job costing with tracking of subcontractor costs, expenses, items, and hours by project. Project statements and cost control reports are standard. Leaving this unanswered creates significant risk as it implies the capability does not exist.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O Project Accounting provides comprehensive job costing reports including subcontractor, expense, item, and labor cost tracking by project/customer.</td>
+        </tr></tbody>
+    </table>
+        </div>
+
+        <h2>3. Medium-Risk Items</h2>
+        <div class="medium-risk">
+            <p>The following items have potential misclassification or missing information:</p>
+            <table>
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Requirement</th>
+                <th>Availability</th>
+                <th>Vendor Comment</th>
+                <th>Validation Finding</th>
+                <th>Recommended Correction</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>17</td>
+            <td>Item Creation approval cycle  - Workflow per item type</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification) for &#x27;Item Creation approval cycle - Workflow per item type&#x27;. D365 F&amp;O has Product Lifecycle Management with configurable workflows for product/item creation and approval. Product lifecycle states and workflow approvals can be configured per product type. This may be achievable as &#x27;S&#x27; (standard workflow configuration) or &#x27;W&#x27; (workaround using product lifecycle states) without custom development.</td>
+            <td>Evaluate if D365 F&amp;O Product Lifecycle Management workflows satisfy this requirement. If per-item-type workflows can be configured through standard workflow framework, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</td>
+        </tr><tr>
+            <td>65</td>
+            <td>Requester name should be mentioned on the delivery order</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification) for &#x27;Requester name should be mentioned on the delivery order&#x27;. D365 F&amp;O purchase orders capture the Requester (Orderer) field, and delivery notes/packing slips can be customized through report configurations. Adding the requester name to the delivery order printout may be achievable through SSRS report modification or Print Management configuration, but it is a relatively minor report change rather than a significant modification.</td>
+            <td>Consider reclassifying to &#x27;W&#x27; if the requester field is available on the underlying data. The change may only require a report layout adjustment rather than a full modification.</td>
+        </tr><tr>
+            <td>93</td>
+            <td>Receive acknowledgements, bill-of-lading, pick tickets online for each invoice</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification) for &#x27;Receive acknowledgements, bill-of-lading, pick tickets online for each invoice&#x27;. D365 F&amp;O WMS provides standard bill-of-lading generation, pick ticket printing, and receiving functionality. These documents are available online within the system. The requirement for receiving &#x27;acknowledgements&#x27; may need clarification, but the core capabilities (BOL, pick tickets, receiving) are standard WMS features. The &#x27;M&#x27; classification likely overstates the effort.</td>
+            <td>Reclassify to &#x27;S&#x27; with comment noting that BOL, pick tickets, and receiving are standard WMS features. Clarify what &#x27;acknowledgements&#x27; specifically means in this context.</td>
+        </tr><tr>
+            <td>100</td>
+            <td>Automatic shipping report – date, order number, customer, dollar amount, ship date, delivery date, on-time and out-of-stock</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification) for &#x27;Automatic shipping report&#x27; with specified fields (date, order number, customer, dollar amount, ship date, delivery date, on-time, out-of-stock). D365 F&amp;O provides shipping reports and delivery performance analytics as standard features. Most of the specified fields are available in standard shipment and sales order reports. Full automation with all specified fields including on-time delivery and out-of-stock metrics may require report customization, but the core data is available.</td>
+            <td>Consider reclassifying to &#x27;W&#x27; or &#x27;S&#x27; with comment. Standard D365 F&amp;O reports cover most fields. On-time delivery metrics are available in Transportation Management. Out-of-stock reporting may need configuration.</td>
+        </tr><tr>
+            <td>105</td>
+            <td>Item consumption by project and sub job</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification) for &#x27;Item consumption by project and sub job&#x27;. D365 F&amp;O Project module tracks item consumption (item journals, item requirements) by project and project activities/tasks. Project statements provide item cost breakdowns by project hierarchy. This appears to be achievable as standard functionality through Project Accounting item tracking.</td>
+            <td>Evaluate if D365 F&amp;O Project Accounting item consumption tracking satisfies this requirement. If sub-jobs are mapped to project activities or sub-projects, reclassify to &#x27;S&#x27;.</td>
+        </tr><tr>
+            <td>106</td>
+            <td>Remaining items report by job and sub job</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Marked as &#x27;M&#x27; (Modification) for &#x27;Remaining items report by job and sub job&#x27;. D365 F&amp;O Project module provides item requirement tracking and remaining budget/ forecast reports by project hierarchy. Project item requirements show remaining quantities. This may be achievable as standard functionality.</td>
+            <td>Evaluate if D365 F&amp;O Project item requirements and project budget tracking satisfy this requirement. If so, reclassify to &#x27;S&#x27;.</td>
+        </tr></tbody>
+    </table>
+        </div>
+
+        <h2>4. Safe Items</h2>
+        <div class="safe">
+            <p>85 items validated as correctly classified. D365 F&amp;O capabilities confirmed for the stated availability codes. Key validated areas include:</p>
+            <ul>
+                <li><strong>Inventory Control (36 items):</strong> Item Master, BOM (including nested BOM), item classification with multiple levels, multi-location, UOM conversions (purchase/stock/selling), cycle counting integrated with GL, serial/batch/lot tracking, item traceability, reorder rules (min/max/reorder points), item cost methods (FIFO, weighted average), cost revaluation, item substitutes, vendor price lists, sales pricing, scrap processing, Intrastat reporting &mdash; all confirmed as standard D365 F&amp;O SCM features.</li>
+                <li><strong>Warehouse/Distribution (16 items):</strong> Stock request orders, physical inventory, RF device support, item storage (location/zone/aisle/bin/shelf), alternate UOM with conversion factors, finished goods tracking, non-stocked item reporting, multi-company/warehouse/location, transaction history with audit trails, pick/pack/delivery processes, product attributes, barcoding with handheld devices, commodity/HS codes &mdash; all confirmed as standard D365 F&amp;O Warehouse Management features.</li>
+                <li><strong>Receiving/Shipping (24 items):</strong> Warehouse receiving, PO-to-receipt comparison, freight charges, PO closure on full receipt, inbound quality inspection, shipment scanning, internal transfers, vendor returns, consolidated shipments (BOL, packing slip, labels), proforma invoicing, shipping addresses, picking list release with RF integration, freight tracking, quality inspection recording, vendor communications, supplier evaluation, vendor contract management, partial receiving &mdash; all confirmed as standard features.</li>
+                <li><strong>Reporting (9 items):</strong> Average costing with variance reporting, carrier shipping reports, shipping schedule reports, inventory usage history, inventory by location, item movement, items by customer/vendor, item history/transactions, min/max reports &mdash; all confirmed as standard D365 F&amp;O reporting capabilities.</li>
+            </ul>
+        </div>
+
+        <h2>5. Recommended Corrections</h2>
+        <div class="risk-note">
+            <ul>
+<li><strong>Row 17:</strong> Evaluate if D365 F&amp;O Product Lifecycle Management workflows satisfy this requirement. If per-item-type workflows can be configured through standard workflow framework, reclassify to &#x27;S&#x27; or &#x27;W&#x27;.</li><li><strong>Row 59:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O Warehouse Management mobile app provides full electronic data collection capability including barcode scanning, RF device support, and real-time data capture.</li><li><strong>Row 60:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O supports barcode generation, printing, and scanning for finished goods as standard WMS functionality.</li><li><strong>Row 61:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O WMS supports barcode-driven pick lists and receiving workflows as standard features.</li><li><strong>Row 62:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O Warehouse Management mobile app supports RF devices for automatic data collection. This is consistent with R46 which is already marked &#x27;S&#x27;.</li><li><strong>Row 63:</strong> Mark as &#x27;S&#x27; or &#x27;W&#x27;. D365 F&amp;O supports mapping item groups to financial dimensions (including profit centers) through product posting profiles and default financial dimension assignments on item groups.</li><li><strong>Row 65:</strong> Consider reclassifying to &#x27;W&#x27; if the requester field is available on the underlying data. The change may only require a report layout adjustment rather than a full modification.</li><li><strong>Row 75:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O Warehouse Management supports splitting and reorganizing shipments, including removing lines from shipment lists.</li><li><strong>Row 85:</strong> Clarify the requirement scope with the client. If referring to financial lease accounting, &#x27;S&#x27; is correct (Asset Leasing module). If referring to tracking inventory equipment leased to/from parties, reclassify to &#x27;M&#x27; or &#x27;3&#x27; and add explanatory comment.</li><li><strong>Row 93:</strong> Reclassify to &#x27;S&#x27; with comment noting that BOL, pick tickets, and receiving are standard WMS features. Clarify what &#x27;acknowledgements&#x27; specifically means in this context.</li><li><strong>Row 97:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O Project Accounting provides comprehensive job costing reports including subcontractor, expense, item, and labor cost tracking by project/customer.</li><li><strong>Row 100:</strong> Consider reclassifying to &#x27;W&#x27; or &#x27;S&#x27; with comment. Standard D365 F&amp;O reports cover most fields. On-time delivery metrics are available in Transportation Management. Out-of-stock reporting may need configuration.</li><li><strong>Row 105:</strong> Evaluate if D365 F&amp;O Project Accounting item consumption tracking satisfies this requirement. If sub-jobs are mapped to project activities or sub-projects, reclassify to &#x27;S&#x27;.</li><li><strong>Row 106:</strong> Evaluate if D365 F&amp;O Project item requirements and project budget tracking satisfy this requirement. If so, reclassify to &#x27;S&#x27;.</li>
+            </ul>
+        </div>
+
+        <h2>6. Suggested Improved Responses</h2>
+        <div class="risk-note">
+            <table>
+                <thead>
+                    <tr><th>Row</th><th>Requirement</th><th>Current Response</th><th>Suggested Improvement</th></tr>
+                </thead>
+                <tbody>
+<tr><td>R17</td><td>Item Creation approval cycle  - Workflow per item type</td><td>M (Modification (custom dev))</td><td>S/W -- D365 F&amp;O Product Lifecycle Management supports configurable approval workflows. Per-item-type workflows can be configured through the standard workflow framework.</td></tr><tr><td>R59</td><td>Electronic Data Collection</td><td>Not Provided</td><td>S -- D365 F&amp;O Warehouse Management mobile app provides comprehensive electronic data collection as a standard feature.</td></tr><tr><td>R60</td><td>        Barcoding of finished goods</td><td>Not Provided</td><td>S -- Standard barcode generation and scanning for finished goods via D365 F&amp;O Warehouse Management and GS1 barcode support.</td></tr><tr><td>R61</td><td>        Barcode, pick list, receiving</td><td>Not Provided</td><td>S -- Barcode-driven pick list and receiving processes are standard D365 F&amp;O Warehouse Management features.</td></tr><tr><td>R62</td><td>        Supports RF automatic data collection</td><td>Not Provided</td><td>S -- RF automatic data collection is supported via D365 F&amp;O Warehouse Management mobile app (consistent with R46).</td></tr><tr><td>R63</td><td>Product Groups assigned to Profit Center</td><td>Not Provided</td><td>S -- Item groups can be mapped to profit centers via default financial dimensions and product posting profiles in D365 F&amp;O.</td></tr><tr><td>R65</td><td>Requester name should be mentioned on the delivery order</td><td>M (Modification (custom dev))</td><td>W/M -- Requester name is captured on purchase orders. Adding it to the delivery order printout requires a minor SSRS report adjustment.</td></tr><tr><td>R75</td><td>Ability to dismantle shipment list</td><td>Not Provided</td><td>S -- D365 F&amp;O WMS supports shipment splitting, line removal, and shipment reorganization as standard features.</td></tr><tr><td>R85</td><td>Leasing Equipments</td><td>S (Standard (out of box))</td><td>Requires clarification. Financial lease accounting is standard via Asset Leasing module. Inventory equipment leasing/tracking would require modification or third-party solution.</td></tr><tr><td>R93</td><td>Receive acknowledgements, bill-of-lading, pick tickets online for each invoice</td><td>M (Modification (custom dev))</td><td>S -- D365 F&amp;O WMS provides standard BOL generation, pick ticket printing, and online receiving. Clarification needed on &#x27;acknowledgements&#x27; scope.</td></tr><tr><td>R97</td><td>Job costing reports to include all sub contractors, expenses, etc. that are assigned to a job/customer</td><td>Not Provided</td><td>S -- D365 F&amp;O Project Accounting provides standard job costing reports covering subcontractors, expenses, items, and hours by project/customer.</td></tr><tr><td>R100</td><td>Automatic shipping report – date, order number, customer, dollar amount, ship date, delivery date, on-time and out-of-stock</td><td>M (Modification (custom dev))</td><td>W -- Most shipping report fields are standard in D365 F&amp;O. On-time delivery metrics available via Transportation Management. Minor configuration needed for full automation with all specified fields.</td></tr><tr><td>R105</td><td>Item consumption by project and sub job</td><td>M (Modification (custom dev))</td><td>S -- D365 F&amp;O Project Accounting tracks item consumption by project and sub-project/activity as standard functionality.</td></tr><tr><td>R106</td><td>Remaining items report by job and sub job</td><td>M (Modification (custom dev))</td><td>S -- D365 F&amp;O Project module provides remaining item requirements and forecast tracking by project and sub-project as standard.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>7. Explicit Risk Notes</h2>
+        <div class="high-risk">
+            <ul>
+<li><strong>Electronic Data Collection (R59-R62) entirely unanswered:</strong> Four consecutive requirements related to electronic data collection, barcoding, and RF devices have no availability codes. Per the RFP Instructions tab, 'Items that are not addressed by the Vendor's response will be assumed as not available or not supported.' D365 F&amp;O Warehouse Management provides all of these capabilities as standard features. Leaving them unanswered creates significant contractual risk and unnecessarily weakens the proposal.</li>
+<li><strong>Product Groups to Profit Center (R63) unanswered:</strong> This requirement has no availability code. D365 F&amp;O supports this through item group financial dimension defaults and posting profiles. The omission creates an unnecessary gap.</li>
+<li><strong>Job costing reports (R97) unanswered:</strong> A reporting requirement covering subcontractors and expenses by job/customer is left without an availability code. D365 F&amp;O Project Accounting provides comprehensive job costing as standard. This is a missed opportunity to demonstrate platform strength.</li>
+<li><strong>Shipment list dismantling (R75) unanswered:</strong> No response provided for a standard WMS capability. Creates unnecessary risk.</li>
+<li><strong>Leasing Equipments (R85) potentially misclassified:</strong> Marked as 'S' but the requirement may refer to inventory equipment leasing rather than financial lease accounting. If the client means tracking equipment loaned out, this is NOT standard in D365 F&amp;O and could lead to scope disputes during implementation.</li>
+<li><strong>Items marked 'M' that may be standard:</strong> Several items (R93: BOL/pick tickets online, R105-R106: item consumption by project) are marked as requiring modification but may be achievable through standard D365 F&amp;O configuration. This understates the platform's capabilities and may increase perceived implementation cost.</li>
+<li><strong>Item Creation workflow (R17) marked 'M':</strong> D365 F&amp;O Product Lifecycle Management includes configurable approval workflows. Marking this as 'M' may overstate the customization needed, potentially disadvantaging the proposal against competitors who classify it correctly.</li>
+            </ul>
+        </div>
+
+        <h2>8. Verification Gaps</h2>
+        <div class="risk-note">
+            <ul>
+<li><strong>R85 (Leasing Equipments):</strong> The requirement is ambiguous. 'Leasing Equipments' could refer to financial lease accounting (standard via Asset Leasing module) or inventory equipment leasing/tracking (not standard). Cannot verify accuracy of the 'S' classification without client clarification on the intended scope.</li>
+<li><strong>R75 (Ability to dismantle shipment list):</strong> The term 'dismantle' is non-standard. D365 F&amp;O supports splitting/reorganizing shipments, but the exact intent (remove specific items, split into multiple shipments, cancel partial shipment) needs clarification to confirm the appropriate availability code.</li>
+<li><strong>R93 (Receive acknowledgements, bill-of-lading, pick tickets online):</strong> The term 'acknowledgements' is vague. BOL and pick tickets are standard WMS features. The 'acknowledgements' component needs clarification &mdash; it may refer to ASN (Advanced Shipping Notices) which are also standard, or to a specific client process.</li>
+<li><strong>R100 (Automatic shipping report):</strong> The requirement includes specific fields (on-time delivery, out-of-stock). While D365 F&amp;O has shipping reports and Transportation Management analytics, the exact combination of all specified fields in a single automated report needs implementation-level verification.</li>
+<li><strong>R63 (Product Groups assigned to Profit Center):</strong> The exact mapping mechanism desired by the client is unclear. D365 F&amp;O supports financial dimension defaults on item groups, but the client may expect a direct parent-child relationship structure that differs from the dimension-based approach.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

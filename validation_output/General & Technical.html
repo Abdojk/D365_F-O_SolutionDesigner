@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>General &amp; Technical — RFP Validation Report</title>
+<style>
+  :root {
+    --primary: #0a3d6b;
+    --primary-light: #1a5e9a;
+    --primary-lighter: #e8f0fe;
+    --accent: #0078d4;
+    --danger: #dc3545;
+    --warning: #fd7e14;
+    --success: #28a745;
+    --gray-50: #f8f9fa;
+    --gray-100: #e9ecef;
+    --gray-200: #dee2e6;
+    --gray-600: #6c757d;
+    --gray-800: #343a40;
+    --white: #ffffff;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--white);
+    padding: 40px 0 32px;
+    margin-bottom: 0;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .header h1 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  .header .subtitle {
+    font-size: 1.05em;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+  .header .meta {
+    margin-top: 14px;
+    font-size: 0.88em;
+    opacity: 0.75;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px 48px;
+  }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 4px solid var(--accent);
+  }
+  .summary-card.danger { border-top-color: var(--danger); }
+  .summary-card.warning { border-top-color: var(--warning); }
+  .summary-card.success { border-top-color: var(--success); }
+  .summary-card .number {
+    font-size: 2.2em;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .summary-card .label {
+    font-size: 0.85em;
+    color: var(--gray-600);
+    margin-top: 4px;
+  }
+
+  /* Sections */
+  .section {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 18px 24px;
+    font-size: 1.15em;
+    font-weight: 700;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-header.high { background: #fdf0f0; color: var(--danger); }
+  .section-header.medium { background: #fff8f0; color: #c35a00; }
+  .section-header.safe { background: #f0fdf4; color: #1a7a32; }
+  .section-header.blue { background: var(--primary-lighter); color: var(--primary); }
+  .section-header.gray { background: var(--gray-100); color: var(--gray-800); }
+  .section-body {
+    padding: 20px 24px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92em;
+  }
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--gray-50);
+    border-bottom: 2px solid var(--gray-200);
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f5f8ff; }
+
+  .note-text {
+    font-size: 0.92em;
+    color: var(--gray-800);
+    line-height: 1.55;
+  }
+
+  /* Risk cards */
+  .risk-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-left: 5px solid var(--danger);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .risk-card.medium-border { border-left-color: var(--warning); }
+  .risk-card h4 {
+    margin-bottom: 8px;
+    font-size: 1em;
+  }
+  .risk-card p {
+    font-size: 0.92em;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .risk-card .field-label {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  /* Gap cards */
+  .gap-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .gap-card h4 {
+    font-size: 0.95em;
+    margin-bottom: 6px;
+    color: var(--primary);
+  }
+  .gap-card p {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+
+  .availability-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 8px;
+  }
+
+  .correction-row td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.82em;
+    color: var(--gray-600);
+    border-top: 1px solid var(--gray-200);
+    margin-top: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .header-inner, .container { padding: 0 16px; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.85em; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <h1>General &amp; Technical</h1>
+    <div class="subtitle">RFP Response Compliance Matrix &mdash; D365 Finance &amp; Operations Validation Report</div>
+    <div class="meta">
+      Source: Technica International Requirements Compliance Matrix &bull; Tab: General &amp; Technical &bull; Generated: February 16, 2026 at 11:35
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ====== VALIDATION SUMMARY ====== -->
+<div class="section">
+  <div class="section-header blue">Validation Summary</div>
+  <div class="section-body">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="number">60</div>
+        <div class="label">Total Requirements</div>
+      </div>
+      <div class="summary-card success">
+        <div class="number" style="color:var(--success);">55</div>
+        <div class="label">Answered</div>
+      </div>
+      <div class="summary-card danger">
+        <div class="number" style="color:var(--danger);">5</div>
+        <div class="label">Unanswered</div>
+      </div>
+      <div class="summary-card">
+        <div class="number" style="color:var(--accent);">86.7%</div>
+        <div class="label">Standard (S) Rate</div>
+      </div>
+      <div class="summary-card danger">
+        <div class="number" style="color:var(--danger);">6</div>
+        <div class="label">High-Risk Items</div>
+      </div>
+      <div class="summary-card warning">
+        <div class="number" style="color:var(--warning);">6</div>
+        <div class="label">Medium-Risk Items</div>
+      </div>
+      <div class="summary-card success">
+        <div class="number" style="color:var(--success);">48</div>
+        <div class="label">Safe Items</div>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom:10px;">Availability Code Distribution</h4>
+    <div class="availability-legend">
+      <span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span> <span style="font-size:0.9em;color:var(--gray-600);">= 52</span>&nbsp;&nbsp;
+      <span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#007bff;color:#fff;font-weight:600;font-size:0.82em;">M — Modification</span> <span style="font-size:0.9em;color:var(--gray-600);">= 3</span>&nbsp;&nbsp;
+      <span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#fd7e14;color:#fff;font-weight:600;font-size:0.82em;">W — Workaround</span> <span style="font-size:0.9em;color:var(--gray-600);">= 0</span>&nbsp;&nbsp;
+      <span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#dc3545;color:#fff;font-weight:600;font-size:0.82em;">N — Not Available</span> <span style="font-size:0.9em;color:var(--gray-600);">= 0</span>&nbsp;&nbsp;
+      <span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6f42c1;color:#fff;font-weight:600;font-size:0.82em;">3 — 3rd Party</span> <span style="font-size:0.9em;color:var(--gray-600);">= 0</span>&nbsp;&nbsp;
+      <span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6c757d;color:#fff;font-weight:600;font-size:0.82em;">BLANK</span>
+      <span style="font-size:0.9em;color:var(--gray-600);">= 5</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header high">High-Risk Items</div>
+  <div class="section-body">
+    <table>
+      <tr>
+        <th style="width:50px;">Row</th>
+        <th>Requirement</th>
+        <th style="width:80px;">Section</th>
+        <th style="width:90px;">Code</th>
+        <th style="width:90px;">Comment</th>
+        <th>Validation Finding</th>
+      </tr>
+
+      <tr>
+        <td>R15</td>
+        <td>Provides ODBC access for external tools like excel</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">CRITICAL: D365 F&amp;O Cloud does NOT provide direct ODBC access to the underlying Azure SQL database. Data access for external tools is via OData/Data Entities, BYOD (Bring Your Own Database) export, or the Data Lake (Synapse Link). Marking this 'S' is MISLEADING if the client expects direct ODBC connectivity. Should be reclassified to 'W' with a comment explaining the BYOD/OData approach.</td>
+      </tr>
+      <tr>
+        <td>R19</td>
+        <td>Summary and detailed business metrics</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6c757d;color:#fff;font-weight:600;font-size:0.82em;">BLANK</span></td>
+        <td style="font-size:0.88em;">Not Clear</td>
+        <td class="note-text">UNANSWERED (Comment: 'Not Clear'). D365 F&amp;O provides analytical workspaces, embedded Power BI reports, and financial/operational KPIs out of the box. This should be answered as 'S' with a comment referencing Power BI embedded analytics and analytical workspaces.</td>
+      </tr>
+      <tr>
+        <td>R52</td>
+        <td>Complex</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Remote User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6c757d;color:#fff;font-weight:600;font-size:0.82em;">BLANK</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">UNANSWERED — Should be 'S'. Azure AD enforces the same password complexity rules for all users regardless of network location. No separate remote policy exists.</td>
+      </tr>
+      <tr>
+        <td>R53</td>
+        <td>Single Singin</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Remote User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6c757d;color:#fff;font-weight:600;font-size:0.82em;">BLANK</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">UNANSWERED — Should be 'S'. Azure AD SSO applies identically to remote and local users. D365 F&amp;O is a cloud application accessed via browser — all users are effectively 'remote'.</td>
+      </tr>
+      <tr>
+        <td>R54</td>
+        <td>Failed login alert</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Remote User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6c757d;color:#fff;font-weight:600;font-size:0.82em;">BLANK</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">UNANSWERED — Should match R49 (currently 'M', could be 'S' with Azure AD Premium). Azure AD sign-in risk detection applies to all authentication attempts regardless of origin.</td>
+      </tr>
+      <tr>
+        <td>R55</td>
+        <td>Password expiry setting</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Remote User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#6c757d;color:#fff;font-weight:600;font-size:0.82em;">BLANK</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">UNANSWERED — Should be 'S' with 'Active Directory' comment, identical to R50. Azure AD password policies apply universally.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header medium">Medium-Risk Items</div>
+  <div class="section-body">
+    <table>
+      <tr>
+        <th style="width:50px;">Row</th>
+        <th>Requirement</th>
+        <th style="width:80px;">Section</th>
+        <th style="width:90px;">Code</th>
+        <th style="width:90px;">Comment</th>
+        <th>Validation Finding</th>
+      </tr>
+
+      <tr>
+        <td>R14</td>
+        <td>Support MS/SQL database</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">D365 F&amp;O Cloud runs on Azure SQL (managed). On-premises deployments use SQL Server. The 'S' code is technically correct, but the response should distinguish cloud (Azure SQL, no direct DBA access) from on-prem (full SQL Server). Recommend adding a clarifying comment.</td>
+      </tr>
+      <tr>
+        <td>R17</td>
+        <td>Ability to add unlimited user definable fields to master files</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">D365 F&amp;O supports no-code custom fields on most forms and tables. While practically unconstrained, 'unlimited' is technically bounded by Azure SQL column limits. The 'S' rating is acceptable but the word 'unlimited' should be tempered in the response.</td>
+      </tr>
+      <tr>
+        <td>R49</td>
+        <td>Failed login alert</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Local User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#007bff;color:#fff;font-weight:600;font-size:0.82em;">M — Modification</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">Azure AD Premium offers sign-in risk policies, Identity Protection alerts, and Conditional Access for failed login monitoring. If the tenant has Azure AD Premium P2, this is standard functionality — could be 'S'. Marked 'M' is conservative but potentially undersells the platform if Azure AD Premium is in scope.</td>
+      </tr>
+      <tr>
+        <td>R69</td>
+        <td>Ability to search for info in collaboration platform for any snags/resolution discovered and solved within projects</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">ECM and DMS</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">D365 F&amp;O does not have a built-in collaboration platform with resolution tracking. This likely requires integration with SharePoint, Teams, or Azure DevOps. 'S' may be optimistic — 'W' might be more accurate depending on client expectations.</td>
+      </tr>
+      <tr>
+        <td>R72</td>
+        <td>Easy to use reporting engine</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Reporting Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">D365 F&amp;O reporting relies on SSRS (developer-oriented) for pixel-perfect reports and Power BI for analytical reports. The SSRS report designer is NOT end-user friendly. 'S' is acceptable only if the intent covers the overall reporting ecosystem including Power BI and Excel integration.</td>
+      </tr>
+      <tr>
+        <td>R73</td>
+        <td>End user should be able to build reports on the fly</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Reporting Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#007bff;color:#fff;font-weight:600;font-size:0.82em;">M — Modification</span></td>
+        <td style="font-size:0.88em;">&mdash;</td>
+        <td class="note-text">D365 F&amp;O SSRS reports require developer skills (Visual Studio). However, Power BI self-service reporting and Excel Data Connector provide end-user ad-hoc reporting capability. 'M' is reasonable but should explicitly mention Power BI self-service and Excel integration as the mechanism.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header safe">Safe Items</div>
+  <div class="section-body">
+    <table>
+      <tr>
+        <th style="width:50px;">Row</th>
+        <th>Requirement</th>
+        <th style="width:80px;">Section</th>
+        <th style="width:90px;">Code</th>
+        <th>Validation Note</th>
+      </tr>
+
+      <tr>
+        <td>R4</td>
+        <td>Multi-Currency system- applicable for all views and modules</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O natively supports multi-currency across all modules including GL, AP, AR, and budgeting. The 'S' rating is accurate.</td>
+      </tr>
+      <tr>
+        <td>R5</td>
+        <td>Multi-Format System - Support different region formats (dates; separators; numbers; etc...)</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O supports region-specific date, number, and separator formats via legal entity and user-level settings. Correct.</td>
+      </tr>
+      <tr>
+        <td>R6</td>
+        <td>Mutli-Language System</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O ships with 42+ language packs. Users can switch UI language independently. Correct.</td>
+      </tr>
+      <tr>
+        <td>R7</td>
+        <td>Translation capabilities</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O supports label translations for custom fields and extensible enums. The platform translation framework is standard. Correct.</td>
+      </tr>
+      <tr>
+        <td>R8</td>
+        <td>Multi-Entity; Multi-company; Multi-warehouse</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O is designed for multi-legal-entity, multi-site, and multi-warehouse operation. Correct.</td>
+      </tr>
+      <tr>
+        <td>R9</td>
+        <td>Inter-company transactions - reconciliations and eliminations</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O has standard intercompany trading, intercompany accounting, and consolidation/elimination journals. Correct.</td>
+      </tr>
+      <tr>
+        <td>R10</td>
+        <td>User-definable dashboards with drill-downs</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O workspaces are customisable. Power BI tiles embed in workspaces and support drill-through. Correct.</td>
+      </tr>
+      <tr>
+        <td>R11</td>
+        <td>Custom metrics on user's dashboards with drill-downs</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Power BI embedded analytics and KPI tiles in workspaces allow custom metrics with drill-down. Correct.</td>
+      </tr>
+      <tr>
+        <td>R12</td>
+        <td>Flexible querying built into main forms</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O has advanced filtering, column filtering, and the Filter Pane on every list page. Correct.</td>
+      </tr>
+      <tr>
+        <td>R13</td>
+        <td>Ability to export to Excel from built in querying tools</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Export-to-Excel is available on virtually every grid in D365 F&amp;O, including filtered results. Correct.</td>
+      </tr>
+      <tr>
+        <td>R16</td>
+        <td>Real-time exception notifications including email and text messages</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O Business Events framework, alerts, and workflow notifications support real-time email and push notifications. Power Automate integration extends to SMS/Teams. Correct.</td>
+      </tr>
+      <tr>
+        <td>R18</td>
+        <td>Ability to change screen layouts without programming</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O personalization feature allows end users to rearrange, hide, and add fields without developer involvement. Correct.</td>
+      </tr>
+      <tr>
+        <td>R20</td>
+        <td>Attach document to any form i.e. PO, Invoice, etc…</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O Document Management allows attachments (files, URLs, notes) on virtually any record. Correct.</td>
+      </tr>
+      <tr>
+        <td>R21</td>
+        <td>Create business rules &amp; notification (emails &amp; messgaes) across all modules</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O alerts, Business Events, workflow notifications, and Power Automate integration cover cross-module rules and notifications. Correct.</td>
+      </tr>
+      <tr>
+        <td>R22</td>
+        <td>System should mark mandatory fields upon data entry</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O marks required fields with a visual indicator (red asterisk). Administrators can change field mandatory status. Correct.</td>
+      </tr>
+      <tr>
+        <td>R23</td>
+        <td>Printing in PDF Formats</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O SSRS reports output to PDF natively. Document Routing Agent supports network printing. Correct.</td>
+      </tr>
+      <tr>
+        <td>R24</td>
+        <td>User Profile</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">General</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O supports user profile / user options for language, time zone, default company, and personalization. Correct.</td>
+      </tr>
+      <tr>
+        <td>R27</td>
+        <td>Adequate and proper access rights defined for each user in the system based on his/her job roles and responsibilities</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O has a role-based security model (Roles &gt; Duties &gt; Privileges). Users are assigned security roles aligned to job functions. Correct.</td>
+      </tr>
+      <tr>
+        <td>R28</td>
+        <td>Security groups</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD security groups can be mapped to D365 F&amp;O security roles for automated provisioning. Correct.</td>
+      </tr>
+      <tr>
+        <td>R29</td>
+        <td>permission groups</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O privileges and duties function as permission groups within the role hierarchy. Correct.</td>
+      </tr>
+      <tr>
+        <td>R30</td>
+        <td>Audit trail</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O Database Log tracks field-level changes. Activity log tracks user actions. Correct.</td>
+      </tr>
+      <tr>
+        <td>R31</td>
+        <td>Workflow engine</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O includes a comprehensive workflow framework supporting approvals, escalations, and parallel/sequential tasks. Correct.</td>
+      </tr>
+      <tr>
+        <td>R32</td>
+        <td>Audit logins</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD sign-in logs and D365 F&amp;O User log track authentication events. Correct.</td>
+      </tr>
+      <tr>
+        <td>R33</td>
+        <td>Menu per user</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O navigation is governed by security roles — users only see menu items they have access to. Correct.</td>
+      </tr>
+      <tr>
+        <td>R34</td>
+        <td>Field level security</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O supports Extensible Data Security (XDS) policies and field-level security through security privileges. Correct.</td>
+      </tr>
+      <tr>
+        <td>R35</td>
+        <td>Group Permission</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Security roles (and Azure AD groups mapped to roles) provide group-level permission management. Correct.</td>
+      </tr>
+      <tr>
+        <td>R36</td>
+        <td>permission per Module/Page/Report/button</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O's privilege/duty model controls access at the menu item (page), report, and action (button) level. Correct.</td>
+      </tr>
+      <tr>
+        <td>R37</td>
+        <td>Group Profile</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Security role assignments serve as group profiles in D365 F&amp;O. Correct.</td>
+      </tr>
+      <tr>
+        <td>R38</td>
+        <td>Report Permission</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">SSRS reports and Power BI reports in D365 F&amp;O are secured through the security role framework. Correct.</td>
+      </tr>
+      <tr>
+        <td>R39</td>
+        <td>User Access</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Individual user access is managed through role assignment on the Users form. Correct.</td>
+      </tr>
+      <tr>
+        <td>R40</td>
+        <td>permission per Module/Page/Report/button</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Same granular permission model applies at the user level through role assignment. Correct.</td>
+      </tr>
+      <tr>
+        <td>R41</td>
+        <td>User Profile</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">User profile settings and security role assignments are standard. Correct.</td>
+      </tr>
+      <tr>
+        <td>R42</td>
+        <td>Group Permission</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Duplicate entry — same as R35. D365 F&amp;O role-based security covers group permissions. Correct.</td>
+      </tr>
+      <tr>
+        <td>R43</td>
+        <td>permission per Module/Page/Report/button</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Duplicate entry — same granular security model. Correct.</td>
+      </tr>
+      <tr>
+        <td>R44</td>
+        <td>Group Profile</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Security</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Duplicate entry — same as R37. Correct.</td>
+      </tr>
+      <tr>
+        <td>R47</td>
+        <td>Complex</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Local User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD supports complex password requirements (length, character types). Correct, though the requirement wording is vague.</td>
+      </tr>
+      <tr>
+        <td>R48</td>
+        <td>Single Singin</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Local User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O supports SSO via Azure AD, including federation with on-premises AD (AD FS) and third-party IdPs. Correct.</td>
+      </tr>
+      <tr>
+        <td>R50</td>
+        <td>Password expiry setting</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Local User Policy</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD password expiration policies are configurable. Comment correctly references Active Directory. Correct.</td>
+      </tr>
+      <tr>
+        <td>R57</td>
+        <td>Ability to add thenew fields and chose its Data type (Varchar, date,Int, decimal,read from Query or drop down list)</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">System Administration</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O custom fields feature allows administrators to add fields and select data types (text, number, date, enum, lookup). Correct.</td>
+      </tr>
+      <tr>
+        <td>R58</td>
+        <td>Ability to change the status from for the fields from optional to Mandatory and vice versa.</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">System Administration</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O allows administrators to toggle field mandatory status through the personalization/customization features. Correct.</td>
+      </tr>
+      <tr>
+        <td>R59</td>
+        <td>Ability to define the required documents to attach depend on the Document type</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">System Administration</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O Document Management supports document type configuration with attachment requirements. Correct.</td>
+      </tr>
+      <tr>
+        <td>R62</td>
+        <td>System admin must be ablle to create workflows accross all modules interlinked, with alerts and escalations</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Workflow Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O workflow framework spans all modules and supports conditions, escalations, automated tasks, and cross-module linking. Correct.</td>
+      </tr>
+      <tr>
+        <td>R63</td>
+        <td>workflow to be  connected to business rules</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Workflow Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O workflow conditions can evaluate business rules (e.g., amount thresholds, field values). Correct.</td>
+      </tr>
+      <tr>
+        <td>R64</td>
+        <td>visual diagram and easy interface and monitoring status of flows</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Workflow Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O workflow editor provides a visual drag-and-drop designer. Tracking shows graphical flow status. Correct.</td>
+      </tr>
+      <tr>
+        <td>R65</td>
+        <td>Users should be able to see clesrly the flow status and next action required</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Workflow Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O shows workflow history, current step, and pending actions on each document. Correct.</td>
+      </tr>
+      <tr>
+        <td>R66</td>
+        <td>standard reports related to workflows status, accomplished tasks, by employee, canceled, escalation automation, etcc</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">Workflow Engine</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O provides workflow history inquiries, performance reports, and automation statistics. Correct.</td>
+      </tr>
+      <tr>
+        <td>R68</td>
+        <td>Ability to search for any type of info in all ERP (materials, clients, BOM, quotations, etc...)</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">ECM and DMS</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O global search (navigation search) and entity-level search provide cross-module information retrieval. Correct.</td>
+      </tr>
+      <tr>
+        <td>R70</td>
+        <td>Ability to search file names attached to ERP records</td>
+        <td style="font-size:0.85em;color:var(--gray-600);">ECM and DMS</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#007bff;color:#fff;font-weight:600;font-size:0.82em;">M — Modification</span></td>
+        <td class="note-text">D365 F&amp;O Document Management stores attachment metadata but cross-record file name search is limited in standard functionality. Custom development or Azure Search integration would be needed for full-text file name search. 'M' is a reasonable and honest assessment.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header blue">Recommended Corrections</div>
+  <div class="section-body">
+    <table>
+      <tr>
+        <th style="width:50px;">Row</th>
+        <th style="width:100px;">Current</th>
+        <th style="width:140px;">Recommended</th>
+        <th>Reason</th>
+      </tr>
+
+      <tr class="correction-row">
+        <td>R15</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#fd7e14;color:#fff;font-weight:600;font-size:0.82em;">W — Workaround</span></td>
+        <td class="note-text">D365 F&amp;O Cloud does not provide direct ODBC access. Data access is via OData/Data Entities or BYOD. Change to 'W' (Workaround) with comment explaining BYOD and OData integration for external tools.</td>
+      </tr>
+      <tr class="correction-row">
+        <td>R19</td>
+        <td>Blank (Not Clear)</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">D365 F&amp;O has Power BI embedded analytics and analytical workspaces that deliver summary and detailed business metrics. Add 'S' with comment: 'Power BI embedded analytics and analytical workspaces provide summary and detailed metrics with drill-through.'</td>
+      </tr>
+      <tr class="correction-row">
+        <td>R52</td>
+        <td>Blank</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD applies identical password complexity policies regardless of user location. Mirror R47 (Local User Policy — Complex = S).</td>
+      </tr>
+      <tr class="correction-row">
+        <td>R53</td>
+        <td>Blank</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD SSO is location-agnostic. Mirror R48 (Local User Policy — Single Sign-on = S).</td>
+      </tr>
+      <tr class="correction-row">
+        <td>R54</td>
+        <td>Blank</td>
+        <td><strong>M (or S with Azure AD Premium)</strong></td>
+        <td class="note-text">Azure AD sign-in risk detection is not location-dependent. Mirror R49 (Local User Policy — Failed login alert = M). Upgrade to 'S' if Azure AD Premium P2 is in scope.</td>
+      </tr>
+      <tr class="correction-row">
+        <td>R55</td>
+        <td>Blank</td>
+        <td><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#28a745;color:#fff;font-weight:600;font-size:0.82em;">S — Standard</span></td>
+        <td class="note-text">Azure AD password expiry policies are universal. Mirror R50 (Local User Policy — Password expiry = S, Active Directory).</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header blue">Suggested Improved Responses</div>
+  <div class="section-body">
+    <table>
+      <tr>
+        <th style="width:50px;">Row</th>
+        <th style="width:160px;">Current Comment</th>
+        <th>Suggested Comment</th>
+      </tr>
+
+      <tr>
+        <td style="font-weight:600;">R14</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">D365 F&amp;O Cloud uses Azure SQL (managed). On-premises deployment uses SQL Server. Direct DBA access is not available in cloud deployments.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R15</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">D365 F&amp;O Cloud provides data access via OData/REST APIs, Data Entities, and BYOD (Bring Your Own Database) for external tool connectivity. Direct ODBC to the production database is not available in cloud. Excel integration uses the Data Connector add-in.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R17</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">D365 F&amp;O supports no-code custom fields via the Custom Fields feature. Practically unlimited, though subject to standard database column limits.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R19</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">Not Clear</td>
+        <td class="note-text">D365 F&amp;O provides embedded Power BI analytics, analytical workspaces with KPI tiles, and Financial Reporting for summary and detailed business metrics with drill-through capability.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R49</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">Azure AD Identity Protection provides failed sign-in alerts and risk-based conditional access. Available as standard with Azure AD Premium P2; requires configuration.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R69</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">Requires integration with Microsoft Teams or SharePoint for collaboration-based resolution search. D365 F&amp;O natively integrates with Teams for record sharing and discussion threading.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R72</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">D365 F&amp;O provides Power BI for self-service analytics and Excel integration for ad-hoc analysis. SSRS is available for pixel-perfect formatted reports but requires developer skills.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;">R73</td>
+        <td style="font-size:0.88em;color:var(--gray-600);">(none)</td>
+        <td class="note-text">End users can create ad-hoc reports using Power BI self-service, Excel Data Connector, and workspace-level analytics. Formal SSRS report development requires Visual Studio.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header high">Explicit Risk Notes</div>
+  <div class="section-body">
+
+    <div class="risk-card">
+      <h4><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#dc3545;color:#fff;font-weight:600;font-size:0.82em;letter-spacing:0.5px;">HIGH</span> &nbsp; RISK-GT-001 &mdash; ODBC Access Claim May Mislead Client (R15)</h4>
+      <p>The response claims 'S' (Standard) for ODBC access, but D365 F&amp;O Cloud does not expose the database via ODBC. If the client's existing tools rely on direct ODBC connections to the ERP database, this will fail during implementation. The BYOD approach requires setting up an Azure SQL Database, configuring data export jobs, and managing data freshness — a fundamentally different architecture from direct ODBC.</p>
+      <p><span class="field-label">Impact:</span> Implementation delay, potential scope change, client dissatisfaction if expectations are set for direct database connectivity.</p>
+      <p><span class="field-label">Mitigation:</span> Clarify during pre-sales that data access is via OData APIs and BYOD. Demonstrate the Data Entity framework and BYOD export during a technical workshop.</p>
+    </div>
+    <div class="risk-card">
+      <h4><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#dc3545;color:#fff;font-weight:600;font-size:0.82em;letter-spacing:0.5px;">HIGH</span> &nbsp; RISK-GT-002 &mdash; Entire Remote User Policy Section Unanswered (R51-R55)</h4>
+      <p>Five requirements under 'Remote User Policy' have no availability codes. This is a significant gap in a compliance matrix. From a D365 F&amp;O perspective, remote vs. local user policies are a distinction that does not apply — Azure AD governs authentication uniformly.</p>
+      <p><span class="field-label">Impact:</span> The evaluator may score these as 'not met', resulting in point deductions. It also signals incomplete vendor due diligence.</p>
+      <p><span class="field-label">Mitigation:</span> Populate R52-R55 with the same codes as R47-R50 and add a comment explaining that Azure AD provides uniform security policies regardless of user location.</p>
+    </div>
+    <div class="risk-card medium-border">
+      <h4><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#fd7e14;color:#fff;font-weight:600;font-size:0.82em;letter-spacing:0.5px;">MEDIUM</span> &nbsp; RISK-GT-003 &mdash; Business Metrics Requirement Left Unanswered (R19)</h4>
+      <p>Row 19 has no availability code and only a 'Not Clear' comment. This is a straightforward D365 F&amp;O capability via Power BI embedded analytics.</p>
+      <p><span class="field-label">Impact:</span> An unanswered requirement in a compliance matrix creates a negative impression and may be scored as zero.</p>
+      <p><span class="field-label">Mitigation:</span> Mark as 'S' and describe the Power BI embedded analytics and analytical workspaces.</p>
+    </div>
+    <div class="risk-card medium-border">
+      <h4><span style="display:inline-block;padding:2px 10px;border-radius:4px;background:#fd7e14;color:#fff;font-weight:600;font-size:0.82em;letter-spacing:0.5px;">MEDIUM</span> &nbsp; RISK-GT-004 &mdash; Collaboration Platform Search Claim May Be Overstated (R69)</h4>
+      <p>The response marks 'S' for searching a collaboration platform for project resolutions. D365 F&amp;O does not include a native collaboration/resolution-tracking platform. This likely requires Teams, SharePoint, or Azure DevOps integration.</p>
+      <p><span class="field-label">Impact:</span> Client may expect built-in collaboration search functionality that does not exist in D365 F&amp;O.</p>
+      <p><span class="field-label">Mitigation:</span> Change to 'W' or add a comment specifying that this requires Microsoft Teams or SharePoint integration, which are part of the Microsoft 365 ecosystem.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header gray">Verification Gaps</div>
+  <div class="section-body">
+
+    <div class="gap-card">
+      <h4>GAP-GT-001 &mdash; ODBC / Data Access Architecture</h4>
+      <p>Verify with the client whether they require direct ODBC connectivity to the ERP database or if API-based / BYOD data access meets their needs. This distinction significantly impacts the architecture.</p>
+      <p><span class="field-label">Recommended Action:</span> Schedule a technical discovery session to map current data access patterns and tool integrations.</p>
+    </div>
+    <div class="gap-card">
+      <h4>GAP-GT-002 &mdash; Azure AD Premium Licensing</h4>
+      <p>Several security features (failed login alerts, risk-based conditional access) depend on Azure AD Premium P2 licensing. It is unclear whether this is included in the proposed licensing.</p>
+      <p><span class="field-label">Recommended Action:</span> Confirm Azure AD licensing tier in the proposal. If P2 is included, upgrade R49 and R54 from 'M' to 'S'.</p>
+    </div>
+    <div class="gap-card">
+      <h4>GAP-GT-003 &mdash; Remote vs. Local Policy Distinction</h4>
+      <p>The client has separate sections for Local and Remote User Policies. Verify whether the client expects different policy enforcement based on network location (VPN, IP ranges) or if uniform Azure AD policies satisfy the requirement.</p>
+      <p><span class="field-label">Recommended Action:</span> Clarify with client during requirements workshop. If conditional access by location is needed, confirm Azure AD Conditional Access is in scope.</p>
+    </div>
+    <div class="gap-card">
+      <h4>GAP-GT-004 &mdash; Reporting Engine End-User Expectations</h4>
+      <p>R72-R73 address 'easy reporting' and 'reports on the fly'. Verify what report types the client expects end users to build (analytical dashboards vs. formatted documents).</p>
+      <p><span class="field-label">Recommended Action:</span> Demo Power BI self-service and Excel Data Connector to set expectations. Confirm SSRS development is positioned for IT/developer use.</p>
+    </div>
+    <div class="gap-card">
+      <h4>GAP-GT-005 &mdash; Collaboration Platform Identity</h4>
+      <p>R69 references searching a 'collaboration platform' for project resolutions. The specific platform (Teams, SharePoint, third-party) is undefined.</p>
+      <p><span class="field-label">Recommended Action:</span> Identify the client's current collaboration tools and confirm integration approach.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  D365 Finance &amp; Operations &mdash; RFP Compliance Validation &bull; General &amp; Technical &bull; Generated February 16, 2026 at 11:35<br>
+  This report is auto-generated. All findings should be reviewed by a certified D365 F&amp;O solution architect before submission.
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
