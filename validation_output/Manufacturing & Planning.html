@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturing &amp; Planning — RFP Compliance Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #0078d4; padding-bottom: 15px; }
+        h2 { color: #0078d4; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th { background: #0078d4; color: white; padding: 10px 8px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ddd; vertical-align: top; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .summary { background: #e8f4fd; border-left: 4px solid #0078d4; padding: 20px; margin: 20px 0; }
+        .high-risk { background: #fdecea; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; }
+        .medium-risk { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; }
+        .safe { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; }
+        .risk-note { background: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin: 10px 0; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+        .stat { display: inline-block; background: #0078d4; color: white; padding: 5px 15px; border-radius: 20px; margin: 3px; font-size: 13px; }
+        .stat.high { background: #dc3545; }
+        .stat.medium { background: #ffc107; color: #333; }
+        .stat.safe { background: #28a745; }
+        .code-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+        .code-S { background: #d4edda; color: #155724; }
+        .code-M { background: #cce5ff; color: #004085; }
+        .code-W { background: #fff3cd; color: #856404; }
+        .code-N { background: #f8d7da; color: #721c24; }
+        .code-3 { background: #e2e3e5; color: #383d41; }
+        .code-none { background: #f8d7da; color: #721c24; border: 1px dashed #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manufacturing &amp; Planning</h1>
+        <h2>1. Validation Summary</h2>
+        <div class="summary">
+            <p><strong>Tab Status:</strong> Responses provided — Validation performed against D365 F&amp;O Manufacturing modules (Production Control, Master Planning, Shop Floor Management, Quality Management, Engineering Change Management).</p>
+            <p><strong>Total Requirements Reviewed:</strong> 108 (excluding headers and blank rows)</p>
+            <p>
+                <span class="stat high">High Risk: 7</span>
+                <span class="stat medium">Medium Risk: 9</span>
+                <span class="stat safe">Safe / Validated: 92</span>
+            </p>
+            <p><strong>Availability Code Distribution:</strong></p>
+            <p>
+                <span class="code-badge code-S">S (Standard): 96</span>
+                <span class="code-badge code-M">M (Modification): 5</span>
+                <span class="code-badge code-none">Not Provided: 7</span>
+            </p>
+            <p>The Manufacturing &amp; Planning tab covers Factory Operations, Material Requirements Planning (MRP), Capacity Requirements Planning, Manufacturing Orders, and Routings. The majority of responses are marked as 'S' (Standard), which is broadly consistent with D365 F&amp;O's comprehensive manufacturing capabilities. However, several items in the Factory Operations and Manufacturing Orders sections are left unanswered (no availability code), and a few 'S' classifications in the Factory Operations section may overstate standard capabilities where Asset Management modules or custom development would be needed.</p>
+        </div>
+        <h2>2. High-Risk Items</h2>
+        <div class="high-risk">
+            <p>The following items pose significant compliance, contractual, or accuracy risk:</p>
+            <table>
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Requirement</th>
+                <th>Availability</th>
+                <th>Vendor Comment</th>
+                <th>Validation Finding</th>
+                <th>Recommended Correction</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>22</td>
+            <td>Small Pieces list track
+Loose parts or non assembled parts list ( included in the PL) </td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>No availability code provided. Comment says &#x27;Not Clear&#x27;. This requirement for tracking small/loose non-assembled parts included in packing lists is unanswered. D365 F&amp;O can track loose parts via BOM phantom items or separate inventory items on packing lists. Leaving this unanswered creates contractual risk per the RFP Instructions tab, which states unanswered items are assumed not available.</td>
+            <td>Seek clarification from the client on the specific tracking mechanism desired. If tracking loose parts on packing lists, this could be &#x27;S&#x27; using BOM line types and packing slip configurations. Must not leave unanswered.</td>
+        </tr><tr>
+            <td>26</td>
+            <td>Factory Test Reports
+For standard assemblies the test reports  will be retrieved from the  library , for new products they are prepared on the spot and integrated manually in the system </td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided and no comment. This requirement for Factory Test Reports (retrieving standard test reports from a library and manually integrating new product test reports) is completely unanswered. D365 F&amp;O Quality Management supports quality order test reports, and Document Management can serve as a test report library. This is a significant gap — per RFP instructions, unanswered items are assumed not available.</td>
+            <td>Must provide a response. D365 F&amp;O Quality Management with quality orders and Document Management for test report storage could support this as &#x27;S&#x27; or &#x27;W&#x27;. Leaving blank is high contractual risk.</td>
+        </tr><tr>
+            <td>32</td>
+            <td>Possibility to make multiple update for assembled items in one shot.  Like from route task nbr 1 to nbr 15, all items are assembled in one click; to prevent update item by item.</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided and no comment. This requirement for multiple bulk updates of assembled items in one shot (route task 1 to 15 in one click) is unanswered. D365 F&amp;O does not have a native &#x27;bulk complete operations&#x27; function for multiple route steps simultaneously — this would require customization. Leaving unanswered creates contractual risk.</td>
+            <td>Must provide a response. This likely requires modification (&#x27;M&#x27;) as D365 F&amp;O route card journals process operations individually. Bulk completion across multiple operations would need custom development.</td>
+        </tr><tr>
+            <td>33</td>
+            <td>Possibility to make multiple update for SAbdblasting or Painting or Laser  in one shot.  Like from route task nbr 1 to nbr 15, all items are performed in one click; to prevent update item by item.</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided and no comment. Same issue as R32 — bulk update for sandblasting/painting/laser operations in one shot is unanswered. D365 F&amp;O does not natively support completing multiple route operations simultaneously. Custom development would be required.</td>
+            <td>Must provide a response. Classify as &#x27;M&#x27;. Bulk operation completion across multiple route steps requires custom development.</td>
+        </tr><tr>
+            <td>63</td>
+            <td>MO - outsourcing activities</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided. D365 F&amp;O fully supports outsourcing/subcontracting activities in manufacturing through subcontracting routing operations. The system supports subcontracted operations where a purchase order is automatically created for the vendor performing the outsourced operation. This should clearly be marked as &#x27;S&#x27;. Leaving unanswered is high risk.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O supports subcontracting in production through subcontracted routing operations with automatic vendor PO creation.</td>
+        </tr><tr>
+            <td>64</td>
+            <td>MO Various status choices allow for flexible control over all orders - choose from quote/estimate, planned, firmed, hold or cancel</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided. D365 F&amp;O production orders have comprehensive status lifecycle: Created, Estimated, Scheduled, Released, Started, Reported as Finished, Ended. This fully satisfies &#x27;various status choices&#x27; for flexible control. This should be marked as &#x27;S&#x27;. Leaving unanswered is high risk.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O has comprehensive production order status lifecycle (Created &gt; Estimated &gt; Scheduled &gt; Released &gt; Started &gt; RAF &gt; Ended) with full control at each stage.</td>
+        </tr><tr>
+            <td>69</td>
+            <td>EStimation &quot;for standard parts calculation will be relying on the library. 
+For new products/parts , to check the possibility to create a link between autodesk and the the critereas that will be set by the Factory &quot;</td>
+            <td><strong>Not Provided</strong></td>
+            <td></td>
+            <td>No availability code provided. This is a complex requirement involving linking estimation to Autodesk for new products. D365 F&amp;O supports standard cost estimation from BOM/route library, but direct Autodesk integration for estimating non-standard parts is not available. The standard parts calculation from library is &#x27;S&#x27;, but the Autodesk link is &#x27;M&#x27; or &#x27;3&#x27;. Leaving unanswered is high risk for a complex and visible requirement.</td>
+            <td>Provide a split response: Standard parts estimation from library = &#x27;S&#x27;. Autodesk integration for new product estimation = &#x27;M&#x27; (requires custom API integration). Must not leave blank.</td>
+        </tr></tbody>
+    </table>
+        </div>
+        <h2>3. Medium-Risk Items</h2>
+        <div class="medium-risk">
+            <p>The following items have potential misclassification or missing information:</p>
+            <table>
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Requirement</th>
+                <th>Availability</th>
+                <th>Vendor Comment</th>
+                <th>Validation Finding</th>
+                <th>Recommended Correction</th>
+            </tr>
+        </thead>
+        <tbody><tr>
+            <td>4</td>
+            <td>Jobs - tasks - CheckLists - Other requests</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O Production Control has work orders and operations, but &#x27;Jobs - tasks - Checklists&#x27; as described (with separate checklist entities attached to tasks) is not a native standard concept. Work orders exist in Asset Management, not core Production Control. Achieving full checklist-driven task management may require Asset Management module or customization. The &#x27;S&#x27; code may overstate standard availability.</td>
+            <td>Reclassify to &#x27;W&#x27; or &#x27;M&#x27;. D365 F&amp;O Production Control provides operations and job cards but dedicated checklists per task require Asset Management module configuration or custom development.</td>
+        </tr><tr>
+            <td>5</td>
+            <td>Team leader assignments</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O Production Control supports resource assignment to operations, but &#x27;Team leader assignments&#x27; as a distinct organizational concept with delegation and reporting is not a standard production feature. This would require custom security roles and workflow or use of Asset Management work orders.</td>
+            <td>Reclassify to &#x27;W&#x27;. Team leader assignment can be approximated via resource groups and worker-to-operation assignment but specific &#x27;team leader&#x27; designation requires configuration or customization.</td>
+        </tr><tr>
+            <td>7</td>
+            <td>Create checklist for tasks</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O does not have native &#x27;checklists&#x27; in Production Control. Quality management has quality orders with tests, and Asset Management has maintenance checklists. For production task checklists specifically, customization is likely required.</td>
+            <td>Reclassify to &#x27;W&#x27; or &#x27;M&#x27;. Checklists for production tasks are not a native standard feature in Production Control. Quality order tests or Asset Management checklists may serve as workarounds.</td>
+        </tr><tr>
+            <td>9</td>
+            <td>Execution request - Seperated Job should be crerated for excution requests</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. The requirement specifies &#x27;Separated Job should be created for execution requests&#x27;. D365 F&amp;O can split production orders and create separate jobs, but the described workflow of automatically creating separate execution jobs from requests is not standard. May need workflow customization.</td>
+            <td>Add comment clarifying that production order splitting is standard, but automatic creation of separate execution jobs from requests requires workflow configuration.</td>
+        </tr><tr>
+            <td>10</td>
+            <td>Tools list per type of job or teams (bending, welding, etc..)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O supports tool requirements per operation in routing. However, &#x27;Tools list per type of job or teams&#x27; as a matrix view grouped by team specialization (bending, welding) is not a standard report. Tool requirements on routing operations are standard.</td>
+            <td>Add comment: Tool requirements per operation are standard via routing setup. A consolidated tools-per-team report may require custom reporting.</td>
+        </tr><tr>
+            <td>11</td>
+            <td>Factory organization chart </td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O has organizational hierarchy and HR modules for org charts, but a &#x27;Factory organization chart&#x27; specifically for shop floor hierarchy is not a standard Production Control feature. Organizational hierarchies in HR module can be used.</td>
+            <td>Add comment: Organizational charts are available through HR organizational hierarchies. Shop-floor-specific org charts may need configuration.</td>
+        </tr><tr>
+            <td>16</td>
+            <td>Factory Load distribution dashboard (Total scheduled hours	Total unpresence	Total overtime hours	Work load) per division per week</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O has capacity load views in Production Control and resource scheduling. However, the specific format requested (Total scheduled hours, Total unpresence, Total overtime hours, Work load per division per week) is a custom dashboard layout. Standard capacity load reports exist but the specific columnar format with overtime and unpresence may require Power BI or custom reporting.</td>
+            <td>Add comment: Capacity load analysis is standard. The specific dashboard format (per division per week with overtime/unpresence columns) may require Power BI dashboard configuration.</td>
+        </tr><tr>
+            <td>36</td>
+            <td>in manufacturing check in/out by part
+to check how the execution time of bulky parts is calculated For painting Process: the duration is calculated based on the area to be painted for each part
+Technicians and machines will be grouped in categories (...</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O has job card terminals and route card journals for manufacturing check-in/out. However, the described level of granularity is very specific: paint area calculation per part, laser duration based on setup time and per-meter cut rates by thickness. While D365 F&amp;O supports operation time formulas in routing, calculating paint area or laser cut time based on physical dimensions would require custom formula setup or integration with engineering data.</td>
+            <td>Add comment: Basic check-in/out and time tracking are standard. The specific calculation formulas for paint area and laser cut duration based on material thickness/dimensions may require custom route operation formulas or Engineering Change Management data integration.</td>
+        </tr><tr>
+            <td>109</td>
+            <td>prorate distribution for overhead cost depend on project size </td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Marked as &#x27;S&#x27;. D365 F&amp;O supports overhead cost distribution through costing sheets, but &#x27;prorate distribution for overhead cost depend on project size&#x27; specifically may require project-based cost allocation configuration. Standard costing sheets support percentage and surcharge-based overhead. Project-size-based prorating may need additional setup or customization.</td>
+            <td>Add comment: Standard overhead distribution via costing sheets is available. Project-size-based proration may require additional cost allocation rule configuration.</td>
+        </tr></tbody>
+    </table>
+        </div>
+        <h2>4. Safe Items</h2>
+        <div class="safe">
+            <p>92 items validated as correctly classified. D365 F&amp;O capabilities confirmed for the stated availability codes. Key validated areas include:</p>
+            <ul>
+                <li><strong>Material Requirements Planning (R42-R49):</strong> MRP by project/plant, purchasing integration, action messages, P.O. generation, performance reporting — all standard D365 F&amp;O Master Planning features.</li>
+                <li><strong>Capacity Requirements Planning (R52-R59):</strong> Plant capacity planning, calendars, setup constraints, What-If scheduling, planning horizons — all standard D365 F&amp;O capabilities.</li>
+                <li><strong>Manufacturing Orders (R62-R101):</strong> Production order lifecycle, scheduling, dispatching, backflushing, cost tracking, component availability, Gantt charts — comprehensive D365 F&amp;O Production Control features. Note: R63, R64, R69 are exceptions (see High Risk).</li>
+                <li><strong>Routings (R104-R119):</strong> Multiple operations, alternate routings, work center definitions, setup/run times, queue times, parallel scheduling, tool/skill requirements — all standard D365 F&amp;O routing capabilities.</li>
+                <li><strong>Factory Operations (selected):</strong> Resource grouping (R12-R15), non-conformance reporting (R19-R20), manufacturing flow tracking (R21), timesheets (R23-R24), workflow (R25), BOM change management (R38-R39) — correctly classified as standard.</li>
+                <li><strong>Modifications correctly identified:</strong> Manufactured parts delivery log (R17), factory snags report (R18), customized test reports (R27), AutoCAD integration (R28-R29) — all correctly marked as 'M'.</li>
+            </ul>
+        </div>
+        <h2>5. Recommended Corrections</h2>
+        <div class="risk-note">
+            <ul>
+<li><strong>Row 22:</strong> Seek clarification from the client on the specific tracking mechanism desired. If tracking loose parts on packing lists, this could be &#x27;S&#x27; using BOM line types and packing slip configurations. Must not leave unanswered.</li>
+<li><strong>Row 26:</strong> Must provide a response. D365 F&amp;O Quality Management with quality orders and Document Management for test report storage could support this as &#x27;S&#x27; or &#x27;W&#x27;. Leaving blank is high contractual risk.</li>
+<li><strong>Row 32:</strong> Must provide a response. This likely requires modification (&#x27;M&#x27;) as D365 F&amp;O route card journals process operations individually. Bulk completion across multiple operations would need custom development.</li>
+<li><strong>Row 33:</strong> Must provide a response. Classify as &#x27;M&#x27;. Bulk operation completion across multiple route steps requires custom development.</li>
+<li><strong>Row 63:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O supports subcontracting in production through subcontracted routing operations with automatic vendor PO creation.</li>
+<li><strong>Row 64:</strong> Mark as &#x27;S&#x27;. D365 F&amp;O has comprehensive production order status lifecycle (Created &gt; Estimated &gt; Scheduled &gt; Released &gt; Started &gt; RAF &gt; Ended) with full control at each stage.</li>
+<li><strong>Row 69:</strong> Provide a split response: Standard parts estimation from library = &#x27;S&#x27;. Autodesk integration for new product estimation = &#x27;M&#x27; (requires custom API integration). Must not leave blank.</li>
+<li><strong>Row 4:</strong> Reclassify to &#x27;W&#x27; or &#x27;M&#x27;. D365 F&amp;O Production Control provides operations and job cards but dedicated checklists per task require Asset Management module configuration or custom development.</li>
+<li><strong>Row 5:</strong> Reclassify to &#x27;W&#x27;. Team leader assignment can be approximated via resource groups and worker-to-operation assignment but specific &#x27;team leader&#x27; designation requires configuration or customization.</li>
+<li><strong>Row 7:</strong> Reclassify to &#x27;W&#x27; or &#x27;M&#x27;. Checklists for production tasks are not a native standard feature in Production Control. Quality order tests or Asset Management checklists may serve as workarounds.</li>
+<li><strong>Row 9:</strong> Add comment clarifying that production order splitting is standard, but automatic creation of separate execution jobs from requests requires workflow configuration.</li>
+<li><strong>Row 10:</strong> Add comment: Tool requirements per operation are standard via routing setup. A consolidated tools-per-team report may require custom reporting.</li>
+<li><strong>Row 11:</strong> Add comment: Organizational charts are available through HR organizational hierarchies. Shop-floor-specific org charts may need configuration.</li>
+<li><strong>Row 16:</strong> Add comment: Capacity load analysis is standard. The specific dashboard format (per division per week with overtime/unpresence columns) may require Power BI dashboard configuration.</li>
+<li><strong>Row 36:</strong> Add comment: Basic check-in/out and time tracking are standard. The specific calculation formulas for paint area and laser cut duration based on material thickness/dimensions may require custom route operation formulas or Engineering Change Management data integration.</li>
+<li><strong>Row 109:</strong> Add comment: Standard overhead distribution via costing sheets is available. Project-size-based proration may require additional cost allocation rule configuration.</li>
+            </ul>
+        </div>
+        <h2>6. Suggested Improved Responses</h2>
+        <div class="risk-note">
+            <table>
+                <thead>
+                    <tr><th>Row</th><th>Current Response</th><th>Suggested Improvement</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>R4</td><td>S (Standard)</td><td>W — D365 F&amp;O Production Control has work orders and operations but dedicated checklists per task require Asset Management or customization.</td></tr>
+                    <tr><td>R5</td><td>S (Standard)</td><td>W — Team leader assignments as a distinct concept require custom roles and workflow beyond standard resource group assignment.</td></tr>
+                    <tr><td>R7</td><td>S (Standard)</td><td>W — Production task checklists are not native to Production Control. Quality order tests or Asset Management checklists serve as workarounds.</td></tr>
+                    <tr><td>R22</td><td>Not Provided (Not Clear)</td><td>Clarify requirement, then likely S — D365 F&amp;O can track loose/non-assembled parts via BOM line types and inventory management.</td></tr>
+                    <tr><td>R26</td><td>Not Provided</td><td>W — D365 F&amp;O Quality Management supports quality order test reports, and Document Management can serve as a test report library.</td></tr>
+                    <tr><td>R32</td><td>Not Provided</td><td>M — Bulk completion of multiple route operations simultaneously requires custom development in D365 F&amp;O.</td></tr>
+                    <tr><td>R33</td><td>Not Provided</td><td>M — Same as R32; bulk update for surface treatment operations requires custom development.</td></tr>
+                    <tr><td>R63</td><td>Not Provided</td><td>S — D365 F&amp;O fully supports subcontracting in production through subcontracted routing operations with automatic vendor PO creation.</td></tr>
+                    <tr><td>R64</td><td>Not Provided</td><td>S — D365 F&amp;O has comprehensive production order status lifecycle (Created, Estimated, Scheduled, Released, Started, RAF, Ended).</td></tr>
+                    <tr><td>R69</td><td>Not Provided</td><td>M (split) — Standard parts estimation from BOM library is S. Autodesk integration for new products requires custom API development (M).</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h2>7. Explicit Risk Notes</h2>
+        <div class="high-risk">
+            <ul>
+<li>7 requirements have no availability code. Per the RFP Instructions tab, &#x27;Items that are not addressed by the Vendor\&#x27;s response will be assumed as not available or not supported.&#x27; This creates significant contractual risk.</li><li>3 items marked as &#x27;S&#x27; (Standard) may be overstated. D365 F&amp;O Production Control provides operations and scheduling but some described features (checklists, team leader assignments, specific dashboard formats) may require Asset Management module, workflow customization, or Power BI development.</li><li>The Factory Operations section (R4-R39) contains the highest concentration of risk. Many requirements describe specialized manufacturing workflows (checklists, team management, AutoCAD integration, area-based calculations) that go beyond standard Production Control.</li><li>MRP (R42-R49), Capacity Planning (R52-R59), and Routings (R104-R119) sections are well-answered and accurately reflect D365 F&amp;O capabilities.</li><li>Manufacturing Orders section (R62-R101) is mostly well-answered but has critical gaps at R63 (outsourcing), R64 (status choices), and R69 (Autodesk estimation) that must be addressed before submission.</li>
+            </ul>
+        </div>
+        <h2>8. Verification Gaps</h2>
+        <div class="risk-note">
+            <ul>
+<li>R22 (Small Pieces list track): Requirement is ambiguous (&#x27;Not Clear&#x27;). Cannot verify without client clarification on what constitutes &#x27;small pieces&#x27; tracking vs. standard inventory item tracking.</li><li>R69 (Estimation linked to Autodesk): Complex requirement spanning standard estimation and external CAD integration. The Autodesk integration scope needs definition before a proper availability code can be assigned.</li><li>R36 (Check in/out with area/duration calculations): The specific calculation formulas (paint area per part, laser cut time per meter per thickness) cannot be verified as standard without examining D365 F&amp;O route operation formula capabilities in detail.</li><li>R109 (Overhead prorate by project size): The exact mechanism for project-size-based overhead proration needs validation against D365 F&amp;O costing sheet capabilities.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

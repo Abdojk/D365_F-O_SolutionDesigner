@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchasing — RFP Compliance Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #0078d4; padding-bottom: 15px; }
+        h2 { color: #0078d4; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th { background: #0078d4; color: white; padding: 10px 8px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ddd; vertical-align: top; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .summary { background: #e8f4fd; border-left: 4px solid #0078d4; padding: 20px; margin: 20px 0; }
+        .high-risk { background: #fdecea; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; }
+        .medium-risk { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; }
+        .safe { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; }
+        .risk-note { background: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin: 10px 0; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+        .stat { display: inline-block; background: #0078d4; color: white; padding: 5px 15px; border-radius: 20px; margin: 3px; font-size: 13px; }
+        .stat.high { background: #dc3545; }
+        .stat.medium { background: #ffc107; color: #333; }
+        .stat.safe { background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Purchasing</h1>
+
+        <h2>1. Validation Summary</h2>
+        <div class="summary">
+            <p><strong>Tab Status:</strong> Responses provided — Validation performed.</p>
+            <p><strong>Total Requirements Reviewed:</strong> 74 (excluding headers and blank rows)</p>
+            <p>
+                <span class="stat high">High Risk: 1</span>
+                <span class="stat medium">Medium Risk: 12</span>
+                <span class="stat safe">Safe / Validated: 61</span>
+            </p>
+            <p><strong>Availability Code Distribution:</strong></p>
+            <ul>
+                <li><strong>S (Standard):</strong> 65 items (87.8%)</li>
+                <li><strong>M (Modification):</strong> 7 items (9.5%)</li>
+                <li><strong>W (Workaround):</strong> 1 items (1.4%)</li>
+                <li><strong>3 (3rd Party):</strong> 0 items (0.0%)</li>
+                <li><strong>N (Not Available):</strong> 0 items (0.0%)</li>
+                <li><strong>Blank / Not Provided:</strong> 1 item(s) (1.4%)</li>
+            </ul>
+            <p>The Purchasing tab covers the full procurement lifecycle including Purchase Requisitions, RFQs, Purchase Orders, vendor quotations, receiving, invoice matching, vendor management, and logistics coordination. The majority of responses (65 of 74) are marked as 'S' (Standard), which is broadly consistent with D365 F&O Procurement &amp; Sourcing module capabilities. However, one critical row (R16) is left unanswered, several 'M' classifications may overstate the required effort, and the complete absence of vendor comments across all rows limits verification of response accuracy.</p>
+        </div>
+
+        <h2>2. High-Risk Items</h2>
+        <div class="high-risk">
+            <p>The following items pose significant compliance, contractual, or accuracy risk:</p>
+            <table>
+<thead><tr><th>Row</th><th>Requirement</th><th>Availability</th><th>Vendor Comment</th><th>Validation Finding</th><th>Recommended Correction</th></tr></thead>
+<tbody><tr>
+  <td>16</td>
+  <td>Need capabilities to determine which items generate variance / replacement</td>
+  <td><strong>Not Provided</strong></td>
+  <td><em>No comment</em></td>
+  <td>NO availability code provided. This requirement asks for capabilities to determine which items generate variance or need replacement. This is a critical gap — leaving it unanswered implies &#x27;Not Available&#x27; per the Instructions tab. D365 F&amp;O does provide purchase price variance tracking via standard costing and can identify items with price deviations through variance reports and the costing sheet. Replacement item tracking could leverage superseded/substitute item functionality.</td>
+  <td>Must provide an availability code. Recommend &#x27;W&#x27; or &#x27;S&#x27; with comment: &#x27;D365 F&amp;O standard costing identifies items generating purchase price variance. Substitute/replacement items are tracked via item substitution setup. Variance reports available through Cost Management module.&#x27;</td>
+</tr>
+</tbody>
+</table>
+        </div>
+
+        <h2>3. Medium-Risk Items</h2>
+        <div class="medium-risk">
+            <p>The following items have potential misclassification, missing comments, or require further review:</p>
+            <table>
+<thead><tr><th>Row</th><th>Requirement</th><th>Availability</th><th>Vendor Comment</th><th>Validation Finding</th><th>Recommended Correction</th></tr></thead>
+<tbody><tr>
+  <td>18</td>
+  <td>Automatically receive components into inventory</td>
+  <td><strong>W</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;W&#x27; (Workaround). D365 F&amp;O can auto-receive via warehouse management policies, automatic product receipt posting upon arrival registration, or through manufacturing execution backflush. The &#x27;W&#x27; classification is reasonable but could arguably be &#x27;S&#x27; depending on the specific scenario (e.g., WMS arrival journals with auto-posting).</td>
+  <td>Consider whether &#x27;S&#x27; is more appropriate. If the use case is receiving components upon PO arrival, D365 F&amp;O product receipt posting with warehouse arrival journal qualifies as standard. Recommend adding a clarifying comment.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td>Add PO Terms &amp; Conditions on master file</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). However, D365 F&amp;O provides Purchase Agreement terms and conditions, and Print Management supports adding standard terms text to PO printouts. Document handling can attach T&amp;C templates. The &#x27;M&#x27; classification likely overstates the required effort.</td>
+  <td>Consider reclassifying to &#x27;W&#x27; or &#x27;S&#x27;. D365 F&amp;O Purchase Agreements support terms and conditions fields. Print Management can include standard T&amp;C text on purchase order confirmations. If the requirement is for T&amp;C stored at the vendor master level, standard vendor notes/document attachments achieve this without code changes.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td>Printable Terms &amp; Conditions Library</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). D365 F&amp;O has Document Handling and Print Management that can store and attach Terms &amp; Conditions documents. SSRS report customization can embed T&amp;C text blocks. A library of reusable T&amp;C templates could be achieved through document types and document attachments without custom code.</td>
+  <td>Consider reclassifying to &#x27;W&#x27;. D365 F&amp;O Document Handling supports a library of attachable documents. Print Management report formatting can include T&amp;C sections. If a formal selectable T&amp;C library with version control is required, &#x27;M&#x27; may be appropriate, but basic T&amp;C printing is achievable via configuration.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td>Vendor lead times and Penalty setup</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; (Standard). D365 F&amp;O supports vendor lead times as standard (configurable on item coverage, trade agreements, and vendor-item combinations). However, &#x27;Penalty setup&#x27; for late deliveries is NOT a standard D365 F&amp;O feature. There is no out-of-the-box penalty calculation or automatic penalty invoice generation. The &#x27;S&#x27; classification overstates the capability for the penalty portion.</td>
+  <td>Reclassify to &#x27;S&#x27; for lead times only, with a comment noting: &#x27;Vendor lead times are standard in D365 F&amp;O via item coverage and trade agreements. Penalty setup for late deliveries requires customization (M) — D365 F&amp;O does not include standard penalty calculation or automatic debit note generation for delivery delays.&#x27;</td>
+</tr>
+<tr>
+  <td>39</td>
+  <td>Ability for Purchase team to check and follow-up pending Invoices (still not issued by Fin team) for shipping.</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; (Standard). D365 F&amp;O allows procurement users to view purchase order statuses and delivery remainders. However, the specific requirement of checking &#x27;pending invoices not yet issued by the Finance team for shipping purposes&#x27; is a cross-functional visibility need. While PO status inquiry is standard, a dedicated view linking unpaid vendor invoices to shipment release may require workspace customization or a saved view.</td>
+  <td>Keep &#x27;S&#x27; but add clarifying comment: &#x27;Purchase order status inquiry and delivery remainder tracking are standard. For specific visibility into pending invoices blocking shipment, a custom workspace tile or saved inquiry view may be needed.&#x27;</td>
+</tr>
+<tr>
+  <td>42</td>
+  <td>Define setup for Shipping rules/regulation by country</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). D365 F&amp;O Foreign Trade module provides Intrastat reporting, export/import compliance codes, commodity codes, and trade parameters by country. However, full shipping rules and regulations by country (e.g., hazmat rules, restricted goods lists, country-specific documentation) are not comprehensively covered out-of-the-box. &#x27;M&#x27; is a reasonable classification for comprehensive country-specific rule enforcement, though partial coverage exists.</td>
+  <td>Keep &#x27;M&#x27; but add clarifying comment: &#x27;D365 F&amp;O Foreign Trade module provides commodity codes, Intrastat, and trade parameters by country. Full country-specific shipping rules (hazmat, restricted goods, documentation checklists) require additional configuration and possible customization. Consider 3rd-party trade compliance add-ons.&#x27;</td>
+</tr>
+<tr>
+  <td>57</td>
+  <td>Vendors assessment checklist (black listed vendors)</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). D365 F&amp;O provides vendor evaluation and rating functionality, plus the ability to place vendors on hold (block for all transactions, invoicing, or requisitions). However, a formal assessment &#x27;checklist&#x27; with structured evaluation criteria and a blacklist workflow is not fully standard. The hold/block mechanism covers basic blacklisting, but a structured checklist-based assessment may require customization.</td>
+  <td>Keep &#x27;M&#x27; but add clarifying comment: &#x27;D365 F&amp;O supports vendor hold/block (effective blacklisting) and vendor evaluation ratings as standard. A formal assessment checklist with structured criteria and approval workflow requires customization, though the Vendor Collaboration portal and questionnaires could partially address this need.&#x27;</td>
+</tr>
+<tr>
+  <td>63</td>
+  <td>Ability to send reminder to suppliers</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). This is a reasonable classification. D365 F&amp;O does not have a standard automated supplier reminder system for overdue deliveries or outstanding RFQ responses. While purchase order confirmations can be resent, proactive automated reminders based on delivery schedules or response deadlines require custom development.</td>
+  <td>Keep &#x27;M&#x27;. Add comment: &#x27;D365 F&amp;O does not include standard automated supplier reminder functionality. PO confirmation can be resent manually via Print Management. Automated reminder workflows for overdue deliveries or pending RFQ responses require custom development using workflow notifications or Power Automate integration.&#x27;</td>
+</tr>
+<tr>
+  <td>65</td>
+  <td>Ability to record negotiation with suppliers (forwarders, vessels)</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). This is correct. D365 F&amp;O does not have a standard negotiation log or structured negotiation recording feature for supplier discussions (forwarders, vessels). While notes and document attachments can be added to vendor records and purchase orders, a formal negotiation tracking module with structured fields is not standard.</td>
+  <td>Keep &#x27;M&#x27;. Add comment: &#x27;D365 F&amp;O supports unstructured notes and document attachments on vendor records, POs, and RFQs. A formal negotiation log with structured fields (date, participants, terms discussed, outcomes) requires customization. Consider integrating with Dynamics 365 Sales for advanced relationship tracking.&#x27;</td>
+</tr>
+<tr>
+  <td>68</td>
+  <td>Ability to check the availability of all the documents required for imported items</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; (Standard). D365 F&amp;O Document Handling allows attaching documents to purchase orders and items. However, a systematic &#x27;checklist&#x27; for verifying all required import documents (certificates of origin, customs declarations, inspection certificates, etc.) is not a standard feature. The requirement may need Document Management with a structured checklist approach.</td>
+  <td>Consider &#x27;W&#x27; with comment: &#x27;D365 F&amp;O Document Handling supports document attachment tracking on purchase orders. Quality orders can verify incoming documentation. However, a comprehensive import document completeness checklist may require configuration of quality order test types or custom document tracking.&#x27;</td>
+</tr>
+<tr>
+  <td>71</td>
+  <td>System should be able to identify and/or reserve forecasted qty of an item (extra ordered quantities) for new purchase requisitions</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; (Standard). D365 F&amp;O Master Planning handles supply and demand netting, and inventory reservation is standard. However, the specific scenario of &#x27;reserving extra ordered quantities (forecasted surplus) for new purchase requisitions&#x27; involves planned order pegging and supply-to-demand linking that requires careful MRP configuration. While achievable, it may not be straightforward &#x27;S&#x27;.</td>
+  <td>Keep &#x27;S&#x27; but add comment: &#x27;D365 F&amp;O Master Planning calculates net requirements considering on-order quantities. Reservation of surplus supply against new demand is handled through planned order firming and pegging. Configuration of coverage rules and action messages required.&#x27;</td>
+</tr>
+<tr>
+  <td>73</td>
+  <td>schedule overview (or calendar showing all requests / projects / countries / ) to help logistics planning. For delivery time and shipping mode etc...</td>
+  <td><strong>M</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;M&#x27; (Modification). This is a reasonable classification. D365 F&amp;O does not provide a standard calendar/schedule overview dashboard showing all procurement requests across projects and countries for logistics planning. While individual inquiries exist (open PO list, delivery schedule), a consolidated visual calendar view requires customization or Power BI dashboard development.</td>
+  <td>Keep &#x27;M&#x27;. Add comment: &#x27;D365 F&amp;O does not include a standard procurement calendar/schedule overview. A consolidated dashboard showing requests by project/country with delivery timelines and shipping modes requires either Power BI embedded dashboard development or a custom workspace with calendar visualization.&#x27;</td>
+</tr>
+</tbody>
+</table>
+        </div>
+
+        <h2>4. Safe Items</h2>
+        <div class="safe">
+            <p>The following items are validated as correctly classified and consistent with D365 F&amp;O Procurement &amp; Sourcing capabilities (61 items):</p>
+            <table>
+<thead><tr><th>Row</th><th>Requirement</th><th>Availability</th><th>Vendor Comment</th><th>Validation Finding</th></tr></thead>
+<tbody><tr>
+  <td>4</td>
+  <td>Procurement Cycle starting from PR requisition, RFQ, PO,  till receiving 
+Flexibility to have multiple process cycles depending on Purchase value i.e.. can skip a step for some types of purchases</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Procurement &amp; Sourcing module provides the full procurement cycle: Purchase Requisitions, RFQs, Purchase Orders, Product Receipt, and Invoice matching. Workflow approval at each stage supports flexible process cycles based on purchase value thresholds.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>Bidding Process</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O supports the bidding process through the Request for Quotation (RFQ) functionality, including sealed bidding, vendor replies, and bid comparison.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>Requisition Inquiry by item, buyer, vendor</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>PR; Call for Tender; RFQ; Quotation comparison; PO (Items &amp; Services); Receive; Bill; Landed Cost; Freight; WHT; Tax</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O covers all listed capabilities: PR, RFQ, quotation comparison, PO (items &amp; services), product receipt, vendor invoicing, landed cost (via Landed Cost module), freight allocation, withholding tax, and tax calculations (Tax engine / sales tax framework).</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>PR (Technica code,  Item description,  Item specification, unit of measurement, Quantity, Remarks,  Delivery date,  Realistic needed on date,  Delivery address (POD),  Agreed incoterms )</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. Purchase Requisition lines in D365 F&amp;O support item number, description, specifications (via product attributes), UOM, quantity, remarks/notes, requested delivery date, delivery address, and Incoterms (via Terms of Delivery on the order header).</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>Quotation Revisions</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>Dispatch purchases by buyer</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>Vendor purchasing history</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>Reordering Rules (Mix/Max Qty)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Master Planning supports Min/Max coverage codes, reorder points, safety stock, and order quantity modifiers as standard item coverage settings.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>Ability to send PO to supplier via email</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Print Management allows POs to be sent via email as PDF attachments directly upon confirmation. Email destinations are configurable per vendor.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>Return Order process</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td>Detailed variance analysis on purchase price costs</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O provides purchase price variance analysis through standard costing variance accounts, purchase price variance postings, and cost analysis reports.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td>List of purchase per vendor (Vendor Activity)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td>Provide inventory reorder point capabilities based on specific part number</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td>Generate purchase order based on multi-level approval (Rules per department/ PO Value)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Workflow engine supports multi-level purchase order approval with conditional routing based on department, PO value, spending limits, and approval hierarchies.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td>Issue blanket Purchase Orders</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O supports blanket POs through Purchase Agreements, which allow pre-negotiated terms, quantities, and prices with release orders created against the agreement.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td>Query partially received and/or billed items</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td>Performance standards and measuring of delivery time-frames</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O tracks confirmed delivery dates vs. actual receipt dates on purchase orders. Vendor evaluation and rating criteria can incorporate delivery performance metrics.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td>Integration with G/L and budgets</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Procurement is fully integrated with General Ledger and Budget Control. Purchase orders can be checked against budget before confirmation, and all procurement transactions post to GL in real-time.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td>Notification or block purchase for over budget purchases based on Projects or Project/Assembly or departments etc...</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Budget Control provides real-time budget checking on purchase orders and requisitions. It can warn or block transactions that exceed budget by project, department, or cost center dimensions.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td>Cross reference with vendor item number</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td>Multiple vendors for an item with ability to define a default one</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>31</td>
+  <td>Ability to select alternative items</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>32</td>
+  <td>Ability to track linked PO &amp; PR</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>33</td>
+  <td>Multiple order types (regular, blanket, outside vendor)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>34</td>
+  <td>PO Revision - PO Audit trail &amp; Log history (qty, price, product,...)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O maintains a full change management log for purchase orders including version history, change tracking for quantities, prices, and delivery dates via the PO change management feature and database logging.</td>
+</tr>
+<tr>
+  <td>35</td>
+  <td>Vendor quotations</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O has a comprehensive vendor quotation system through the RFQ (Request for Quotation) module, supporting electronic creation/sending, vendor reply entry, quote comparison, and award.</td>
+</tr>
+<tr>
+  <td>36</td>
+  <td>Vendor quotation system</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>37</td>
+  <td>Create and send RFQs electronically to vendors</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>38</td>
+  <td>Quote per Unit of Measure</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>40</td>
+  <td>PO/Invoice reconciliation</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O provides standard invoice matching with two-way and three-way matching policies, matching discrepancy workflows, and invoice register/approval journal functionality.</td>
+</tr>
+<tr>
+  <td>41</td>
+  <td>Define preferred Shipping Method by Vendor</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>43</td>
+  <td>User notes by PO</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>44</td>
+  <td>Notes per item, vendor, etc.</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>45</td>
+  <td>Unlimited PO Line Comments</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>46</td>
+  <td>Vendor history by item</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>47</td>
+  <td>Pricing history by vendor and item</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>48</td>
+  <td>Quality Inspection checklist/notification</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Quality Management module provides quality orders, inspection checklists (test groups and test instruments), and notifications upon receipt. Quality associations can automatically trigger inspection upon product receipt.</td>
+</tr>
+<tr>
+  <td>49</td>
+  <td>Print Bar-Coded Receipt Tag</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>50</td>
+  <td>Specify Receiving Date on PO Line</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>51</td>
+  <td>3-Way Matching (PO, Invoice, Receipt)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O provides standard three-way matching (PO, Product Receipt, Vendor Invoice) with configurable matching tolerances and discrepancy handling workflows.</td>
+</tr>
+<tr>
+  <td>52</td>
+  <td>Vendor Payment Terms</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>53</td>
+  <td>PO Inquiry by Item, buyer, vendor</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>54</td>
+  <td>Multi-Line PO Receipt Function</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>55</td>
+  <td>Ability to assign and update delivery date based on separated Receipts</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>56</td>
+  <td>Vendor Statistical/Analysis</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>58</td>
+  <td>Define discount matrix per item/quantity/value/period</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Trade Agreements support complex discount structures including line discounts, multiline discounts, and total discounts, configurable by item, quantity breaks, value thresholds, and date ranges.</td>
+</tr>
+<tr>
+  <td>59</td>
+  <td>Ability to drop-ship orders directly from vendors to customers</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O supports direct delivery (drop-ship) where purchase orders are linked to sales orders and goods ship directly from vendor to customer.</td>
+</tr>
+<tr>
+  <td>60</td>
+  <td>Item Vendor Catalogue</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>61</td>
+  <td>Allocate PO by dimension/project/assembly</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>62</td>
+  <td>UOM Conversion</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>64</td>
+  <td>Ability to cancel a PO. With justification</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O supports PO cancellation through change management with reason codes. The cancellation workflow can require approval and the reason code captures the justification.</td>
+</tr>
+<tr>
+  <td>66</td>
+  <td>Ability to receive a notification when  items are late</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O can identify overdue purchase orders through delivery date tracking. Alerts can be configured on confirmed delivery dates, and the Purchase Order Overdue report provides visibility into late deliveries.</td>
+</tr>
+<tr>
+  <td>67</td>
+  <td>Daily visibility over the quantity received , quantity ordered and current stock</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>69</td>
+  <td>Procurement should be notified in case of non-conformity</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Quality Management can generate non-conformance records linked to purchase orders. Workflow notifications can alert procurement teams when quality issues are detected during inspection.</td>
+</tr>
+<tr>
+  <td>70</td>
+  <td>While planning Purchases and replenishment, the system should be able to calculate [ordered items qty] not received yet</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O tracks delivery remainders (ordered quantity minus received quantity) on every purchase order line. On-hand inventory includes &#x27;On Order&#x27; quantities in the supply overview. Master Planning considers open PO quantities in net requirements.</td>
+</tr>
+<tr>
+  <td>72</td>
+  <td>Ability to track the items returned to the suppliers for repairs by their serial number, supplier code and part number, order number</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O supports Return to Vendor orders with serial number tracking. The combination of return orders, serial number management, and vendor tracking provides full traceability by serial number, vendor code, part number, and order number.</td>
+</tr>
+<tr>
+  <td>74</td>
+  <td>List of purchase orders by status by project (open, closed, shipped, received, awaiting approval, etc..)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>75</td>
+  <td>Type of purchases (Factory, Stock, Spare parts, Support, administrations, others)</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Marked &#x27;S&#x27; — consistent with D365 F&amp;O Procurement &amp; Sourcing standard capabilities. No issues identified.</td>
+</tr>
+<tr>
+  <td>76</td>
+  <td>Vendor agreements and contracts</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O Purchase Agreements support vendor contracts with negotiated terms, pricing, quantity commitments, and validity periods. Release orders are automatically linked to agreements.</td>
+</tr>
+<tr>
+  <td>77</td>
+  <td>Multiple POs on one bill, and multiple bills on one PO</td>
+  <td><strong>S</strong></td>
+  <td><em>No comment</em></td>
+  <td>Correctly marked &#x27;S&#x27;. D365 F&amp;O vendor invoicing supports invoice matching against multiple purchase orders (consolidated invoicing) and multiple invoices against a single PO (partial invoicing). Invoice pools and invoice registers provide flexible invoice-to-PO relationships.</td>
+</tr>
+</tbody>
+</table>
+        </div>
+
+        <h2>5. Recommended Corrections</h2>
+        <div class="summary">
+            <p>The following availability code or comment corrections are recommended to improve RFP response accuracy:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Current Code</th>
+                        <th>Recommended Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>16</td>
+                        <td>Need capabilities to determine which items generate variance / replacement</td>
+                        <td><strong>Not Provided</strong></td>
+                        <td>Must provide an availability code. Recommend &#x27;W&#x27; or &#x27;S&#x27; with comment: &#x27;D365 F&amp;O standard costing identifies items generating purchase price variance. Substitute/replacement items are tracked via item substitution setup. Variance reports available through Cost Management module.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Automatically receive components into inventory</td>
+                        <td><strong>W</strong></td>
+                        <td>Consider whether &#x27;S&#x27; is more appropriate. If the use case is receiving components upon PO arrival, D365 F&amp;O product receipt posting with warehouse arrival journal qualifies as standard. Recommend adding a clarifying comment.</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>Add PO Terms &amp; Conditions on master file</td>
+                        <td><strong>M</strong></td>
+                        <td>Consider reclassifying to &#x27;W&#x27; or &#x27;S&#x27;. D365 F&amp;O Purchase Agreements support terms and conditions fields. Print Management can include standard T&amp;C text on purchase order confirmations. If the requirement is for T&amp;C stored at the vendor master level, standard vendor notes/document attachments achieve this without code changes.</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>Printable Terms &amp; Conditions Library</td>
+                        <td><strong>M</strong></td>
+                        <td>Consider reclassifying to &#x27;W&#x27;. D365 F&amp;O Document Handling supports a library of attachable documents. Print Management report formatting can include T&amp;C sections. If a formal selectable T&amp;C library with version control is required, &#x27;M&#x27; may be appropriate, but basic T&amp;C printing is achievable via configuration.</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>Vendor lead times and Penalty setup</td>
+                        <td><strong>S</strong></td>
+                        <td>Reclassify to &#x27;S&#x27; for lead times only, with a comment noting: &#x27;Vendor lead times are standard in D365 F&amp;O via item coverage and trade agreements. Penalty setup for late deliveries requires customization (M) — D365 F&amp;O does not include standard penalty calculation or automatic debit note generation for delivery delays.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td>Ability for Purchase team to check and follow-up pending Invoices (still not issued by Fin team) for shipping.</td>
+                        <td><strong>S</strong></td>
+                        <td>Keep &#x27;S&#x27; but add clarifying comment: &#x27;Purchase order status inquiry and delivery remainder tracking are standard. For specific visibility into pending invoices blocking shipment, a custom workspace tile or saved inquiry view may be needed.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>42</td>
+                        <td>Define setup for Shipping rules/regulation by country</td>
+                        <td><strong>M</strong></td>
+                        <td>Keep &#x27;M&#x27; but add clarifying comment: &#x27;D365 F&amp;O Foreign Trade module provides commodity codes, Intrastat, and trade parameters by country. Full country-specific shipping rules (hazmat, restricted goods, documentation checklists) require additional configuration and possible customization. Consider 3rd-party trade compliance add-ons.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>57</td>
+                        <td>Vendors assessment checklist (black listed vendors)</td>
+                        <td><strong>M</strong></td>
+                        <td>Keep &#x27;M&#x27; but add clarifying comment: &#x27;D365 F&amp;O supports vendor hold/block (effective blacklisting) and vendor evaluation ratings as standard. A formal assessment checklist with structured criteria and approval workflow requires customization, though the Vendor Collaboration portal and questionnaires could partially address this need.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>63</td>
+                        <td>Ability to send reminder to suppliers</td>
+                        <td><strong>M</strong></td>
+                        <td>Keep &#x27;M&#x27;. Add comment: &#x27;D365 F&amp;O does not include standard automated supplier reminder functionality. PO confirmation can be resent manually via Print Management. Automated reminder workflows for overdue deliveries or pending RFQ responses require custom development using workflow notifications or Power Automate integration.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>65</td>
+                        <td>Ability to record negotiation with suppliers (forwarders, vessels)</td>
+                        <td><strong>M</strong></td>
+                        <td>Keep &#x27;M&#x27;. Add comment: &#x27;D365 F&amp;O supports unstructured notes and document attachments on vendor records, POs, and RFQs. A formal negotiation log with structured fields (date, participants, terms discussed, outcomes) requires customization. Consider integrating with Dynamics 365 Sales for advanced relationship tracking.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>68</td>
+                        <td>Ability to check the availability of all the documents required for imported items</td>
+                        <td><strong>S</strong></td>
+                        <td>Consider &#x27;W&#x27; with comment: &#x27;D365 F&amp;O Document Handling supports document attachment tracking on purchase orders. Quality orders can verify incoming documentation. However, a comprehensive import document completeness checklist may require configuration of quality order test types or custom document tracking.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>71</td>
+                        <td>System should be able to identify and/or reserve forecasted qty of an item (extra ordered quantities) for new purchase requisitions</td>
+                        <td><strong>S</strong></td>
+                        <td>Keep &#x27;S&#x27; but add comment: &#x27;D365 F&amp;O Master Planning calculates net requirements considering on-order quantities. Reservation of surplus supply against new demand is handled through planned order firming and pegging. Configuration of coverage rules and action messages required.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>73</td>
+                        <td>schedule overview (or calendar showing all requests / projects / countries / ) to help logistics planning. For delivery time and shipping mode etc...</td>
+                        <td><strong>M</strong></td>
+                        <td>Keep &#x27;M&#x27;. Add comment: &#x27;D365 F&amp;O does not include a standard procurement calendar/schedule overview. A consolidated dashboard showing requests by project/country with delivery timelines and shipping modes requires either Power BI embedded dashboard development or a custom workspace with calendar visualization.&#x27;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>6. Suggested Improved Responses</h2>
+        <div class="summary">
+            <p>The following table provides suggested improved availability codes and vendor comments for key items:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Current Code</th>
+                        <th>Suggested Code</th>
+                        <th>Suggested Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>16</td>
+                        <td>Need capabilities to determine which items generate variance / replacement</td>
+                        <td><strong>Not Provided</strong></td>
+                        <td><strong>W</strong></td>
+                        <td>D365 F&amp;O standard costing identifies items generating purchase price variance through variance analysis reports in the Cost Management module. Item substitution and supersession features track replacement items. Variance inquiries are available by item, vendor, and cost group.</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>Add PO Terms &amp; Conditions on master file</td>
+                        <td><strong>M</strong></td>
+                        <td><strong>W</strong></td>
+                        <td>D365 F&amp;O supports Terms &amp; Conditions through Purchase Agreement terms, vendor-level document attachments, and Print Management configuration for PO confirmations. No custom code required for basic T&amp;C inclusion on purchase documents.</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>Printable Terms &amp; Conditions Library</td>
+                        <td><strong>M</strong></td>
+                        <td><strong>W</strong></td>
+                        <td>D365 F&amp;O Document Handling provides a document library capability. Print Management can include T&amp;C text on SSRS-based PO reports. Document types can categorize different T&amp;C templates for selection and attachment to purchase orders.</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>Vendor lead times and Penalty setup</td>
+                        <td><strong>S</strong></td>
+                        <td><strong>S/M (split)</strong></td>
+                        <td>Vendor lead times: Standard — configurable via item coverage, trade agreements, and vendor-item default order settings. Penalty setup: Modification required — D365 F&amp;O does not include standard penalty calculation for late vendor deliveries. Recommend splitting or noting partial standard coverage.</td>
+                    </tr>
+                    <tr>
+                        <td>42</td>
+                        <td>Define setup for Shipping rules/regulation by country</td>
+                        <td><strong>M</strong></td>
+                        <td><strong>M</strong></td>
+                        <td>D365 F&amp;O Foreign Trade module provides commodity codes, country/region trade parameters, and Intrastat reporting. Full country-specific shipping rules (hazmat, restricted items, documentation requirements) require additional configuration and potentially 3rd-party trade compliance solutions such as Integration Point or Descartes.</td>
+                    </tr>
+                    <tr>
+                        <td>57</td>
+                        <td>Vendors assessment checklist (black listed vendors)</td>
+                        <td><strong>M</strong></td>
+                        <td><strong>M</strong></td>
+                        <td>D365 F&amp;O supports vendor hold/block (effective blacklisting) and vendor evaluation/rating as standard. A formal structured assessment checklist with approval workflow requires customization. Consider using Vendor Collaboration portal questionnaires for vendor self-assessment.</td>
+                    </tr>
+                    <tr>
+                        <td>63</td>
+                        <td>Ability to send reminder to suppliers</td>
+                        <td><strong>M</strong></td>
+                        <td><strong>M</strong></td>
+                        <td>D365 F&amp;O does not include automated supplier reminder functionality. PO confirmations can be resent via Print Management. Automated delivery reminders require Power Automate flows or custom batch jobs monitoring delivery dates and triggering email notifications.</td>
+                    </tr>
+                    <tr>
+                        <td>68</td>
+                        <td>Ability to check the availability of all the documents required for imported items</td>
+                        <td><strong>S</strong></td>
+                        <td><strong>W</strong></td>
+                        <td>D365 F&amp;O Document Handling tracks attachments on purchase orders and items. Quality order test types can verify documentation completeness. A comprehensive import document checklist (certificates of origin, customs declarations, etc.) may require quality management configuration or document type setup.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>7. Explicit Risk Notes</h2>
+        <div class="high-risk">
+            <p>The following risk notes highlight areas requiring immediate attention before RFP submission:</p>
+            <div class="risk-note">
+                <p><strong>Unanswered Requirement (R16) — Contractual Exposure</strong></p>
+                <p>Row 16 (&#x27;Need capabilities to determine which items generate variance / replacement&#x27;) has no availability code. Per the RFP Instructions: &#x27;Items that are not addressed by the Vendor\&#x27;s response will be assumed as not available or not supported.&#x27; This creates a direct contractual risk where the client may assume the solution cannot identify variance-generating items, despite D365 F&amp;O having this capability through standard costing and variance reports.</p>
+            </div>
+            <div class="risk-note">
+                <p><strong>Penalty Setup Overstated as Standard (R29)</strong></p>
+                <p>Row 29 marks &#x27;Vendor lead times and Penalty setup&#x27; as &#x27;S&#x27; (Standard). While vendor lead times are indeed standard, penalty setup for late deliveries is not a D365 F&amp;O standard feature. If the client relies on the &#x27;S&#x27; classification to expect out-of-the-box penalty management, this creates a scope gap during implementation. The penalty portion should be clearly flagged as requiring customization.</p>
+            </div>
+            <div class="risk-note">
+                <p><strong>Terms &amp; Conditions Potentially Over-Classified (R22, R23)</strong></p>
+                <p>Rows 22 and 23 mark PO Terms &amp; Conditions and Printable T&amp;C Library as &#x27;M&#x27; (Modification). While customization may enhance the experience, basic T&amp;C functionality is available through D365 F&amp;O Print Management and Document Handling. Over-classifying as &#x27;M&#x27; may inflate implementation cost estimates unnecessarily and could lead to scope disputes.</p>
+            </div>
+            <div class="risk-note">
+                <p><strong>Cross-Functional Visibility Assumptions (R39, R68)</strong></p>
+                <p>Rows 39 and 68 are marked &#x27;S&#x27; but involve cross-functional visibility that may require workspace configuration or saved views beyond default setup. While technically achievable without code, the implementation effort for proper configuration should be planned.</p>
+            </div>
+            <div class="risk-note">
+                <p><strong>Import Document Compliance Gap (R68)</strong></p>
+                <p>Row 68 requires checking availability of all documents for imported items. While D365 F&amp;O tracks documents, a systematic import compliance checklist is not standard. For organizations with significant import operations, this may require Quality Management configuration or a specialized trade compliance solution.</p>
+            </div>
+        </div>
+
+        <h2>8. Verification Gaps</h2>
+        <div class="medium-risk">
+            <p>The following gaps in the response limit the ability to fully verify compliance:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Gap Description</th>
+                        <th>Recommendation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Comments Column</strong></td>
+                        <td>The entire Purchasing tab has no vendor comments on any row. While the availability codes are provided (except R16), the RFP Instructions &#x27;strongly encourage&#x27; vendors to add brief comments. The complete absence of comments makes it impossible to verify the vendor&#x27;s understanding of each requirement or their proposed approach.</td>
+                        <td>Add clarifying comments to all rows, especially where requirements are complex or multi-faceted. Focus on items where the requirement text is ambiguous or could be interpreted multiple ways.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Penalty &amp; Compliance Features</strong></td>
+                        <td>Row 29 combines two distinct capabilities (lead times and penalties) but receives a single availability code. There is no way to verify whether the vendor recognized that penalty setup is different from lead time configuration.</td>
+                        <td>Split compound requirements or add comments that address each sub-requirement individually.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sub-Item Groupings</strong></td>
+                        <td>Rows 36-38 and 44-45 are sub-items (indented with spaces) under parent rows 35 and 43 respectively. All are marked &#x27;S&#x27; individually, which is correct, but there is no comment explaining how these sub-capabilities relate to the parent capability.</td>
+                        <td>Add brief comments on sub-items confirming they are addressed as part of the parent functionality.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modification Scope Definition</strong></td>
+                        <td>Rows marked &#x27;M&#x27; (22, 23, 42, 57, 63, 65, 73) have no comments explaining the scope, effort, or approach for the modification. This creates ambiguity about what the modification entails and its cost/timeline impact.</td>
+                        <td>For every &#x27;M&#x27; classification, provide a comment explaining: (1) what standard D365 F&amp;O provides, (2) what gap the modification addresses, and (3) estimated complexity (low/medium/high).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration Assumptions</strong></td>
+                        <td>Several requirements (R26, R27, R39) involve cross-module integration. While D365 F&amp;O provides this natively, the response does not clarify whether the scope includes configuration of these integrations or assumes they work automatically.</td>
+                        <td>Add comments confirming that cross-module integration (GL, Budget Control, Quality) is included in implementation scope and configuration effort.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr style="margin-top: 40px; border: 1px solid #ddd;">
+        <p style="font-size: 12px; color: #888;">
+            Generated on 2026-02-16 11:30:49 | D365 F&amp;O RFP Compliance Validation Engine | Tab: Purchasing |
+            Source: Technica International Requirements Compliance Matrix
+        </p>
+    </div>
+</body>
+</html>

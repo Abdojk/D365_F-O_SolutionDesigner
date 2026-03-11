@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales - Sales Support — RFP Compliance Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #0078d4; padding-bottom: 15px; }
+        h2 { color: #0078d4; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        h3 { color: #333; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th { background: #0078d4; color: white; padding: 10px 8px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ddd; vertical-align: top; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .summary { background: #e8f4fd; border-left: 4px solid #0078d4; padding: 20px; margin: 20px 0; }
+        .high-risk { background: #fdecea; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; }
+        .medium-risk { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; }
+        .safe { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; }
+        .risk-note { background: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin: 10px 0; }
+        .critical-banner { background: #dc3545; color: white; padding: 20px; border-radius: 6px; margin: 20px 0; font-size: 15px; }
+        .critical-banner strong { font-size: 17px; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+        .stat { display: inline-block; background: #0078d4; color: white; padding: 5px 15px; border-radius: 20px; margin: 3px; font-size: 13px; }
+        .stat.high { background: #dc3545; }
+        .stat.medium { background: #ffc107; color: #333; }
+        .stat.safe { background: #28a745; }
+        .section-box { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 15px; margin: 12px 0; }
+        .section-box h4 { margin-top: 0; color: #0078d4; }
+        .unanswered-row-list { font-size: 12px; color: #666; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sales - Sales Support</h1>
+
+        <h2>1. Validation Summary</h2>
+        <div class="summary">
+            <p><strong>Tab Status:</strong> Partially completed — Only 16 of 104 requirements have availability codes. Validation performed on answered items; gap analysis performed on unanswered items.</p>
+            <p><strong>Total Requirements Identified:</strong> 104 (excluding header rows and blank rows)</p>
+            <p><strong>Answered (with availability code):</strong> 16 rows (R4–R21, codes S or M)</p>
+            <p><strong>Unanswered (no availability code):</strong> 88 rows (R16–R120, across all remaining sections)</p>
+            <p>
+                <span class="stat high">High Risk (Answered): 1</span>
+                <span class="stat medium">Medium Risk (Answered): 3</span>
+                <span class="stat safe">Safe / Validated (Answered): 12</span>
+            </p>
+            <p>
+                <span class="stat high">UNANSWERED REQUIREMENTS: 88 (all treated as high risk)</span>
+            </p>
+            <p>This tab covers Quotation/Proposal Creation, Sales Orders, Pricing, Order Modifications, Commissions, Sales Analysis, and Reporting. Only the Quotation/Proposal Creation section (R4–R21) has been partially answered. The remaining ~88 requirements spanning Sales Orders, Pricing, Invoicing, Commissions, Analysis, and Reporting are entirely unanswered — representing the single largest compliance gap in this workbook.</p>
+        </div>
+
+        <h2>2. High-Risk Items</h2>
+
+        <div class="critical-banner">
+            <strong>CRITICAL: 88 Requirements Are Completely Unanswered</strong>
+            <p>Per the RFP Instructions tab: "Items that are not addressed by the Vendor's response will be assumed as not available or not supported by the Vendor's proposed solution." This means 88 requirements — spanning Sales Orders, Pricing, Order Modifications, Commissions, Sales Analysis, and Reporting — will be contractually treated as "Not Available." Many of these capabilities ARE available in D365 F&amp;O, making this an enormous missed opportunity and contractual liability.</p>
+        </div>
+
+        <div class="high-risk">
+            <h3>Unanswered Sections — Detailed Gap Analysis</h3>
+            <p>The following sections have zero availability codes. Each section is assessed against known D365 F&amp;O capabilities:</p>
+
+            <div class="section-box">
+                <h4>Quotation/Proposal Gaps (R16-R17)</h4>
+                <p><strong>Rows:</strong> R16; R17</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R16 (Labels each product in project context): D365 F&amp;O Project Quotations can label items per project. Likely S or W. R17 (Track quoted vs actual price): D365 F&amp;O provides quote-to-order comparison and margin analysis. Should be S.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R16: Labels each product in the context of a project<br>
+                    R17: Track quoted price against the actual price<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Progress Billing &amp; Quote-to-Order Conversion (R22-R27)</h4>
+                <p><strong>Rows:</strong> R22; R23; R24; R25; R26; R27</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R22 (Progress billing with milestones): D365 F&amp;O Project module supports milestone billing — S or W. R23 (Convert quote to order): Standard D365 F&amp;O quotation-to-sales-order conversion — S. R24 (Create new offer from previous): Copy quotation functionality is standard — S. R25-R27 (DFI import, customer data collection, workflow): These are Technica-specific processes that would require M or 3.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R22: Support progress billing based on project milestones with notifications<br>
+                    R23: Automatically convert a quote into an order<br>
+                    R24: Ability to create new offer from previous offers and do changes<br>
+                    R25: Ability to import DFI (Data for Inquiry) to Offer<br>
+                    R26: Ability to collect customer product data for inquiry directly on the system<br>
+                    R27: DFI internal workflow and confirmation from Client<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Credit Hold &amp; Order Processing (R28-R30)</h4>
+                <p><strong>Rows:</strong> R28; R29; R30</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R28-R29 (Credit hold): D365 F&amp;O has standard credit management with order holds — S. R30 (Auto SO number with configurable sequences): D365 F&amp;O number sequences are standard — S.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R28: Lockup (Credit hold) so order can not be processed without approval<br>
+                    R29: All orders need to clear credit before a Pick Ticket or Bill-of-Lading is printed<br>
+                    R30: System generated Sales Order number with ability to configure number format &amp; sequence<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Forecasting &amp; Control Points (R31-R37)</h4>
+                <p><strong>Rows:</strong> R31; R32; R33; R34; R35; R36; R37</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R31-R37 (Automated control points for engineering, manufacturing, assembly, testing, shipping times and cost): D365 F&amp;O provides lead time calculations and BOM costing. However, automatic formula-driven estimation for all these control points in quotation context would likely require M. Some elements (manufacturing lead time, shipping) are standard in MRP.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R31: Ability to generate and forecast automatically the following control points for acccurate offer selling price and delivery time.  (ability to utilize formula to calculate final answer)<br>
+                    R32: Design &amp; Engineering Time<br>
+                    R33: Execution &amp; Manufacturing Time<br>
+                    R34: Assembly/Disassembly Time<br>
+                    R35: Testing &amp; acceptance<br>
+                    R36: Shipping &amp; delivery Time<br>
+                    R37: Cost &amp; budget<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Sales Order Management (R38-R55)</h4>
+                <p><strong>Rows:</strong> R38; R39; R40; R41; R42; R43; R44; R45; R46; R47; R48; R49; R50; R51; R52; R53; R54; R55</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> The majority of these are STANDARD D365 F&amp;O capabilities: multiple order types (S), request/scheduled/actual dates per line (S), unlimited lines (S), unlimited comments (S), price increases with effectivity (S via trade agreements), multiple discounting methods (S), contract pricing (S via trade agreements), allocated inventory (S), order history (S). Some items like complementary product prompting (W via cross-sell/up-sell), late order notifications (M or W via alerts), and manufacturing-sales integration (S) are well-supported. This represents a massive missed opportunity — nearly all these items should be S or W.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R38: Multiple order types (User-defined) (Scheduling, Pricing, Customer Type Rules)<br>
+                    R39: Request, scheduled, actual date per order line<br>
+                    R40: Unlimited lines per order<br>
+                    R41: Unlimited comments (customer level, order level, item level, line comments)<br>
+                    R42: User-Defined Comment Print Codes (ACKN, INV, PICK)<br>
+                    R43: Price increases (with effective dates)<br>
+                    R44: Multiple discounting methods (by line and/or order)<br>
+                    R45: Contract pricing<br>
+                    R46: Cash-in-Advance orders<br>
+                    R47: Alternate products versions (old part # / new part #) with effectivity dates<br>
+                    R48: Complementary product prompting during order entity<br>
+                    R49: Order history with ship data (by Item; by Invoice; by date range; etc... )<br>
+                    R50: Lock order after fully shipped &amp; invoiced / after commissioning<br>
+                    R51: Allocated inventory with override - allocate by line (real time)<br>
+                    R52: Track on-time delivery and order accuracy<br>
+                    R53: Complete integration of information (process steps) between Sales Associates and Manufacturing<br>
+                    R54: Automated/Electronic notification that an order is running late, 
+separate categories for customer&#x27;s fixed deadlines and internal milestones<br>
+                    R55: Manufacturing – picking should be sequenced (by date or priority or availability) for projects<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Commission Structure (R56-R57)</h4>
+                <p><strong>Rows:</strong> R56; R57</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R56 (Split commissions): D365 F&amp;O Sales Commission module supports commission calculation but split commissions may require configuration — S or W. R57 (Commission Structure): D365 F&amp;O has commission groups and calculation rules — S.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R56: Calculate split commissions automatically incentive for sales/ sales support<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Order Modifications (R60-R65)</h4>
+                <p><strong>Rows:</strong> R60; R61; R62; R63; R64; R65</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R60 (Change orders): D365 F&amp;O supports modifying sales orders (lines, dates, quantities, prices) as standard — S. R61 (Pegging change orders to original SO): Change management and order history tracking is available — S or W. R62 (Close/delete SO line): Standard functionality — S. R63 (Change order types): D365 F&amp;O supports order status resets and re-pricing — S or W. R65 (Cancel transaction): Standard — S.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R60: Change Order Request (Line Items; date; quantity; price; terms; etc...)<br>
+                    R61: Process change orders easily, &quot;pegging&quot; these change orders to the original sales order<br>
+                    R62: Close/delete sales order line<br>
+                    R63: Change Order Types (Reset Order Status, Re-Price, Reschedule Order)<br>
+                    R64: Implement optional acknowledgments by line<br>
+                    R65: cancel a transaction<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Pricing Algorithm (R68-R77)</h4>
+                <p><strong>Rows:</strong> R68; R69; R70; R71; R72; R73; R74; R75; R76; R77</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> D365 F&amp;O has a comprehensive pricing engine: trade agreements, price groups, discount structures, cost-plus pricing, effectivity dates, price overrides with approval workflows. Most of these requirements (R68-R77) should be S or W. Feature-based pricing for configured products is supported via Product Configurator pricing rules.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R68: Computes prices using any mathematical operation<br>
+                    R69: Prices complex products based on features and selected options<br>
+                    R70: Sets up pricing and discounting rules based on multiple parameters<br>
+                    R71: Pricing can be based on a fixed amount for a generic model or the sum of the option prices (variants, aliases) selected<br>
+                    R72: Pricing and costing can be user-defined, based on specific combinations of features<br>
+                    R73: Cost-based (cost-plus) pricing and estimating<br>
+                    R74: Supports free goods and zero cost pricing<br>
+                    R75: Pricing effectivity dates<br>
+                    R76: Change prices easily, including limiting price override capability so that only the sales manager can use it beyond a certain percent of list price (rules applies)_<br>
+                    R77: Automatic pricing may be overridden (rules apply)<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Sales Invoice (R80-R85)</h4>
+                <p><strong>Rows:</strong> R80; R81; R82; R83; R84; R85</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R80-R82 (Invoice by assembly, BOM split, CAD export): These are Technica-specific manufacturing/engineering integration requirements — likely M or 3. R83 (Sales methodologies): Not a standard ERP feature — N or 3 (CRM function). R84 (Sales analytics on dashboards): D365 F&amp;O Power BI embedded analytics — S. R85 (Dormant account reports): Can be built via customer activity analysis — W or M.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R80: Ability to invoice a project  by Assembly<br>
+                    R81: Ability to split Assembly into lower level of Items/parts and BOM<br>
+                    R82: BOM and Items will be exported from CAD<br>
+                    R83: Support for one or more popular sales methodologies (e.g., Miller Heiman, Customer Centric Selling, etc.)<br>
+                    R84: Predesigned sales-related analytics (charts and graphs) are available for display on dashboards and reports<br>
+                    R85: Report of Dormant accounts<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Sales Analysis (R88-R99)</h4>
+                <p><strong>Rows:</strong> R88; R89; R90; R91; R92; R93; R94; R95; R96; R97; R98; R99</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> D365 F&amp;O with Power BI provides extensive sales analysis: pipeline dashboards (S/W with CRM or Power BI), sales reporting by customer/product/date (S), territory reporting (S via sales district), commission tracking (S), customer history (S), quotation analysis (S). Most should be S or W. Commission based on customer payments (R96-R97) may require configuration — W or M.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R88: Pipeline sales dashboard and KPIs<br>
+                    R89: Provide detailed and summary sales reporting by customer, product category, item, invoice date, sales report and customer type<br>
+                    R90: Pipeline monthly, quarterly, yearly or custom dates<br>
+                    R91: Pipeline by country, by salesperson, by industry etc…<br>
+                    R92: History by customer<br>
+                    R93: Ability for salespeople to review reporting for their territory<br>
+                    R94: Sales performance reporting<br>
+                    R95: Commission tracking<br>
+                    R96: Commissions based on customer payments<br>
+                    R97: commission is paid full on down-payment<br>
+                    R98: Quotation Analysis &amp; Comparison<br>
+                    R99: Sales Cycle Analysis<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Reporting (R102-R114)</h4>
+                <p><strong>Rows:</strong> R102; R103; R104; R105; R106; R107; R108; R109; R110; R111; R112; R113; R114</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> D365 F&amp;O provides extensive reporting capabilities: standard sales and profit ranking reports (S), commission reporting (S), custom report design via SSRS and Power BI (S), data filters (S), charts/graphs (S), multi-currency reporting (S), report output in graphic format (S). Custom data fields and report templates are standard SSRS/Power BI capabilities. Nearly all of these should be S.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R102: Standard ranking – sales and gross profit by customer<br>
+                    R103: Customer service order reporting – ties different information points to an order (customer number, customer type)<br>
+                    R104: Simple commission reporting<br>
+                    R105: Tracks and reports on projects by custom attributes<br>
+                    R106: Custom data fields can be added to predefined report templates<br>
+                    R107: Data columns can be added or removed from predefined report templates<br>
+                    R108: Report data filters can be changed in predefined report templates<br>
+                    R109: Charts and graphs can be added to predefined report templates<br>
+                    R110: Custom reports can be designed from &quot;scratch&quot;<br>
+                    R111: Report output can be displayed in graphic and/or chart format<br>
+                    R112: Comparison of predefined subtotal reports covering two periods of time<br>
+                    R113: Selection of default currency<br>
+                    R114: Sales Reports in multiple currencies<br>
+                </p>
+            </div>
+
+            <div class="section-box">
+                <h4>Suppliers Machines / Miscellaneous (R116-R120)</h4>
+                <p><strong>Rows:</strong> R116; R117; R118; R119; R120</p>
+                <p><strong>D365 F&amp;O Assessment:</strong> R116-R118 (Supplier machines, offers with specs, competition analysis): These are specialized CRM/competitive intelligence requirements — likely M or 3. R119 (Tracking validity): Quotation validity dates are standard — S. R120 (Merge/select options): Product Configurator supports option selection — S or W.</p>
+                <p class="unanswered-row-list"><strong>Requirements:</strong><br>
+                    R117: New offers with prices and machines specs<br>
+                    R118: competition analisis<br>
+                    R119: Tracking validity<br>
+                    R120: Flexibility to merge options or select individual options<br>
+                </p>
+            </div>
+        </div>
+
+        <div class="high-risk">
+            <h3>High-Risk Answered Items</h3>
+            <p>The following answered items pose significant compliance or accuracy risk:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Availability</th>
+                        <th>Vendor Comment</th>
+                        <th>Validation Finding</th>
+                        <th>Recommended Correction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>Automatically populates proposals with relevant customer data</td>
+                        <td><strong>M</strong></td>
+                        <td></td>
+                        <td>Marked &#x27;M&#x27; (Modification). D365 F&amp;O standard Sales Quotation functionality auto-populates customer master data (name, address, payment terms, currency, prices) onto quotation headers and lines. No modification is required for this capability.</td>
+                        <td>Reclassify to &#x27;S&#x27;. D365 F&amp;O auto-populates customer data on sales quotations as standard functionality.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>3. Medium-Risk Items</h2>
+        <div class="medium-risk">
+            <p>The following answered items have potential misclassification or require clarifying comments:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Availability</th>
+                        <th>Vendor Comment</th>
+                        <th>Validation Finding</th>
+                        <th>Recommended Correction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9</td>
+                        <td>Product images from the product catalog can be included in quotes</td>
+                        <td><strong>S</strong></td>
+                        <td></td>
+                        <td>Marked &#x27;S&#x27;. D365 F&amp;O Document Management supports attaching images to records. However, automatically embedding product catalog images into the quote document output (e.g., SSRS report) requires report customization. The &#x27;S&#x27; classification is reasonable if images are attached; potentially overstated if embedded rendering is expected.</td>
+                        <td>Add comment clarifying that product images can be attached to quotation records. Embedding images in printed quotation documents may require report customization.</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Generates rich proposal packages including quotes, cover letters, datasheets, and drawings</td>
+                        <td><strong>S</strong></td>
+                        <td></td>
+                        <td>Marked &#x27;S&#x27;. D365 F&amp;O can generate quotation documents with line details. However, &#x27;rich proposal packages&#x27; combining quotes, cover letters, datasheets, and drawings as a unified package is not a single standard feature — it typically requires Document Management with multiple attachments or a third-party document generation tool. Potentially overstated for a seamless unified package.</td>
+                        <td>Consider adding a comment: &#x27;Individual documents (quotes, datasheets, drawings) can be generated and attached. A unified rich proposal package may require document assembly configuration or third-party tools.&#x27;</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Automated estimation cost sheet</td>
+                        <td><strong>S</strong></td>
+                        <td></td>
+                        <td>Marked &#x27;S&#x27;. D365 F&amp;O has BOM cost calculations, cost rollup, and costing sheets. However, a fully &#x27;automated estimation cost sheet&#x27; depends on the complexity of the estimation model. For standard BOM-based costing, &#x27;S&#x27; is appropriate. For complex project-based estimation beyond BOM, this may require configuration or customization.</td>
+                        <td>Add comment: &#x27;D365 F&amp;O provides standard BOM cost rollup and costing sheets. Complex project estimation models may require additional configuration.&#x27;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>4. Safe Items</h2>
+        <div class="safe">
+            <p>12 items validated as correctly classified among the answered rows. D365 F&amp;O capabilities confirmed for the stated availability codes:</p>
+            <ul>
+                <li><strong>R4:</strong> Dynamically generates quote content based on configuration choices — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O Product Configurator supports dynamic quote content generation based on configuration choices. Correct classification.</li>
+                <li><strong>R6:</strong> Provide ability to quote configured products — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O supports quoting configured products via the Product Configurator and Dimension-based configuration. Correct.</li>
+                <li><strong>R7:</strong> Exact product features, descriptions, pricing, and quantities can be added from valid or approved quote line items — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O Sales Quotation lines include product features, descriptions, pricing, and quantities sourced from product master and trade agreements. Correct.</li>
+                <li><strong>R8:</strong> Detailed quotes can be included as sub-documents or appended documents — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O supports document attachments on quotations through Document Management. Sub-documents and appendices can be attached. Correct.</li>
+                <li><strong>R10:</strong> Adds cover letters from user-defined or company-defined templates — <strong>M</strong>. Marked &#x27;M&#x27;. D365 F&amp;O does not have built-in cover letter template generation as part of the quotation workflow. Cover letters would require Document Management templates or custom SSRS/Word template integration. &#x27;M&#x27; is correct.</li>
+                <li><strong>R11:</strong> Users can copy or duplicate configured lines during quote development — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O allows copying quotation lines, including configured lines, within quote development. Correct.</li>
+                <li><strong>R12:</strong> Other documents can be included in a quote document, e.g. warranty or service agreements — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O Document Management allows attaching external documents (warranty agreements, service contracts) to quotation records. Correct.</li>
+                <li><strong>R13:</strong> User can browse and append any external documents from her desktop, company intranet, or internal shared drives (if permitted by the administrator and application) — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O Document Management supports attaching files from local desktop and SharePoint integration for shared drives. Correct.</li>
+                <li><strong>R15:</strong> Master quotes can be created from bundles of pre-existing quotes — <strong>M</strong>. Marked &#x27;M&#x27;. D365 F&amp;O does not have a standard &#x27;master quote from bundled quotes&#x27; feature. Creating master quotations from pre-existing quotes would require customization. &#x27;M&#x27; is correct.</li>
+                <li><strong>R19:</strong> Maintain quote revisions — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O supports quotation journal/versions, allowing maintenance of quote revisions with full revision history. Correct.</li>
+                <li><strong>R20:</strong> Reason codes for quotes lost — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O has quotation result/reason codes for tracking why quotes are won or lost. Correct.</li>
+                <li><strong>R21:</strong> Email quotes directly — <strong>S</strong>. Marked &#x27;S&#x27;. D365 F&amp;O supports emailing quotes directly via Print Management email destinations. Correct.</li>
+            </ul>
+        </div>
+
+        <h2>5. Recommended Corrections</h2>
+        <div class="risk-note">
+            <h3>A. Corrections for Answered Items</h3>
+            <ul>
+                <li><strong>Row 5:</strong> Reclassify to &#x27;S&#x27;. D365 F&amp;O auto-populates customer data on sales quotations as standard functionality.</li>
+                <li><strong>Row 9:</strong> Add comment clarifying that product images can be attached to quotation records. Embedding images in printed quotation documents may require report customization.</li>
+                <li><strong>Row 14:</strong> Consider adding a comment: &#x27;Individual documents (quotes, datasheets, drawings) can be generated and attached. A unified rich proposal package may require document assembly configuration or third-party tools.&#x27;</li>
+                <li><strong>Row 18:</strong> Add comment: &#x27;D365 F&amp;O provides standard BOM cost rollup and costing sheets. Complex project estimation models may require additional configuration.&#x27;</li>
+            </ul>
+            <h3>B. Critical Action: Complete All Unanswered Requirements</h3>
+            <p>The following sections must be completed before RFP submission. For each section, a preliminary D365 F&amp;O capability assessment is provided above in the High-Risk section. The vendor team should:</p>
+            <ol>
+                <li>Review each unanswered requirement against D365 F&amp;O standard functionality.</li>
+                <li>Assign appropriate availability codes (S, W, M, 3, or N).</li>
+                <li>Add explanatory comments, especially for M and 3 classifications.</li>
+                <li>Prioritize Sales Order Management (R38-R55) and Pricing Algorithm (R68-R77) as these are core ERP capabilities where D365 F&O is strongest.</li>
+            </ol>
+        </div>
+
+        <h2>6. Suggested Improved Responses</h2>
+        <div class="risk-note">
+            <h3>A. Corrections for Currently Answered Items</h3>
+            <table>
+                <thead>
+                    <tr><th>Row</th><th>Current Response</th><th>Suggested Improvement</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>R5</td><td>M (Modification)</td><td>S — D365 F&amp;O auto-populates customer master data (name, address, payment terms, currency, pricing) onto sales quotation headers and lines as standard functionality.</td></tr>
+                    <tr><td>R9</td><td>S (Standard)</td><td>S — Add comment: &#x27;Product images can be attached to quotation records via Document Management. Embedding images in printed quotation output may require report customization.&#x27;</td></tr>
+                    <tr><td>R14</td><td>S (Standard)</td><td>S or W — Add comment: &#x27;Individual documents can be generated and attached. A unified rich proposal package may require document assembly configuration or a document generation add-on.&#x27;</td></tr>
+                    <tr><td>R18</td><td>S (Standard)</td><td>S — Add comment: &#x27;D365 F&amp;O provides standard BOM cost rollup and costing sheets. Complex project estimation models beyond standard BOM costing may require additional configuration.&#x27;</td></tr>
+                </tbody>
+            </table>
+
+            <h3>B. Suggested Responses for Key Unanswered Items</h3>
+            <p>The following are recommended availability codes for the most impactful unanswered requirements, based on standard D365 F&amp;O capabilities:</p>
+            <table>
+                <thead>
+                    <tr><th>Row</th><th>Requirement</th><th>Suggested Code</th><th>Rationale</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>R23</td><td>Automatically convert a quote into an order</td><td><strong>S</strong></td><td>D365 F&amp;O has standard quotation-to-sales-order conversion via &#x27;Confirm quotation&#x27; process.</td></tr>
+                    <tr><td>R24</td><td>Ability to create new offer from previous offers and do changes</td><td><strong>S</strong></td><td>D365 F&amp;O supports copying existing quotations to create new ones with modifications.</td></tr>
+                    <tr><td>R28</td><td>Lockup (Credit hold) so order cannot be processed without approval</td><td><strong>S</strong></td><td>D365 F&amp;O Credit Management module provides credit holds, credit limits, and blocked order processing.</td></tr>
+                    <tr><td>R29</td><td>All orders need to clear credit before Pick Ticket or BOL is printed</td><td><strong>S</strong></td><td>D365 F&amp;O credit check rules can be configured to block picking and packing until credit is cleared.</td></tr>
+                    <tr><td>R30</td><td>System generated SO number with configurable format &amp; sequence</td><td><strong>S</strong></td><td>D365 F&amp;O number sequences are fully configurable with format, scope, and sequence rules.</td></tr>
+                    <tr><td>R38</td><td>Multiple order types (User-defined)</td><td><strong>S</strong></td><td>D365 F&amp;O supports multiple sales order types with configurable scheduling, pricing, and customer type rules.</td></tr>
+                    <tr><td>R39</td><td>Request, scheduled, actual date per order line</td><td><strong>S</strong></td><td>D365 F&amp;O sales order lines track requested receipt date, confirmed ship date, and actual ship date.</td></tr>
+                    <tr><td>R40</td><td>Unlimited lines per order</td><td><strong>S</strong></td><td>D365 F&amp;O has no practical limit on sales order lines.</td></tr>
+                    <tr><td>R43</td><td>Price increases (with effective dates)</td><td><strong>S</strong></td><td>D365 F&amp;O trade agreements support price effectivity dates, allowing scheduled price increases.</td></tr>
+                    <tr><td>R44</td><td>Multiple discounting methods (by line and/or order)</td><td><strong>S</strong></td><td>D365 F&amp;O supports line discounts, multiline discounts, and total discounts with flexible calculation rules.</td></tr>
+                    <tr><td>R45</td><td>Contract pricing</td><td><strong>S</strong></td><td>D365 F&amp;O trade agreements and sales agreements support contract-based pricing.</td></tr>
+                    <tr><td>R51</td><td>Allocated inventory with override — allocate by line (real time)</td><td><strong>S</strong></td><td>D365 F&amp;O supports real-time inventory reservation at the sales order line level with override capability.</td></tr>
+                    <tr><td>R60</td><td>Change Order Request (line items, date, quantity, price, terms)</td><td><strong>S</strong></td><td>D365 F&amp;O allows modifying sales order lines, dates, quantities, prices, and terms directly on the order.</td></tr>
+                    <tr><td>R62</td><td>Close/delete sales order line</td><td><strong>S</strong></td><td>D365 F&amp;O supports canceling or closing individual sales order lines.</td></tr>
+                    <tr><td>R73</td><td>Cost-based (cost-plus) pricing and estimating</td><td><strong>S</strong></td><td>D365 F&amp;O supports cost-plus markup pricing through trade agreement markup rules and costing sheets.</td></tr>
+                    <tr><td>R75</td><td>Pricing effectivity dates</td><td><strong>S</strong></td><td>D365 F&amp;O trade agreements have standard from/to effectivity date fields.</td></tr>
+                    <tr><td>R89</td><td>Detailed and summary sales reporting by customer, product, invoice date, etc.</td><td><strong>S</strong></td><td>D365 F&amp;O provides standard sales statistics, customer transaction reports, and Power BI analytics.</td></tr>
+                    <tr><td>R102</td><td>Standard ranking — sales and gross profit by customer</td><td><strong>S</strong></td><td>D365 F&amp;O provides customer sales statistics and profitability analysis reports as standard.</td></tr>
+                    <tr><td>R113</td><td>Selection of default currency</td><td><strong>S</strong></td><td>D365 F&amp;O supports default currency per legal entity, customer, and transaction level.</td></tr>
+                    <tr><td>R114</td><td>Sales Reports in multiple currencies</td><td><strong>S</strong></td><td>D365 F&amp;O supports multi-currency reporting with automatic currency conversion.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>7. Explicit Risk Notes</h2>
+        <div class="high-risk">
+            <ul>
+                <li><strong>Catastrophic Response Gap:</strong> 88 of 104 requirements (85%) in this tab have no availability code. Per RFP instructions, all unanswered items are assumed "Not Available." This means the vendor's response effectively states that D365 F&amp;O cannot handle sales orders, pricing, order modifications, commissions, sales analysis, or reporting — which is fundamentally incorrect and contractually devastating.</li>
+                <li><strong>Core ERP Strength Unrepresented:</strong> Sales Order Management, Pricing, and Reporting are among D365 F&amp;O's strongest functional areas. Leaving these unanswered while competitors will likely mark them as Standard represents a critical competitive disadvantage.</li>
+                <li><strong>R5 Misclassification:</strong> Auto-populating customer data on proposals is marked as 'M' (Modification) when it is standard D365 F&amp;O functionality. This understates the platform's capability and may create unnecessary cost expectations for the client.</li>
+                <li><strong>Overstatement Risk on R14 and R18:</strong> 'Rich proposal packages' (R14) and 'Automated estimation cost sheets' (R18) are marked as 'S' but may not fully meet the requirement scope without additional configuration. Comments should be added to set accurate expectations.</li>
+                <li><strong>Commission Tracking Gap:</strong> The Commission Structure section (R56-R57) and commission-related items in Sales Analysis (R95-R97) are all unanswered. D365 F&amp;O has a Commission module, but split commissions and payment-based commissions may require configuration.</li>
+                <li><strong>No Comments Provided:</strong> None of the answered rows include explanatory comments. The RFP instructions "strongly encourage" vendors to add comments. The absence of comments weakens the response even for correctly classified items.</li>
+            </ul>
+        </div>
+
+        <h2>8. Verification Gaps</h2>
+        <div class="risk-note">
+            <ul>
+                <li><strong>R25 (Import DFI to Offer):</strong> "DFI" (Data for Inquiry) is a Technica-specific term not mapped to standard ERP terminology. Cannot verify D365 F&amp;O capability without understanding the DFI format and business process. Requires client clarification.</li>
+                <li><strong>R27 (DFI internal workflow and confirmation from Client):</strong> Same dependency on DFI process definition. D365 F&amp;O has workflow capabilities, but whether they match the DFI process cannot be verified without specifications.</li>
+                <li><strong>R31 (Automated control points for offer selling price and delivery time):</strong> The requirement references formula-based automatic calculation across engineering, manufacturing, assembly, testing, shipping, and costing. D365 F&amp;O has components addressing each area, but the "automated estimation" combining all into a single quotation output depends entirely on implementation design. Cannot fully verify without understanding current estimation methodology.</li>
+                <li><strong>R48 (Complementary product prompting):</strong> D365 F&amp;O has cross-sell/up-sell suggestions but the depth of "complementary product prompting during order entry" depends on product data setup. Cannot verify completeness without product catalog review.</li>
+                <li><strong>R53 (Complete integration between Sales and Manufacturing):</strong> D365 F&amp;O integrates sales and manufacturing via MRP/production orders, but "complete integration" is subjective. The scope of integration expected by Technica cannot be verified without detailed process mapping.</li>
+                <li><strong>R80-R82 (Invoice by assembly, BOM split, CAD export):</strong> These are engineering-to-finance integration requirements specific to Technica's manufacturing process. D365 F&amp;O has BOM and project invoicing, but the CAD-to-BOM export workflow depends on CAD system and integration approach. Cannot verify without technical architecture review.</li>
+                <li><strong>R116-R118 (Suppliers machines, competition analysis):</strong> These appear to be CRM/competitive intelligence requirements. D365 F&amp;O does not have native competitive analysis features. These would likely require Dynamics 365 Sales (CRM) or a third-party solution. Verification requires clarification of expected functionality.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

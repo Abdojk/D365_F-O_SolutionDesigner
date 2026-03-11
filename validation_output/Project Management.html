@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management — RFP Compliance Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a2e; border-bottom: 3px solid #0078d4; padding-bottom: 15px; }
+        h2 { color: #0078d4; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th { background: #0078d4; color: white; padding: 10px 8px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ddd; vertical-align: top; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .summary { background: #e8f4fd; border-left: 4px solid #0078d4; padding: 20px; margin: 20px 0; }
+        .high-risk { background: #fdecea; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; }
+        .medium-risk { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; }
+        .safe { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; }
+        .risk-note { background: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin: 10px 0; }
+        ul { margin: 10px 0; }
+        li { margin: 5px 0; }
+        .stat { display: inline-block; background: #0078d4; color: white; padding: 5px 15px; border-radius: 20px; margin: 3px; font-size: 13px; }
+        .stat.high { background: #dc3545; }
+        .stat.medium { background: #ffc107; color: #333; }
+        .stat.safe { background: #28a745; }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #888; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Management</h1>
+
+        <h2>1. Validation Summary</h2>
+        <div class="summary">
+            <p><strong>Tab Status:</strong> Responses provided — Validation performed against D365 F&amp;O Project Management and Accounting module.</p>
+            <p><strong>Total Requirements Reviewed:</strong> 45 (excluding section headers and blank rows)</p>
+            <p>
+                <span class="stat high">High Risk: 1</span>
+                <span class="stat medium">Medium Risk: 5</span>
+                <span class="stat safe">Safe / Validated: 39</span>
+            </p>
+            <p>The Project Management tab covers project setup, WBS, resource management, procurement, budgets, change management, cost tracking, and reporting. The tab is well-completed overall with 39 out of 45 items correctly marked as 'S' (Standard). D365 F&amp;O has a comprehensive Project Management and Accounting module that aligns well with these requirements. However, <strong>1 item is unanswered</strong> (Row 24 — procurement plan against a project), <strong>2 items are marked 'M' (Modification)</strong> where standard or configuration-based solutions may exist, and <strong>3 items marked 'S' could benefit from qualifying comments</strong> to set accurate expectations.</p>
+            <p><strong>Availability Code Distribution:</strong></p>
+            <ul>
+                <li><strong>S (Standard):</strong> 36 items</li>
+                <li><strong>M (Modification):</strong> 2 items (Rows 21, 27)</li>
+                <li><strong>Unanswered:</strong> 1 item (Row 24 — 'Not Clear' comment only)</li>
+            </ul>
+        </div>
+
+        <h2>2. High-Risk Items</h2>
+        <div class="high-risk">
+            <p>The following items pose significant compliance, contractual, or accuracy risk:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Availability</th>
+                        <th>Vendor Comment</th>
+                        <th>Validation Finding</th>
+                        <th>Recommended Correction</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+            <td>24</td>
+            <td>Create a procurement plan against a project</td>
+            <td><strong>Not Provided</strong></td>
+            <td>Not Clear</td>
+            <td>HIGH RISK: No availability code provided, with only &#x27;Not Clear&#x27; as comment. D365 F&amp;O fully supports project-based procurement through Project Purchase Requisitions, Project Purchase Orders, and Item Requirements. The procurement plan links directly to project budgets and WBS tasks. This is a standard, well-established feature of the Project Management and Accounting module. Leaving this unanswered creates significant contractual risk and undermines the credibility of the response.</td>
+            <td>Mark as &#x27;S&#x27;. D365 F&amp;O supports project procurement planning via Item Requirements (derived from WBS), Project Purchase Requisitions, and Project Purchase Orders. All procurement transactions post to project costs automatically. This is core standard functionality.</td>
+        </tr></tbody>
+            </table>
+        </div>
+
+        <h2>3. Medium-Risk Items</h2>
+        <div class="medium-risk">
+            <p>The following items have potential misclassification, missing qualifiers, or may set inaccurate expectations:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Availability</th>
+                        <th>Vendor Comment</th>
+                        <th>Validation Finding</th>
+                        <th>Recommended Correction</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+            <td>21</td>
+            <td>Generate automatic alerts to resources on due dates to enable proactive updates</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Potentially overstated as &#x27;M&#x27;. D365 F&amp;O has built-in Alert Rules that can be configured to trigger notifications based on due dates, status changes, and other field-level events. Workflow notifications also support automated alerts. This could be achievable as &#x27;S&#x27; using Alert Rules or &#x27;W&#x27; with minor workflow configuration rather than a full modification.</td>
+            <td>Consider reclassifying to &#x27;S&#x27; or &#x27;W&#x27;. D365 F&amp;O Alert Rules (Organization Administration &gt; Alerts) allow users to create rule-based alerts on due dates. Workflow notifications can also be configured to send email/action center alerts on approaching deadlines without code modification.</td>
+        </tr><tr>
+            <td>27</td>
+            <td>Notify stakeholders upon approved change request or update in status of a change request</td>
+            <td><strong>M</strong></td>
+            <td></td>
+            <td>Potentially overstated as &#x27;M&#x27;. D365 F&amp;O Workflow framework includes built-in notification capabilities that send alerts and emails upon approval, rejection, or status changes. This is configurable without code modifications. Could be achieved as &#x27;W&#x27; (workflow configuration) or potentially &#x27;S&#x27; if standard workflow notifications are considered standard.</td>
+            <td>Consider reclassifying to &#x27;W&#x27; or &#x27;S&#x27;. D365 F&amp;O Workflow notifications are configurable to send email and action center notifications upon approval events. No code modification is needed — only workflow configuration.</td>
+        </tr><tr>
+            <td>35</td>
+            <td>Integration between the ERP and MS Project, automatic updates</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct, but with important qualification. D365 F&amp;O does provide MS Project integration for WBS management. However, this integration requires the Microsoft Project Client Add-in for D365 F&amp;O. The WBS can be opened, edited in MS Project, and synchronized back. Users should be informed that this requires the add-in to be installed and configured.</td>
+            <td>Retain &#x27;S&#x27; but add a clarifying comment: &#x27;Requires Microsoft Project Client Add-in for D365 F&amp;O. WBS can be exported to/imported from MS Project with synchronization. The add-in must be installed and configured on user workstations.&#x27;</td>
+        </tr><tr>
+            <td>37</td>
+            <td>Project Assessment Sheets (PM, Fin, Tech) to be filled by all departments and log KB lessons learned</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Potentially overstated. D365 F&amp;O does not have formal &#x27;Project Assessment Sheet&#x27; templates built in as a standard feature. While project notes, document attachments, and questionnaire functionality exist, a structured multi-departmental assessment sheet with knowledge base (KB) lessons learned would likely require configuration or minor customization. The response may set expectations beyond out-of-the-box capability.</td>
+            <td>Consider reclassifying to &#x27;W&#x27; with clarification: &#x27;D365 F&amp;O supports project documentation via Document Management and Questionnaires module. Structured assessment sheets across departments would require configuration of questionnaire templates and may benefit from Power Apps/Power Automate for workflow routing. Lessons learned can be stored via project notes or SharePoint integration.&#x27;</td>
+        </tr><tr>
+            <td>39</td>
+            <td>Travel Timesheet (Day; Date; Customer; Project ID; Arrival Time; Departure Time; Hours; Summary)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Mostly correct. D365 F&amp;O has robust Timesheet functionality (including mobile timesheets) and Expense Management for travel. However, specific arrival/departure time tracking fields are not standard timesheet fields. Day, date, customer, project ID, hours, and summary are all standard. Arrival/departure times may require minor configuration or additional fields.</td>
+            <td>Retain &#x27;S&#x27; but add qualifying comment: &#x27;Standard D365 F&amp;O Timesheets support day, date, project, hours, and notes. Expense Management handles travel details. Specific arrival/departure time fields may require minor form customization or use of the line property and notes fields for this detail.&#x27;</td>
+        </tr></tbody>
+            </table>
+        </div>
+
+        <h2>4. Safe / Validated Items</h2>
+        <div class="safe">
+            <p>The following 39 items are correctly classified and align with D365 F&amp;O Project Management and Accounting capabilities:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Availability</th>
+                        <th>Vendor Comment</th>
+                        <th>Validation Finding</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+            <td>4</td>
+            <td>Record proposed project details (budget; timesheet; timing)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O Project Management and Accounting module supports recording project details including budgets, timesheets, and project scheduling out of the box.</td>
+        </tr><tr>
+            <td>5</td>
+            <td>Filter project by priority, budget and timing</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project list pages support filtering and personalization by any field including priority, budget, and dates.</td>
+        </tr><tr>
+            <td>6</td>
+            <td>Filter projects by type</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports project types (Time &amp; Material, Fixed-price, Investment, Internal, Cost, Time) with full filtering capability.</td>
+        </tr><tr>
+            <td>7</td>
+            <td>Sub Projects - or child projects (like assemblies)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports project hierarchies with parent/child (sub-project) structures natively.</td>
+        </tr><tr>
+            <td>8</td>
+            <td>Generate a list of all open tasks by project and project type</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. WBS tasks and activities can be listed and filtered by project and type using standard inquiries.</td>
+        </tr><tr>
+            <td>9</td>
+            <td>Develop a work breakdown structure (WBS)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O has a dedicated WBS editor within the Project module that supports task creation, dependencies, scheduling, and effort estimation.</td>
+        </tr><tr>
+            <td>10</td>
+            <td>Develop a project timeline</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project timelines are managed through the WBS with start/end dates, effort estimates, and Gantt-style views via MS Project integration.</td>
+        </tr><tr>
+            <td>11</td>
+            <td>Project and budget baselines</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports project budget baselines with original budget, revisions, and remaining budget tracking. Budget control integration is standard.</td>
+        </tr><tr>
+            <td>12</td>
+            <td>Filter projects by status (approved, rejected, pending)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project stages and statuses (Created, In Process, Finished, etc.) can be filtered on list pages.</td>
+        </tr><tr>
+            <td>13</td>
+            <td>Rank projects by priority</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project priority fields and sorting/filtering are available in standard list pages.</td>
+        </tr><tr>
+            <td>14</td>
+            <td>Facilitate project set up (add tasks, create dependencies within &amp; across projects, assign resources)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. The WBS editor supports task creation, predecessor/successor dependencies, and resource assignment as standard functionality.</td>
+        </tr><tr>
+            <td>15</td>
+            <td>Leverage previous projects as templates for future projects</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports &#x27;Copy project&#x27; functionality which allows copying WBS, estimates, and project structures from one project to another, effectively enabling project templates.</td>
+        </tr><tr>
+            <td>16</td>
+            <td>Track the required project documents</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O Document Management (attachments) supports attaching and tracking documents on project records. SharePoint integration extends this further.</td>
+        </tr><tr>
+            <td>17</td>
+            <td>Assign resources or resource groups to specific tasks</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. The WBS allows assigning named resources or resource categories to tasks. Resource scheduling and capacity management are standard features.</td>
+        </tr><tr>
+            <td>18</td>
+            <td>View and update resource availability in real time</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Resource availability is visible through the resource scheduling views and can be updated in real time. Calendar and capacity views are standard.</td>
+        </tr><tr>
+            <td>19</td>
+            <td>Add new activities and view planned activities on a calendar</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project activities can be managed and viewed through scheduling tools. Calendar integration is available.</td>
+        </tr><tr>
+            <td>20</td>
+            <td>Create and manage a resource plan</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports resource plans (soft-booked vs. hard-booked resources) and resource fulfillment workflows.</td>
+        </tr><tr>
+            <td>22</td>
+            <td>Report on resource utilization and availability</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O provides resource utilization reports and availability views within the Project module.</td>
+        </tr><tr>
+            <td>23</td>
+            <td>Assign delegates</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports delegate assignment for workflows, timesheet entry, and expense report submission.</td>
+        </tr><tr>
+            <td>25</td>
+            <td>Track the project budget per Assembly and sub assembly</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project budgets can be tracked at sub-project and WBS task level, mapping to assembly/sub-assembly structures.</td>
+        </tr><tr>
+            <td>26</td>
+            <td>Track all change requests</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports tracking change requests through workflow and project change management processes. Budget revisions are tracked with full audit trail.</td>
+        </tr><tr>
+            <td>28</td>
+            <td>Issue Purchase Requests against a project</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project Purchase Requisitions are a standard feature in D365 F&amp;O, allowing purchase requests to be linked to specific projects and WBS tasks.</td>
+        </tr><tr>
+            <td>29</td>
+            <td>Project to date expenditure reports showing details against budget (purchases, expenses, labor time)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O provides comprehensive project cost tracking reports including Actual vs. Budget, cost control inquiries, and project statements covering all transaction types (purchases, expenses, hours, fees).</td>
+        </tr><tr>
+            <td>30</td>
+            <td>Allocation of Materials</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Materials can be allocated to projects via Item Requirements and Item Journals. Project inventory management is standard.</td>
+        </tr><tr>
+            <td>31</td>
+            <td>Track ordered Material by assembly</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project purchase orders and item requirements track ordered materials which can be organized by project hierarchy (assembly/sub-assembly via sub-projects or WBS).</td>
+        </tr><tr>
+            <td>32</td>
+            <td>PM must have visibility of the Financial Matrix directly after signature</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project financial data (contracts, funding sources, budgets) is available in real-time upon project activation. Role-based security ensures PM access to financial dashboards.</td>
+        </tr><tr>
+            <td>33</td>
+            <td>PM must have visibility of the contract details, deliveries, specs directly after signature</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project contracts, funding limits, and delivery schedules are accessible in the Project module. Document Management handles specifications and contract documents.</td>
+        </tr><tr>
+            <td>34</td>
+            <td>PM must have visibility to all schedules, plans, rules related to the project (shipping, modes, installations, prices, incoterms, containers)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O provides project-linked visibility to related sales orders, delivery schedules, and trade parameters. Some shipping-specific fields (incoterms, containers) are managed through Trade and Logistics modules with project linkage.</td>
+        </tr><tr>
+            <td>36</td>
+            <td>Project Checklist for shipments (to client)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports project-related checklists through document management and quality checklists. Shipment checklists can be configured through packing slip processes.</td>
+        </tr><tr>
+            <td>38</td>
+            <td>Full overview on all project transactions: PR, PO, Prod orders, Budget, forecast, etc</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O Project module provides comprehensive transaction inquiries covering all transaction types: purchase requisitions, purchase orders, production orders, budgets, forecasts, hours, expenses, fees, and items.</td>
+        </tr><tr>
+            <td>40</td>
+            <td>Project costing sheet for offer</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports project estimates, quotations, and cost breakdown structures for offer/bid preparation through the Project Quotation functionality.</td>
+        </tr><tr>
+            <td>41</td>
+            <td>Collaborate with projects team</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports collaboration via project team management, resource assignment, and integration with Microsoft Teams/SharePoint. Action center notifications also support team collaboration.</td>
+        </tr><tr>
+            <td>42</td>
+            <td>Update Work package status (delayed, done, pending)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. WBS task statuses can be updated and tracked within the project. Custom statuses can be configured as needed.</td>
+        </tr><tr>
+            <td>43</td>
+            <td>Filing suppliers details (delivery, technical requirement, quotation, payment terms)</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Vendor master records in D365 F&amp;O store comprehensive supplier details including delivery terms, payment terms, and linked documents. Project-specific supplier information flows through procurement.</td>
+        </tr><tr>
+            <td>44</td>
+            <td>Monitor engineering cost</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O project cost tracking supports monitoring costs by category, including engineering-specific cost categories and project groups.</td>
+        </tr><tr>
+            <td>45</td>
+            <td>Monitor Project cost</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. Project cost monitoring is a core capability of D365 F&amp;O Project Management and Accounting, with real-time cost control, budget tracking, and comprehensive reporting.</td>
+        </tr><tr>
+            <td>46</td>
+            <td>Shareable Issue log</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O supports issue tracking via project activities and notes. Integration with Azure DevOps or SharePoint lists can extend this further for shared issue logs.</td>
+        </tr><tr>
+            <td>47</td>
+            <td>Capability to allow the allocation of costs based on budgets</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O Project budget allocation and cost distribution features allow allocating costs based on budget lines and funding sources.</td>
+        </tr><tr>
+            <td>48</td>
+            <td>Ability to compute production cost per Project/Assembly detailing all cost elements</td>
+            <td><strong>S</strong></td>
+            <td></td>
+            <td>Correct. D365 F&amp;O integrates production orders with projects, enabling detailed production cost computation with full cost element breakdown (materials, labor, overhead) per project and sub-project.</td>
+        </tr></tbody>
+            </table>
+        </div>
+
+        <h2>5. Recommended Corrections</h2>
+        <div class="summary">
+            <p>The following corrections are recommended to improve accuracy and reduce risk:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Current Code</th>
+                        <th>Recommended Action</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+                <td>21</td>
+                <td>Generate automatic alerts to resources on due dates to enable proactive updates</td>
+                <td><strong>M</strong></td>
+                <td>Consider reclassifying to &#x27;S&#x27; or &#x27;W&#x27;. D365 F&amp;O Alert Rules (Organization Administration &gt; Alerts) allow users to create rule-based alerts on due dates. Workflow notifications can also be configured to send email/action center alerts on approaching deadlines without code modification.</td>
+            </tr><tr>
+                <td>24</td>
+                <td>Create a procurement plan against a project</td>
+                <td><strong>Not Provided</strong></td>
+                <td>Mark as &#x27;S&#x27;. D365 F&amp;O supports project procurement planning via Item Requirements (derived from WBS), Project Purchase Requisitions, and Project Purchase Orders. All procurement transactions post to project costs automatically. This is core standard functionality.</td>
+            </tr><tr>
+                <td>27</td>
+                <td>Notify stakeholders upon approved change request or update in status of a change request</td>
+                <td><strong>M</strong></td>
+                <td>Consider reclassifying to &#x27;W&#x27; or &#x27;S&#x27;. D365 F&amp;O Workflow notifications are configurable to send email and action center notifications upon approval events. No code modification is needed — only workflow configuration.</td>
+            </tr><tr>
+                <td>35</td>
+                <td>Integration between the ERP and MS Project, automatic updates</td>
+                <td><strong>S</strong></td>
+                <td>Retain &#x27;S&#x27; but add a clarifying comment: &#x27;Requires Microsoft Project Client Add-in for D365 F&amp;O. WBS can be exported to/imported from MS Project with synchronization. The add-in must be installed and configured on user workstations.&#x27;</td>
+            </tr><tr>
+                <td>37</td>
+                <td>Project Assessment Sheets (PM, Fin, Tech) to be filled by all departments and log KB lessons learned</td>
+                <td><strong>S</strong></td>
+                <td>Consider reclassifying to &#x27;W&#x27; with clarification: &#x27;D365 F&amp;O supports project documentation via Document Management and Questionnaires module. Structured assessment sheets across departments would require configuration of questionnaire templates and may benefit from Power Apps/Power Automate for workflow routing. Lessons learned can be stored via project notes or SharePoint integration.&#x27;</td>
+            </tr><tr>
+                <td>39</td>
+                <td>Travel Timesheet (Day; Date; Customer; Project ID; Arrival Time; Departure Time; Hours; Summary)</td>
+                <td><strong>S</strong></td>
+                <td>Retain &#x27;S&#x27; but add qualifying comment: &#x27;Standard D365 F&amp;O Timesheets support day, date, project, hours, and notes. Expense Management handles travel details. Specific arrival/departure time fields may require minor form customization or use of the line property and notes fields for this detail.&#x27;</td>
+            </tr></tbody>
+            </table>
+        </div>
+
+        <h2>6. Suggested Improved Responses</h2>
+        <div class="summary">
+            <p>The following table provides suggested improved availability codes and comments for items that need attention:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Requirement</th>
+                        <th>Current Response</th>
+                        <th>Suggested Code</th>
+                        <th>Suggested Comment</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+            <td>21</td>
+            <td>Generate automatic alerts to resources on due dates to enable proactive updates</td>
+            <td>M</td>
+            <td><strong>S</strong></td>
+            <td>D365 F&amp;O Alert Rules can be configured to generate automatic notifications on due dates. Workflow notifications also support proactive alerts to assigned resources. No code modification required.</td>
+        </tr><tr>
+            <td>24</td>
+            <td>Create a procurement plan against a project</td>
+            <td>No code / &#x27;Not Clear&#x27;</td>
+            <td><strong>S</strong></td>
+            <td>D365 F&amp;O supports project procurement planning via Item Requirements, Project Purchase Requisitions, and Project Purchase Orders. All procurement transactions automatically post to project costs and link to the WBS.</td>
+        </tr><tr>
+            <td>27</td>
+            <td>Notify stakeholders upon approved change request or update in status of a change request</td>
+            <td>M</td>
+            <td><strong>W</strong></td>
+            <td>D365 F&amp;O Workflow framework provides configurable notifications on approval events and status changes. Email and action center notifications are sent automatically upon workflow approval/rejection. Configuration only — no code modification needed.</td>
+        </tr><tr>
+            <td>35</td>
+            <td>Integration between the ERP and MS Project, automatic updates</td>
+            <td>S (no comment)</td>
+            <td><strong>S</strong></td>
+            <td>D365 F&amp;O supports MS Project integration via the Microsoft Project Client Add-in. WBS can be synchronized between D365 F&amp;O and MS Project. Requires add-in installation on client workstations.</td>
+        </tr><tr>
+            <td>37</td>
+            <td>Project Assessment Sheets (PM, Fin, Tech) to be filled by all departments and log KB lessons learned</td>
+            <td>S (no comment)</td>
+            <td><strong>W</strong></td>
+            <td>D365 F&amp;O supports project documentation via Document Management and Questionnaires module. Structured multi-departmental assessment sheets require questionnaire template configuration. Lessons learned can leverage project notes and SharePoint integration.</td>
+        </tr><tr>
+            <td>39</td>
+            <td>Travel Timesheet (Day; Date; Customer; Project ID; Arrival Time; Departure Time; Hours; Summary)</td>
+            <td>S (no comment)</td>
+            <td><strong>S</strong></td>
+            <td>D365 F&amp;O Timesheets support project time tracking with day, date, project ID, hours, and notes. Expense Management handles travel details. Specific arrival/departure time fields may require minor form customization.</td>
+        </tr></tbody>
+            </table>
+        </div>
+
+        <h2>7. Explicit Risk Notes</h2>
+        <div class="high-risk">
+            <p>The following risk notes should be reviewed by the proposal team:</p>
+            
+        <div class="risk-note">
+            <strong>Unanswered Requirement (Row 24)</strong>
+            <p>Row 24 (&#x27;Create a procurement plan against a project&#x27;) has no availability code and only a &#x27;Not Clear&#x27; comment. This is the only unanswered item in the tab and represents a significant gap. D365 F&amp;O natively supports project procurement planning — this should be marked &#x27;S&#x27; with a clear explanation. Leaving it unanswered may cause the evaluator to assume the system does not support this capability, which would be incorrect and potentially disqualifying for this section.</p>
+        </div>
+        <div class="risk-note">
+            <strong>Modification Classifications May Be Overstated (Rows 21, 27)</strong>
+            <p>Two items are marked &#x27;M&#x27; (Modification) where D365 F&amp;O built-in Alert Rules and Workflow Notifications could address the requirements with configuration only. Overstating the need for modifications increases perceived implementation cost and effort, which may negatively affect scoring. These should be reviewed for potential reclassification to &#x27;S&#x27; or &#x27;W&#x27;.</p>
+        </div>
+        <div class="risk-note">
+            <strong>MS Project Integration Dependency (Row 35)</strong>
+            <p>The MS Project integration response is correct but should explicitly mention the dependency on the Microsoft Project Client Add-in. Without this qualifier, the client may assume native browser-based MS Project integration, which is not how D365 F&amp;O delivers this capability. Failure to set proper expectations could lead to post-implementation disputes.</p>
+        </div>
+        <div class="risk-note">
+            <strong>Assessment Sheets Capability (Row 37)</strong>
+            <p>Marking &#x27;Project Assessment Sheets&#x27; as &#x27;S&#x27; may overstate the out-of-the-box capability. D365 F&amp;O does not have pre-built, structured multi-departmental assessment templates with KB/lessons learned. While the building blocks exist (Questionnaires, Document Management, Notes), assembly of a complete assessment sheet solution requires configuration effort. This should be disclosed to avoid scope disputes.</p>
+        </div>
+        <div class="risk-note">
+            <strong>Travel Timesheet Specifics (Row 39)</strong>
+            <p>While D365 F&amp;O timesheets and expense management cover the core requirements, specific fields for arrival/departure times are not standard timesheet line fields. Minor form customization may be needed. The &#x27;S&#x27; marking is defensible but should include a qualifying note.</p>
+        </div>
+        </div>
+
+        <h2>8. Verification Gaps</h2>
+        <div class="medium-risk">
+            <p>The following areas require additional verification before finalizing the response:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Verification Area</th>
+                        <th>Gap Description</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+            <td><strong>Alert Rules Configuration</strong></td>
+            <td>The validation assumes D365 F&amp;O Alert Rules can fully meet the &#x27;automatic alerts on due dates&#x27; requirement (Row 21). This should be verified by testing alert rule creation on project task due date fields to confirm the specific trigger events are available out of the box.</td>
+        </tr><tr>
+            <td><strong>MS Project Add-in Compatibility</strong></td>
+            <td>Row 35 assumes the MS Project Client Add-in is still supported and compatible with the client&#x27;s intended D365 F&amp;O version. Microsoft has been evolving this integration. Verify the current state of the add-in and whether Project for the Web or Project Operations may be the recommended path.</td>
+        </tr><tr>
+            <td><strong>Questionnaire Module Suitability</strong></td>
+            <td>The suggestion to use D365 F&amp;O Questionnaires for assessment sheets (Row 37) assumes the module can handle multi-departmental routing and structured data capture. The Questionnaires module may have limitations for complex workflows. Verify suitability or evaluate Power Apps as an alternative.</td>
+        </tr><tr>
+            <td><strong>Timesheet Custom Fields</strong></td>
+            <td>Row 39 assumes arrival/departure time fields can be added to timesheets with minor customization. Verify whether timesheet line extensions are supported in the client&#x27;s target D365 F&amp;O version and whether this falls within standard configuration or requires developer effort.</td>
+        </tr><tr>
+            <td><strong>Project Procurement Workflow</strong></td>
+            <td>While Row 24 is recommended to be &#x27;S&#x27;, the specific procurement planning workflow the client envisions (procurement plan vs. individual purchase requisitions) should be clarified. D365 F&amp;O supports item requirements and purchase requisitions against projects, but a formal &#x27;procurement plan&#x27; document as a consolidated planning view may require Power BI or custom reporting.</td>
+        </tr></tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Generated: 2026-02-16 11:29:53 | D365 F&amp;O RFP Compliance Validation — Project Management Tab</p>
+            <p>Source: Copy of Technica International - Requirements Compliance Matrix.xlsx</p>
+            <p>Validation Basis: Microsoft Dynamics 365 Finance &amp; Operations — Project Management and Accounting Module</p>
+        </div>
+    </div>
+</body>
+</html>
